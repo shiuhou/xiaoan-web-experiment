@@ -1,0 +1,92 @@
+[
+  {
+    "mode": "normal",
+    "endState": {
+      "scrollY": 10890,
+      "maxScroll": 10890,
+      "closingVisible": 0,
+      "activeIndex": "08 / 08",
+      "horizontalOverflow": 0
+    },
+    "replayState": {
+      "scrollY": 0,
+      "heroTop": 0,
+      "heroOpacity": "1",
+      "activeIndex": "01 / 08"
+    },
+    "reloadState": {
+      "scrollY": 4520,
+      "edgeTop": -515,
+      "canvasCount": 1,
+      "bodyTextLength": 1935
+    },
+    "resizeState": {
+      "width": 1280,
+      "height": 720,
+      "horizontalOverflow": 0,
+      "sceneCount": 8
+    },
+    "consoleMessages": [],
+    "pageErrors": []
+  },
+  {
+    "mode": "fast",
+    "endState": {
+      "scrollY": 10890,
+      "maxScroll": 10890,
+      "closingVisible": 0,
+      "activeIndex": "08 / 08",
+      "horizontalOverflow": 0
+    },
+    "replayState": {
+      "scrollY": 0,
+      "heroTop": 0,
+      "heroOpacity": "1",
+      "activeIndex": "01 / 08"
+    },
+    "reloadState": {
+      "scrollY": 4520,
+      "edgeTop": -515,
+      "canvasCount": 1,
+      "bodyTextLength": 1935
+    },
+    "resizeState": {
+      "width": 1280,
+      "height": 720,
+      "horizontalOverflow": 0,
+      "sceneCount": 8
+    },
+    "consoleMessages": [],
+    "pageErrors": []
+  },
+  {
+    "mode": "slow",
+    "endState": {
+      "scrollY": 10890,
+      "maxScroll": 10890,
+      "closingVisible": 0,
+      "activeIndex": "08 / 08",
+      "horizontalOverflow": 0
+    },
+    "replayState": {
+      "scrollY": 0,
+      "heroTop": 0,
+      "heroOpacity": "1",
+      "activeIndex": "01 / 08"
+    },
+    "reloadState": {
+      "scrollY": 4520,
+      "edgeTop": -515,
+      "canvasCount": 1,
+      "bodyTextLength": 1935
+    },
+    "resizeState": {
+      "width": 1280,
+      "height": 720,
+      "horizontalOverflow": 0,
+      "sceneCount": 8
+    },
+    "consoleMessages": [],
+    "pageErrors": []
+  }
+]

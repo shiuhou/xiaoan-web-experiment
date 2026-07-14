@@ -1,0 +1,20 @@
+:root {
+  --void: #020507;
+  --void-soft: #050b0f;
+  --indigo: #07121b;
+  --structural: #102b3a;
+  --signal: #5ee7ff;
+  --signal-soft: #a8f3ff;
+  --cold-white: #edf8f7;
+  --porcelain: #dce5e2;
+  --copper: #d79a56;
+  --muted: #7f9aa5;
+  --hairline: rgba(168, 243, 255, 0.18);
+  --display: "Bahnschrift Condensed", "Arial Narrow", "Helvetica Neue", Arial,
+    sans-serif;
+  --sans: Inter, "Segoe UI Variable", "Microsoft JhengHei", "PingFang TC",
+    Arial, sans-serif;
+  --mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  --page-pad: clamp(1.25rem, 3vw, 3.5rem);
+  --ease-signal: cubic-bezier(0.16, 1, 0.3, 1);
+}

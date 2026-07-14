@@ -1,0 +1,66 @@
+{
+  "scenes": [
+    {
+      "id": "awakening",
+      "top": 0,
+      "height": 900
+    },
+    {
+      "id": "breaking",
+      "top": 900,
+      "height": 1710
+    },
+    {
+      "id": "perception",
+      "top": 2610,
+      "height": 1395
+    },
+    {
+      "id": "edge",
+      "top": 4005,
+      "height": 900
+    },
+    {
+      "id": "understanding",
+      "top": 4905,
+      "height": 1395
+    },
+    {
+      "id": "presence",
+      "top": 6300,
+      "height": 900
+    },
+    {
+      "id": "system",
+      "top": 7200,
+      "height": 900
+    },
+    {
+      "id": "closing",
+      "top": 8100,
+      "height": 900
+    }
+  ],
+  "diagnostics": {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 9000
+    },
+    "reducedMotion": "true",
+    "webglCanvasCount": 0,
+    "fallbackCount": 1,
+    "sceneCount": 8
+  },
+  "consoleMessages": [
+    {
+      "type": "warning",
+      "text": "Image with src \"/assets/product/xiaoan-dock.png\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    }
+  ],
+  "pageErrors": []
+}

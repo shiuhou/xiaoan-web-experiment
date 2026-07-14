@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Tests and generated QA
+coverage/
+playwright-report/
+test-results/
+artifacts/dev/
+
+# Asset extraction scratch
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment
+.env*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db

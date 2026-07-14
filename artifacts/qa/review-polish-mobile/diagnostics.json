@@ -1,0 +1,61 @@
+{
+  "scenes": [
+    {
+      "id": "awakening",
+      "top": 0,
+      "height": 844
+    },
+    {
+      "id": "breaking",
+      "top": 844,
+      "height": 1012.796875
+    },
+    {
+      "id": "perception",
+      "top": 1856.796875,
+      "height": 995.90625
+    },
+    {
+      "id": "edge",
+      "top": 2852.703125,
+      "height": 1097.1875
+    },
+    {
+      "id": "understanding",
+      "top": 3949.890625,
+      "height": 995.90625
+    },
+    {
+      "id": "presence",
+      "top": 4945.796875,
+      "height": 995.90625
+    },
+    {
+      "id": "system",
+      "top": 5941.703125,
+      "height": 1223.796875
+    },
+    {
+      "id": "closing",
+      "top": 7165.5,
+      "height": 928.390625
+    }
+  ],
+  "diagnostics": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "document": {
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 8094
+    },
+    "reducedMotion": "false",
+    "webglCanvasCount": 1,
+    "fallbackCount": 0,
+    "sceneCount": 8
+  },
+  "consoleMessages": [],
+  "pageErrors": []
+}

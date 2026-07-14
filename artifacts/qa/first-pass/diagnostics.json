@@ -1,0 +1,70 @@
+{
+  "scenes": [
+    {
+      "id": "awakening",
+      "top": 0,
+      "height": 900
+    },
+    {
+      "id": "breaking",
+      "top": 900,
+      "height": 900
+    },
+    {
+      "id": "perception",
+      "top": 1800,
+      "height": 900
+    },
+    {
+      "id": "edge",
+      "top": 2700,
+      "height": 900
+    },
+    {
+      "id": "understanding",
+      "top": 3600,
+      "height": 900
+    },
+    {
+      "id": "presence",
+      "top": 4500,
+      "height": 900
+    },
+    {
+      "id": "system",
+      "top": 5400,
+      "height": 900
+    },
+    {
+      "id": "closing",
+      "top": 6300,
+      "height": 900
+    }
+  ],
+  "diagnostics": {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "document": {
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 7200
+    },
+    "reducedMotion": "false",
+    "webglCanvasCount": 1,
+    "fallbackCount": 0,
+    "sceneCount": 8
+  },
+  "consoleMessages": [
+    {
+      "type": "warning",
+      "text": "Image with src \"/assets/product/xiaoan-dock.png\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    },
+    {
+      "type": "warning",
+      "text": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead."
+    }
+  ],
+  "pageErrors": []
+}

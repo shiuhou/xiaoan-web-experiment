@@ -1,0 +1,584 @@
+[
+  {
+    "filename": "image1.png",
+    "source_path": "ppt/media/image1.png",
+    "width": 1620,
+    "height": 1618,
+    "format": "PNG",
+    "mode": "RGBA",
+    "bytes": 4992938,
+    "sha256": "23db9aad2f8483072c56bf93a9c33473d0417c4cdfd96b98cf800e69f11d4576",
+    "slides": [
+      1,
+      14,
+      15
+    ],
+    "context": "基于 Intel DK-2500 的桌面智能伙伴 智能情感桌面助理 Welcome to Meet 小安 Presented by 张子尧 郑斯锐 施宇灏 From HKUST(GZ) | 从虚拟中走出来，在现实中走近你 小安 Intel 杯嵌入式大赛 · 2026 基于 Intel DK-2500 的桌面智能伙伴 | 感谢评委",
+    "categories": [
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image10.png",
+    "source_path": "ppt/media/image10.png",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 1524831,
+    "sha256": "b445e8e96e583410b9ac7abafd0f8944df53628bce894972060b9449e10cfbef",
+    "slides": [
+      5
+    ],
+    "context": "情绪陪伴 ： 主动式状态关怀 效率助手 ： 无打断任务承接 主动感知用户情绪并关怀； 与用户正常互动，提供情绪价值 核心 解法 ： 基于 Intel DK-2500 的桌面智能伙伴：小安 语音交互记录待办提醒，无需切屏，不干扰工作主线",
+    "categories": [
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image11.png",
+    "source_path": "ppt/media/image11.png",
+    "width": 1267,
+    "height": 845,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 777982,
+    "sha256": "7df0df3f40e5761aad5a1bf342b5da024e47c48f4b9576cd1d234d50592e4fd3",
+    "slides": [
+      6
+    ],
+    "context": "部件组成 ： 基于 Intel DK-2500 的桌面智能伙伴：小 安",
+    "categories": [
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image12.png",
+    "source_path": "ppt/media/image12.png",
+    "width": 741,
+    "height": 1111,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 877016,
+    "sha256": "182b9ac833c67fa299df680b6f03c61f64dbfa1da6e63bd70376844326a90355",
+    "slides": [
+      6
+    ],
+    "context": "部件组成 ： 基于 Intel DK-2500 的桌面智能伙伴：小 安",
+    "categories": [
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image13.png",
+    "source_path": "ppt/media/image13.png",
+    "width": 1195,
+    "height": 896,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 1233284,
+    "sha256": "99dba4c95d6d6820432dc1f54d41a5e156313c51186149a9267b38c711533f2f",
+    "slides": [
+      6
+    ],
+    "context": "部件组成 ： 基于 Intel DK-2500 的桌面智能伙伴：小 安",
+    "categories": [
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image14.jpeg",
+    "source_path": "ppt/media/image14.jpeg",
+    "width": 4032,
+    "height": 3024,
+    "format": "JPEG",
+    "mode": "RGB",
+    "bytes": 1783983,
+    "sha256": "bc8d1a02589531a2f1cce16185098d4470a95f3e6dd6b137b9949c5d148a5812",
+    "slides": [
+      6
+    ],
+    "context": "部件组成 ： 基于 Intel DK-2500 的桌面智能伙伴：小 安",
+    "categories": [
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image15.png",
+    "source_path": "ppt/media/image15.png",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 861126,
+    "sha256": "d522c393b0086eeebdf648f1cbfacc8ed7d59801b6c4dcb849cddf1ebd6dccbf",
+    "slides": [
+      7
+    ],
+    "context": "demo1&2 ：语音请求响应链路（请求陪伴 / 任务完成） 小安功能演示 demo3 ：视觉感知主动关怀链路 用户主动开口，小安完成理解、回复与具身反馈 用户无需开口，小安感知疲劳并主动介入",
+    "categories": [
+      "architecture",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image16.png",
+    "source_path": "ppt/media/image16.png",
+    "width": 2106,
+    "height": 747,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 959836,
+    "sha256": "1fb46b9127a006ff90dacc780449e098f2b6eacdc33cdb7e89dc17f1c14af3b3",
+    "slides": [
+      7
+    ],
+    "context": "demo1&2 ：语音请求响应链路（请求陪伴 / 任务完成） 小安功能演示 demo3 ：视觉感知主动关怀链路 用户主动开口，小安完成理解、回复与具身反馈 用户无需开口，小安感知疲劳并主动介入",
+    "categories": [
+      "architecture",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image17.png",
+    "source_path": "ppt/media/image17.png",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 1404103,
+    "sha256": "489829724e696c2c76cc6dd6c06f13fe4b1c9d5e796b7674f4385292379db900",
+    "slides": [
+      8
+    ],
+    "context": "端边协同架构：机器人本体 + Intel 边缘基站 + OpenClaw 服务层 机器人提供具身感知与反馈， intel DK-2500 承担本地模型推理与通信中枢， OpenClaw 负责用户理解、任务编排与决策生成",
+    "categories": [
+      "architecture",
+      "hardware"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image18.jpeg",
+    "source_path": "ppt/media/image18.jpeg",
+    "width": 1438,
+    "height": 560,
+    "format": "JPEG",
+    "mode": "RGB",
+    "bytes": 21932,
+    "sha256": "c80c612b0b9363d50925ec384064c550f6597b3c96b27f165517b02165cc061e",
+    "slides": [
+      9,
+      10,
+      11,
+      14,
+      15
+    ],
+    "context": "Intel DK-2500 ： 边缘智能中枢 | 核心算法：低打扰主动关怀机制 | 四大核心竞争力 主动感知 摄像头+情绪阈值机制 主动关注用户状态 有身体的 Agent OpenClaw 从屏幕走进物理世界 把理解、反馈与行动变成可悲感知的真实体验 通过机器人的表情、声音与运动能力回到桌面 算力分离架构 机器人轻量执行，基站集中处理 esp32-s3 负责表情、声音和运动 突破本体算力 与功耗限制 Intel 生态 + 隐私 边界 Intel DK-2500 NPU 本地推理 提供 AI 推理底座 结合 openvino/npu 加速 原始 数据不出设备 ，上传结构化事件 | 从虚拟中走出来，在现实中走近你 小安 Intel 杯嵌入式大赛 · 2026 基于 Intel DK-2500 的桌面智能伙伴 | 感谢评委",
+    "categories": [
+      "architecture",
+      "expression",
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image19.png",
+    "source_path": "ppt/media/image19.png",
+    "width": 1770,
+    "height": 888,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 1445702,
+    "sha256": "62a0fd1147c8c870f86c98fabd6d9db3311f5798a77c4715225f6aa8a270fb4f",
+    "slides": [
+      9
+    ],
+    "context": "Intel DK-2500 ： 边缘智能中枢",
+    "categories": [
+      "architecture",
+      "hardware"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image2.jpeg",
+    "source_path": "ppt/media/image2.jpeg",
+    "width": 1438,
+    "height": 560,
+    "format": "JPEG",
+    "mode": "RGB",
+    "bytes": 43327,
+    "sha256": "9ee7ee06555e4fc0051448f8e85135fdbc37c9d17589864eb7bb5e2f4bf44d89",
+    "slides": [
+      1,
+      2,
+      11,
+      14,
+      15
+    ],
+    "context": "基于 Intel DK-2500 的桌面智能伙伴 智能情感桌面助理 Welcome to Meet 小安 Presented by 张子尧 郑斯锐 施宇灏 From HKUST(GZ) | 项目背景：桌面工作中的两类困扰 | 四大核心竞争力 主动感知 摄像头+情绪阈值机制 主动关注用户状态 有身体的 Agent OpenClaw 从屏幕走进物理世界 把理解、反馈与行动变成可悲感知的真实体验 通过机器人的表情、声音与运动能力回到桌面 算力分离架构 机器人轻量执行，基站集中处理 esp32-s3 负责表情、声音和运动 突破本体算力 与功耗限制 Intel 生态 + 隐私 边界 Intel DK-2500 NPU 本地推理 提供 AI 推理底座 结合 openvino/npu 加速 原始 数据不出设备 ，上传结构化事件 | 从虚拟中走出来，在现实中走近你 小安 Intel 杯嵌入式大赛 · 2026 基于 Intel DK-2500 的桌面智能伙伴 | 感谢评委",
+    "categories": [
+      "architecture",
+      "expression",
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image20.png",
+    "source_path": "ppt/media/image20.png",
+    "width": 1616,
+    "height": 1379,
+    "format": "PNG",
+    "mode": "RGBA",
+    "bytes": 729331,
+    "sha256": "a8bd82f1a47cd117cc140df43f39518081e42516a8b23a583c34ff773fb83f9f",
+    "slides": [
+      9,
+      10
+    ],
+    "context": "Intel DK-2500 ： 边缘智能中枢 | 核心算法：低打扰主动关怀机制",
+    "categories": [
+      "architecture",
+      "hardware"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image21.png",
+    "source_path": "ppt/media/image21.png",
+    "width": 1500,
+    "height": 898,
+    "format": "PNG",
+    "mode": "RGBA",
+    "bytes": 3743223,
+    "sha256": "a6c566dbdf66bd1417f617021f34e2b682421fefb3e18d76442550f8d6e09433",
+    "slides": [
+      9,
+      10
+    ],
+    "context": "Intel DK-2500 ： 边缘智能中枢 | 核心算法：低打扰主动关怀机制",
+    "categories": [
+      "architecture",
+      "hardware"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image22.png",
+    "source_path": "ppt/media/image22.png",
+    "width": 1536,
+    "height": 1024,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 1532811,
+    "sha256": "dbf76449389a49b2a167a39e911b7ae58911db8c7e21869e496660a7818ec3e8",
+    "slides": [
+      10
+    ],
+    "context": "核心算法：低打扰主动关怀机制",
+    "categories": [
+      "architecture"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image23.png",
+    "source_path": "ppt/media/image23.png",
+    "width": 103,
+    "height": 103,
+    "format": "PNG",
+    "mode": "RGBA",
+    "bytes": 6270,
+    "sha256": "ae92d720a950197a06eae64f9d9794ad848c5d3e42437c4202eb91ea84dd7579",
+    "slides": [
+      11
+    ],
+    "context": "四大核心竞争力 主动感知 摄像头+情绪阈值机制 主动关注用户状态 有身体的 Agent OpenClaw 从屏幕走进物理世界 把理解、反馈与行动变成可悲感知的真实体验 通过机器人的表情、声音与运动能力回到桌面 算力分离架构 机器人轻量执行，基站集中处理 esp32-s3 负责表情、声音和运动 突破本体算力 与功耗限制 Intel 生态 + 隐私 边界 Intel DK-2500 NPU 本地推理 提供 AI 推理底座 结合 openvino/npu 加速 原始 数据不出设备 ，上传结构化事件",
+    "categories": [
+      "architecture",
+      "expression",
+      "hardware"
+    ],
+    "selected": false
+  },
+  {
+    "filename": "image24.png",
+    "source_path": "ppt/media/image24.png",
+    "width": 103,
+    "height": 103,
+    "format": "PNG",
+    "mode": "RGBA",
+    "bytes": 4091,
+    "sha256": "f85aada0b81254d2039cf7b88383ea3c3abc9f68d009fa97a38d32421365ac44",
+    "slides": [
+      11
+    ],
+    "context": "四大核心竞争力 主动感知 摄像头+情绪阈值机制 主动关注用户状态 有身体的 Agent OpenClaw 从屏幕走进物理世界 把理解、反馈与行动变成可悲感知的真实体验 通过机器人的表情、声音与运动能力回到桌面 算力分离架构 机器人轻量执行，基站集中处理 esp32-s3 负责表情、声音和运动 突破本体算力 与功耗限制 Intel 生态 + 隐私 边界 Intel DK-2500 NPU 本地推理 提供 AI 推理底座 结合 openvino/npu 加速 原始 数据不出设备 ，上传结构化事件",
+    "categories": [
+      "architecture",
+      "expression",
+      "hardware"
+    ],
+    "selected": false
+  },
+  {
+    "filename": "image25.png",
+    "source_path": "ppt/media/image25.png",
+    "width": 103,
+    "height": 103,
+    "format": "PNG",
+    "mode": "RGBA",
+    "bytes": 3357,
+    "sha256": "dcb0c561fb69f107ac3e143db34858a1847bcfad8816d67d421b1b383b212625",
+    "slides": [
+      11
+    ],
+    "context": "四大核心竞争力 主动感知 摄像头+情绪阈值机制 主动关注用户状态 有身体的 Agent OpenClaw 从屏幕走进物理世界 把理解、反馈与行动变成可悲感知的真实体验 通过机器人的表情、声音与运动能力回到桌面 算力分离架构 机器人轻量执行，基站集中处理 esp32-s3 负责表情、声音和运动 突破本体算力 与功耗限制 Intel 生态 + 隐私 边界 Intel DK-2500 NPU 本地推理 提供 AI 推理底座 结合 openvino/npu 加速 原始 数据不出设备 ，上传结构化事件",
+    "categories": [
+      "architecture",
+      "expression",
+      "hardware"
+    ],
+    "selected": false
+  },
+  {
+    "filename": "image26.png",
+    "source_path": "ppt/media/image26.png",
+    "width": 103,
+    "height": 103,
+    "format": "PNG",
+    "mode": "RGBA",
+    "bytes": 6772,
+    "sha256": "3a94f40e5648d37d9e351ab45ba77e07588f965ca6ae79c2da81db6356197fb4",
+    "slides": [
+      11
+    ],
+    "context": "四大核心竞争力 主动感知 摄像头+情绪阈值机制 主动关注用户状态 有身体的 Agent OpenClaw 从屏幕走进物理世界 把理解、反馈与行动变成可悲感知的真实体验 通过机器人的表情、声音与运动能力回到桌面 算力分离架构 机器人轻量执行，基站集中处理 esp32-s3 负责表情、声音和运动 突破本体算力 与功耗限制 Intel 生态 + 隐私 边界 Intel DK-2500 NPU 本地推理 提供 AI 推理底座 结合 openvino/npu 加速 原始 数据不出设备 ，上传结构化事件",
+    "categories": [
+      "architecture",
+      "expression",
+      "hardware"
+    ],
+    "selected": false
+  },
+  {
+    "filename": "image27.png",
+    "source_path": "ppt/media/image27.png",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 1274251,
+    "sha256": "1f55ec86b97b45cd5ab6cca945bbc32747a74814dc23c76f4451b02b8baa3ff1",
+    "slides": [
+      11
+    ],
+    "context": "四大核心竞争力 主动感知 摄像头+情绪阈值机制 主动关注用户状态 有身体的 Agent OpenClaw 从屏幕走进物理世界 把理解、反馈与行动变成可悲感知的真实体验 通过机器人的表情、声音与运动能力回到桌面 算力分离架构 机器人轻量执行，基站集中处理 esp32-s3 负责表情、声音和运动 突破本体算力 与功耗限制 Intel 生态 + 隐私 边界 Intel DK-2500 NPU 本地推理 提供 AI 推理底座 结合 openvino/npu 加速 原始 数据不出设备 ，上传结构化事件",
+    "categories": [
+      "architecture",
+      "expression",
+      "hardware"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image28.png",
+    "source_path": "ppt/media/image28.png",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 1174571,
+    "sha256": "854149be894a03bcf980bc5f9fe57c4e77d77c5ae3d7d7586f7fbbfcc3c8a028",
+    "slides": [
+      12
+    ],
+    "context": "",
+    "categories": [
+      "supporting"
+    ],
+    "selected": false
+  },
+  {
+    "filename": "image29.png",
+    "source_path": "ppt/media/image29.png",
+    "width": 1118,
+    "height": 244,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 58647,
+    "sha256": "dc22c13482ccca9d3f1bba5e18d6f5ab5af54c323b5abceb0e52d1e9c812d83d",
+    "slides": [
+      13
+    ],
+    "context": "知识产权声明 我们在此承诺：本作品\"小安\"的系统架构设计、软硬件实现方案及项目创意均为团队原创成果，不涉及侵犯任何第三方知识产权及其他合法权利。项目中使用的开源框架与工具库（如 OpenClaw、OpenVINO、Sherpa-ONNX 等）均遵循其原始开源协议。",
+    "categories": [
+      "architecture",
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image3.png",
+    "source_path": "ppt/media/image3.png",
+    "width": 1122,
+    "height": 1402,
+    "format": "PNG",
+    "mode": "RGBA",
+    "bytes": 1210465,
+    "sha256": "3b1f73f9c9189b81d5f65a5abec0c3afd4002da7bee62f0e1a80e9e8f541217b",
+    "slides": [
+      1,
+      14
+    ],
+    "context": "基于 Intel DK-2500 的桌面智能伙伴 智能情感桌面助理 Welcome to Meet 小安 Presented by 张子尧 郑斯锐 施宇灏 From HKUST(GZ) | 从虚拟中走出来，在现实中走近你 小安 Intel 杯嵌入式大赛 · 2026 基于 Intel DK-2500 的桌面智能伙伴",
+    "categories": [
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image4.png",
+    "source_path": "ppt/media/image4.png",
+    "width": 1293,
+    "height": 1104,
+    "format": "PNG",
+    "mode": "RGBA",
+    "bytes": 683839,
+    "sha256": "febf1e85fa94fe5240011fde5df547ce29b2d02ea69a0cfc8ac021c954a2ce38",
+    "slides": [
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      11
+    ],
+    "context": "项目背景：桌面工作中的两类困扰 | 需求验证：问卷调查分析与想法印证 用户需要的是一个能提供陪伴感与情绪价值、又能顺手处理一些小事情的助手 | 情绪陪伴 ： 主动式状态关怀 效率助手 ： 无打断任务承接 主动感知用户情绪并关怀； 与用户正常互动，提供情绪价值 核心 解法 ： 基于 Intel DK-2500 的桌面智能伙伴：小安 语音交互记录待办提醒，无需切屏，不干扰工作主线 | 部件组成 ： 基于 Intel DK-2500 的桌面智能伙伴：小 安 | demo1&2 ：语音请求响应链路（请求陪伴 / 任务完成） 小安功能演示 demo3 ：视觉感知主动关怀链路 用户主动开口，小安完成理解、回复与具身反馈 用户无需开口，小安感知疲劳并主动介入 | 端边协同架构：机器人本体 + Intel 边缘基站 + OpenClaw 服务层 机器人提供具身感知与反馈， intel DK-2500 承担本地模型推理与通信中枢， OpenClaw 负责用户理解、任务编排与决策生成 | 四大核心竞争力 主动感知 摄像头+情绪阈值机制 主动关注用户状态 有身体的 Agent OpenClaw 从屏幕走进物理世界 把理解、反馈与行动变成可悲感知的真实体验 通过机器人的表情、声音与运动能力回到桌面 算力分离架构 机器人轻量执行，基站集中处理 esp32-s3 负责表情、声音和运动 突破本体算力 与功耗限制 Intel 生态 + 隐私 边界 Intel DK-2500 NPU 本地推理 提供 AI 推理底座 结合 openvino/npu 加速 原始 数据不出设备 ，上传结构化事件",
+    "categories": [
+      "architecture",
+      "expression",
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image5.png",
+    "source_path": "ppt/media/image5.png",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 1583141,
+    "sha256": "0f5d5c797cf245248d6974305ba43727daa4d01aebd9a6da49dd20c3e0b9dc7e",
+    "slides": [
+      2
+    ],
+    "context": "项目背景：桌面工作中的两类困扰",
+    "categories": [
+      "supporting"
+    ],
+    "selected": false
+  },
+  {
+    "filename": "image6.png",
+    "source_path": "ppt/media/image6.png",
+    "width": 1500,
+    "height": 898,
+    "format": "PNG",
+    "mode": "RGBA",
+    "bytes": 3743223,
+    "sha256": "0ad012ffb1a4372058fb6dbcf86cc2ad0f2a0173d51c2577b8a760c1280fd068",
+    "slides": [
+      2,
+      3,
+      5,
+      6,
+      7,
+      11,
+      13
+    ],
+    "context": "项目背景：桌面工作中的两类困扰 | 需求验证：问卷调查分析与想法印证 用户需要的是一个能提供陪伴感与情绪价值、又能顺手处理一些小事情的助手 | 情绪陪伴 ： 主动式状态关怀 效率助手 ： 无打断任务承接 主动感知用户情绪并关怀； 与用户正常互动，提供情绪价值 核心 解法 ： 基于 Intel DK-2500 的桌面智能伙伴：小安 语音交互记录待办提醒，无需切屏，不干扰工作主线 | 部件组成 ： 基于 Intel DK-2500 的桌面智能伙伴：小 安 | demo1&2 ：语音请求响应链路（请求陪伴 / 任务完成） 小安功能演示 demo3 ：视觉感知主动关怀链路 用户主动开口，小安完成理解、回复与具身反馈 用户无需开口，小安感知疲劳并主动介入 | 四大核心竞争力 主动感知 摄像头+情绪阈值机制 主动关注用户状态 有身体的 Agent OpenClaw 从屏幕走进物理世界 把理解、反馈与行动变成可悲感知的真实体验 通过机器人的表情、声音与运动能力回到桌面 算力分离架构 机器人轻量执行，基站集中处理 esp32-s3 负责表情、声音和运动 突破本体算力 与功耗限制 Intel 生态 + 隐私 边界 Intel DK-2500 NPU 本地推理 提供 AI 推理底座 结合 openvino/npu 加速 原始 数据不出设备 ，上传结构化事件 | 知识产权声明 我们在此承诺：本作品\"小安\"的系统架构设计、软硬件实现方案及项目创意均为团队原创成果，不涉及侵犯任何第三方知识产权及其他合法权利。项目中使用的开源框架与工具库（如 OpenClaw、OpenVINO、Sherpa-ONNX 等）均遵循其原始开源协议。",
+    "categories": [
+      "architecture",
+      "expression",
+      "hardware",
+      "product"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image7.png",
+    "source_path": "ppt/media/image7.png",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 1375229,
+    "sha256": "1306cdcc4017cc72757bd1825665182de2168bdf4aab7d9341cd92b96abb23de",
+    "slides": [
+      3
+    ],
+    "context": "需求验证：问卷调查分析与想法印证 用户需要的是一个能提供陪伴感与情绪价值、又能顺手处理一些小事情的助手",
+    "categories": [
+      "supporting"
+    ],
+    "selected": false
+  },
+  {
+    "filename": "image8.png",
+    "source_path": "ppt/media/image8.png",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "mode": "RGB",
+    "bytes": 1327088,
+    "sha256": "abe68bb605c16ac8d2dc35d4d1509744f0c9f6d4ec34246d5c1acede3f924d1e",
+    "slides": [
+      4
+    ],
+    "context": "市场现状：能力分散，缺少完整桌面工作闭环",
+    "categories": [
+      "architecture"
+    ],
+    "selected": true
+  },
+  {
+    "filename": "image9.svg",
+    "source_path": "ppt/media/image9.svg",
+    "width": null,
+    "height": null,
+    "format": "SVG",
+    "mode": "unknown",
+    "bytes": 794,
+    "sha256": "c32648f6726741327654eb6efa2ed5fd1529031a10de6bfba2c519ef1f07b480",
+    "slides": [],
+    "context": "",
+    "categories": [
+      "supporting"
+    ],
+    "selected": false
+  }
+]
