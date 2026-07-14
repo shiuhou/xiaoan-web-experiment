@@ -3,21 +3,19 @@ import { describe, expect, it } from "vitest";
 import Home from "./page";
 
 describe("Home page shell", () => {
-  it("renders the complete eight-scene narrative in order", () => {
+  it("renders the complete six-act V2 narrative in order", () => {
     const { container } = render(<Home />);
     const main = container.querySelector("main#main-content");
-    const scenes = [...(main?.querySelectorAll("[data-scene]") ?? [])];
+    const acts = [...(main?.querySelectorAll("[data-act]") ?? [])];
 
     expect(main).toBeInTheDocument();
-    expect(scenes.map((scene) => scene.id)).toEqual([
-      "awakening",
-      "breaking",
-      "perception",
-      "edge",
-      "understanding",
+    expect(acts.map((act) => act.id)).toEqual([
+      "wake",
+      "break",
+      "signal",
+      "edge-intent",
+      "action",
       "presence",
-      "system",
-      "closing",
     ]);
     expect(main?.querySelectorAll("h1")).toHaveLength(1);
   });

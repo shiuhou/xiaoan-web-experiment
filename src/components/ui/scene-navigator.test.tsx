@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { SceneNavigator } from "./scene-navigator";
 
 describe("SceneNavigator", () => {
-  it("exposes all eight scenes through a compact keyboard-operable index", async () => {
+  it("exposes all six acts through a compact keyboard-operable index", async () => {
     const user = userEvent.setup();
     render(<SceneNavigator />);
 
@@ -13,13 +13,13 @@ describe("SceneNavigator", () => {
 
     await user.click(toggle);
     expect(toggle).toHaveAttribute("aria-expanded", "true");
-    expect(screen.getAllByRole("link")).toHaveLength(8);
-    expect(screen.getByRole("link", { name: /01 awakening/i })).toHaveAttribute(
+    expect(screen.getAllByRole("link")).toHaveLength(6);
+    expect(screen.getByRole("link", { name: /01 wake/i })).toHaveAttribute(
       "href",
-      "#awakening",
+      "#wake",
     );
 
-    await user.click(screen.getByRole("link", { name: /04 edge/i }));
+    await user.click(screen.getByRole("link", { name: /04 edge-intent/i }));
     expect(toggle).toHaveAttribute("aria-expanded", "false");
   });
 });
