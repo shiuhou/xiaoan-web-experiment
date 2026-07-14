@@ -13,28 +13,29 @@
     "extract:assets": "python scripts/extract-ppt-assets.py --input \"references/结题(3).pptx\" --output-dir work/ppt-assets/final-deck --public-dir public/assets/ppt"
   },
   "dependencies": {
-    "@react-three/drei": "latest",
-    "@react-three/fiber": "latest",
-    "gsap": "latest",
-    "lenis": "latest",
+    "@fontsource-variable/inter-tight": "5.2.7",
+    "@react-three/drei": "10.7.7",
+    "@react-three/fiber": "9.6.1",
+    "gsap": "3.15.0",
+    "lenis": "1.3.25",
     "next": "16.2.10",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "three": "0.180.0"
   },
   "devDependencies": {
-    "@playwright/test": "latest",
-    "@testing-library/jest-dom": "latest",
-    "@testing-library/react": "latest",
-    "@testing-library/user-event": "latest",
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
+    "@playwright/test": "1.61.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.1",
+    "@types/node": "26.1.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
     "@types/three": "0.180.0",
     "eslint": "9.39.2",
     "eslint-config-next": "16.2.10",
-    "jsdom": "latest",
+    "jsdom": "29.1.1",
     "typescript": "5.9.3",
-    "vitest": "latest"
+    "vitest": "4.1.10"
   }
 }

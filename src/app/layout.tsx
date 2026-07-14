@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import "@fontsource-variable/inter-tight";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { SignalThread } from "@/components/motion/signal-thread";
 import { SceneNavigator } from "@/components/ui/scene-navigator";

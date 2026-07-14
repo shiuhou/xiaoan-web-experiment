@@ -1,0 +1,80 @@
+[
+  {
+    "direction": "a",
+    "viewport": "desktop",
+    "diagnostics": {
+      "overflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "productImages": 1
+    },
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedResponses": []
+  },
+  {
+    "direction": "b",
+    "viewport": "desktop",
+    "diagnostics": {
+      "overflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "productImages": 1
+    },
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedResponses": []
+  },
+  {
+    "direction": "c",
+    "viewport": "desktop",
+    "diagnostics": {
+      "overflow": false,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "productImages": 1
+    },
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedResponses": []
+  },
+  {
+    "direction": "a",
+    "viewport": "mobile",
+    "diagnostics": {
+      "overflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "productImages": 1
+    },
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedResponses": []
+  },
+  {
+    "direction": "b",
+    "viewport": "mobile",
+    "diagnostics": {
+      "overflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "productImages": 1
+    },
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedResponses": []
+  },
+  {
+    "direction": "c",
+    "viewport": "mobile",
+    "diagnostics": {
+      "overflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "productImages": 1
+    },
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedResponses": []
+  }
+]
