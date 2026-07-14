@@ -36,6 +36,6 @@
 ## External state
 
 - Git repository：已依使用者授權初始化
-- GitHub remote：納入本次發布流程
-- Commit / push：納入本次發布流程
-- Deployment：尚未執行
+- GitHub remote：`https://github.com/shiuhou/xiaoan-web-experiment`
+- Commit / push：已推送至 `0703`
+- Deployment：已透過 GitHub Pages workflow 部署至 `https://shiuhou.github.io/xiaoan-web-experiment/`

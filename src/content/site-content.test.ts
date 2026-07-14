@@ -1,9 +1,26 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { ASSETS, CONCEPT_STATES, SCENES } from "./site-content";
+import {
+  ASSETS,
+  CONCEPT_STATES,
+  SCENES,
+  withSiteBasePath,
+} from "./site-content";
 
 describe("Xiao-An narrative content", () => {
+  it("prefixes public assets for subpath deployments", () => {
+    expect(
+      withSiteBasePath(
+        "/assets/product/xiaoan-dock.png",
+        "/xiaoan-web-experiment",
+      ),
+    ).toBe("/xiaoan-web-experiment/assets/product/xiaoan-dock.png");
+    expect(withSiteBasePath("/assets/product/xiaoan-dock.png", "")).toBe(
+      "/assets/product/xiaoan-dock.png",
+    );
+  });
+
   it("keeps exactly eight scenes in the intended narrative order", () => {
     expect(SCENES.map((scene) => scene.id)).toEqual([
       "awakening",

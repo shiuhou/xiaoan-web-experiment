@@ -2,6 +2,9 @@
 
 以「**FROM SIGNAL TO UNDERSTANDING TO PRESENCE**」為主線的小安概念產品網站。這不是答辯簡報網頁化，也不是可控制機器人的 Dashboard；它是一個使用真實產品素材、ScrollTrigger、2.5D 與單一 WebGL 場景完成的 Creative Web Experiment。
 
+- 公開網站：https://shiuhou.github.io/xiaoan-web-experiment/
+- GitHub（`0703`）：https://github.com/shiuhou/xiaoan-web-experiment/tree/0703
+
 ## 快速開始
 
 需求：Node.js 20+，建議使用 pnpm。
@@ -137,9 +140,11 @@ node scripts/record-scroll.mjs
 
 輸出在 `artifacts/recordings/xiaoan-scroll-desktop.webm`。若剪成社交媒體版本，建議只保留 Hero、Breaking、Edge、Presence、Closing，控制在 12–16 秒；完整錄屏仍作為工程交付與全頁動態證據。
 
-## 部署至 Vercel
+## 部署
 
-本專案不依賴遠端圖片、網路字體、API 或外部資料服務，可直接部署：
+`0703` 分支已設定 GitHub Pages workflow。每次 push 到該分支時，GitHub Actions 會以 `/xiaoan-web-experiment` 作為站點子路徑，輸出靜態網站並更新公開頁面。
+
+如需改用 Vercel，本專案不依賴遠端圖片、網路字體、API 或外部資料服務，可直接部署：
 
 1. 將此獨立專案放入自己的 Git repository。
 2. 在 Vercel 匯入 repository。
@@ -147,7 +152,7 @@ node scripts/record-scroll.mjs
 4. 如需停用 WebGL，加入 `NEXT_PUBLIC_DISABLE_WEBGL=1`。
 5. 部署前再次執行 `pnpm test && pnpm lint && pnpm build`。
 
-本專案已依使用者授權建立 GitHub repository。Vercel 部署仍需另外執行，因為 GitHub repository URL 本身只展示代碼，不會運行 Next.js 網站。
+GitHub Pages 公開站點與 repository 是兩個不同網址；前者展示可操作網站，後者用於查看代碼與交付素材。
 
 ## 已知限制
 

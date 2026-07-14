@@ -18,14 +18,28 @@ export type SceneContent = {
   tags: readonly string[];
 };
 
+export function withSiteBasePath(
+  assetPath: string,
+  basePath = process.env.NEXT_PUBLIC_SITE_BASE_PATH ?? "",
+) {
+  const normalizedBasePath = basePath.replace(/\/$/, "");
+  const normalizedAssetPath = assetPath.startsWith("/")
+    ? assetPath
+    : `/${assetPath}`;
+
+  return `${normalizedBasePath}${normalizedAssetPath}`;
+}
+
 export const ASSETS = {
-  hero: "/assets/product/xiaoan-dock.png",
-  dockExploded: "/assets/product/dk2500-exploded.png",
-  architecture: "/assets/product/system-architecture.png",
-  edgeHardware: "/assets/product/edge-hardware.png",
-  internalsFront: "/assets/product/robot-internals-front.png",
-  internalsTop: "/assets/product/robot-internals-top.jpeg",
-  expressions: "/assets/product/xiaoan-expressions.png",
+  hero: withSiteBasePath("/assets/product/xiaoan-dock.png"),
+  dockExploded: withSiteBasePath("/assets/product/dk2500-exploded.png"),
+  architecture: withSiteBasePath("/assets/product/system-architecture.png"),
+  edgeHardware: withSiteBasePath("/assets/product/edge-hardware.png"),
+  internalsFront: withSiteBasePath(
+    "/assets/product/robot-internals-front.png",
+  ),
+  internalsTop: withSiteBasePath("/assets/product/robot-internals-top.jpeg"),
+  expressions: withSiteBasePath("/assets/product/xiaoan-expressions.png"),
 } as const;
 
 export const CONCEPT_STATES = [
