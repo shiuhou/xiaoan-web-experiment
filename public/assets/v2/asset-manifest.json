@@ -1,0 +1,49 @@
+{
+  "expression_care": {
+    "source": "public/assets/product/xiaoan-expressions.png",
+    "source_sha256": "e601c368ceceb69b4ae5f8e22d5303be531f04827a10955985c7fda9ff8a679d",
+    "output": "expression-care.png",
+    "crop": [
+      496,
+      90,
+      636,
+      168
+    ],
+    "crop_normalized": [
+      0.665772,
+      0.157618,
+      0.853691,
+      0.294221
+    ],
+    "note": "Authentic worried cyan expression from the top-right source panel.",
+    "dimensions": [
+      140,
+      78
+    ],
+    "mode": "RGBA"
+  },
+  "product_foreground": {
+    "source": "public/assets/product/xiaoan-dock.png",
+    "source_sha256": "3b1f73f9c9189b81d5f65a5abec0c3afd4002da7bee62f0e1a80e9e8f541217b",
+    "output": "product-foreground.png",
+    "strategy": "safe_full_copy",
+    "note": "Full transparent source retained; CSS mask supplies conservative foreground clipping.",
+    "dimensions": [
+      1122,
+      1402
+    ],
+    "mode": "RGBA"
+  },
+  "product_dock": {
+    "source": "public/assets/product/xiaoan-dock.png",
+    "source_sha256": "3b1f73f9c9189b81d5f65a5abec0c3afd4002da7bee62f0e1a80e9e8f541217b",
+    "output": "product-dock.png",
+    "strategy": "safe_full_copy",
+    "note": "Full transparent source retained to avoid destructive object removal.",
+    "dimensions": [
+      1122,
+      1402
+    ],
+    "mode": "RGBA"
+  }
+}

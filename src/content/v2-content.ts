@@ -20,6 +20,9 @@ export const V2_ASSETS = {
   hero: withSiteBasePath("/assets/product/xiaoan-dock.png"),
   dk2500: withSiteBasePath("/assets/product/dk2500-exploded.png"),
   expressions: withSiteBasePath("/assets/product/xiaoan-expressions.png"),
+  expressionCare: withSiteBasePath("/assets/v2/expression-care.png"),
+  productForeground: withSiteBasePath("/assets/v2/product-foreground.png"),
+  productDock: withSiteBasePath("/assets/v2/product-dock.png"),
 } as const;
 
 export const V2_ACTS: readonly ActContent[] = [
