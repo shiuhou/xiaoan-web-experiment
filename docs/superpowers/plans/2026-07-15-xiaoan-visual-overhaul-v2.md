@@ -65,7 +65,7 @@ describe("V2 narrative contract", () => {
 
 - [ ] **Step 2: Run the test and confirm the module is missing**
 
-Run: `pnpm vitest run src/content/v2-content.test.ts`  
+Run: `pnpm vitest run src/content/v2-content.test.ts`
 Expected: FAIL because `./v2-content` does not exist.
 
 - [ ] **Step 3: Implement the content contract**
@@ -103,7 +103,7 @@ export const AGENT_OUTPUTS = ["REMINDER", "CARE", "WAIT"] as const;
 
 - [ ] **Step 5: Run content and page tests**
 
-Run: `pnpm vitest run src/content/v2-content.test.ts src/app/page.test.tsx`  
+Run: `pnpm vitest run src/content/v2-content.test.ts src/app/page.test.tsx`
 Expected: PASS with six `[data-act]` sections and no V1 scene IDs on the page.
 
 - [ ] **Step 6: Commit**
@@ -150,7 +150,7 @@ describe("V2 concepts", () => {
 
 - [ ] **Step 2: Run the test and confirm it fails**
 
-Run: `pnpm vitest run src/components/concepts/concepts.test.tsx`  
+Run: `pnpm vitest run src/components/concepts/concepts.test.tsx`
 Expected: FAIL because `ConceptGallery` does not exist.
 
 - [ ] **Step 3: Implement distinct static compositions**
@@ -158,10 +158,10 @@ Expected: FAIL because `ConceptGallery` does not exist.
 Install a pinned, locally bundled Latin variable font before styling:
 
 ```powershell
-pnpm add @fontsource-variable/inter-tight@5.2.7
+pnpm add --save-exact @fontsource-variable/inter-tight@5.2.7
 ```
 
-Import its CSS from `src/app/globals.css`; no font file may be fetched at build or runtime.
+Replace the existing `latest` ranges in `package.json` with the exact versions already resolved in `pnpm-lock.yaml` (`@react-three/drei@10.7.7`, `@react-three/fiber@9.6.1`, `gsap@3.15.0`, `lenis@1.3.25`, `@playwright/test@1.61.1`, `@testing-library/jest-dom@6.9.1`, `@testing-library/react@16.3.2`, `@testing-library/user-event@14.6.1`, `@types/node@26.1.1`, `@types/react@19.2.17`, `@types/react-dom@19.2.3`, `eslint@9.39.2`, `jsdom@29.1.1`, and `vitest@4.1.10`), then run `pnpm install --lockfile-only`. Import the font CSS from `src/app/globals.css`; no font file may be fetched at build or runtime.
 
 - A: Chinese split across product foreground/background; black-to-porcelain slit; product 60% width.
 - B: white editorial operating-system blocks, asymmetric red/cyan registration marks, product 42% width.
@@ -177,7 +177,7 @@ Import its CSS from `src/app/globals.css`; no font file may be fetched at build 
 
 - [ ] **Step 5: Capture desktop and mobile concepts**
 
-Run: `node scripts/capture-v2-concepts.mjs`  
+Run: `node scripts/capture-v2-concepts.mjs`
 Expected: six PNGs under `artifacts/v2/concepts/`, diagnostics with `consoleErrors: 0`, `pageErrors: 0`, and `overflow: false`.
 
 - [ ] **Step 6: Select A and document the visual gate**
@@ -194,7 +194,7 @@ git commit -m "feat(v2): establish fracture-into-form art direction"
 ### Task 3: Preprocess real expression and product layers without altering sources
 
 **Files:**
-- Create: `scripts/prepare-v2-assets.py`
+- Create: `scripts/prepare_v2_assets.py`
 - Create: `tests/test_prepare_v2_assets.py`
 - Create: `public/assets/v2/expression-care.png`
 - Create: `public/assets/v2/product-foreground.png`
@@ -230,7 +230,7 @@ class PrepareV2AssetsTest(unittest.TestCase):
 
 - [ ] **Step 2: Run and confirm import failure**
 
-Run: `python -m unittest tests/test_prepare_v2_assets.py`  
+Run: `python -m unittest tests/test_prepare_v2_assets.py`
 Expected: FAIL because `scripts.prepare_v2_assets` does not exist.
 
 - [ ] **Step 3: Implement deterministic Pillow preprocessing**
@@ -242,7 +242,7 @@ Expected: FAIL because `scripts.prepare_v2_assets` does not exist.
 
 - [ ] **Step 4: Run tests and generate assets**
 
-Run: `python -m unittest tests/test_prepare_v2_assets.py && python scripts/prepare-v2-assets.py`  
+Run: `python -m unittest tests/test_prepare_v2_assets.py && python scripts/prepare_v2_assets.py`
 Expected: tests PASS and four files appear under `public/assets/v2/`.
 
 - [ ] **Step 5: Inspect all generated PNGs at original resolution**
@@ -252,7 +252,7 @@ Use the local image viewer. Reject rough cut-outs, face stretching, source text,
 - [ ] **Step 6: Commit**
 
 ```powershell
-git add scripts/prepare-v2-assets.py tests/test_prepare_v2_assets.py public/assets/v2 src/content/v2-content.ts
+git add scripts/prepare_v2_assets.py tests/test_prepare_v2_assets.py public/assets/v2 src/content/v2-content.ts
 git commit -m "feat(v2): derive authentic product expression assets"
 ```
 
@@ -288,7 +288,7 @@ it("clamps progress and starts every act at zero", () => {
 
 - [ ] **Step 2: Run and confirm failure**
 
-Run: `pnpm vitest run src/lib/experience-state.test.ts`  
+Run: `pnpm vitest run src/lib/experience-state.test.ts`
 Expected: FAIL because the state module does not exist.
 
 - [ ] **Step 3: Implement the pure state helpers and context**
@@ -301,7 +301,7 @@ Use one stable `useRef<ExperienceFrame>` in the provider. Setter callbacks mutat
 
 - [ ] **Step 5: Run controller and MotionProvider tests**
 
-Run: `pnpm vitest run src/lib/experience-state.test.ts src/components/motion/motion-provider.test.tsx`  
+Run: `pnpm vitest run src/lib/experience-state.test.ts src/components/motion/motion-provider.test.tsx`
 Expected: PASS; provider cleans listeners, Lenis, RAF, ScrollTrigger, and controller context.
 
 - [ ] **Step 6: Commit**
@@ -345,7 +345,7 @@ it("keeps DPR bounded", () => {
 
 - [ ] **Step 2: Run and confirm failure**
 
-Run: `pnpm vitest run src/components/experience/product-reveal.test.tsx`  
+Run: `pnpm vitest run src/components/experience/product-reveal.test.tsx`
 Expected: FAIL because the experience components do not exist.
 
 - [ ] **Step 3: Implement the Wake DOM composition and fallback**
@@ -378,8 +378,6 @@ git commit -m "feat(v2): create cinematic Xiao-An wake reveal"
 - Create: `src/components/motion/break-timeline.ts`
 - Create: `src/components/acts/break-act.test.tsx`
 - Create: `src/styles/v2/break.css`
-- Modify: `src/components/motion/desktop-timeline.ts`
-- Modify: `src/components/motion/mobile-timeline.ts`
 
 **Interfaces:**
 - Consumes: `setActProgress("break", value)` and `V2_ASSETS.hero`.
@@ -396,7 +394,7 @@ expect(screen.getByRole("img", { name: /Xiao-An/i })).toHaveAttribute("loading",
 
 - [ ] **Step 2: Run and confirm failure**
 
-Run: `pnpm vitest run src/components/acts/break-act.test.tsx`  
+Run: `pnpm vitest run src/components/acts/break-act.test.tsx`
 Expected: FAIL because `BreakAct` does not exist.
 
 - [ ] **Step 3: Implement one coherent 2D interface and two fracture halves**
@@ -416,7 +414,7 @@ Save desktop and mobile clips under `artifacts/v2/signature-moments/break/`. Ver
 - [ ] **Step 6: Commit**
 
 ```powershell
-git add src/components/acts/break-act* src/components/motion/break-timeline.ts src/components/motion/desktop-timeline.ts src/components/motion/mobile-timeline.ts src/styles/v2/break.css artifacts/v2/signature-moments/break
+git add src/components/acts/break-act* src/components/motion/break-timeline.ts src/styles/v2/break.css artifacts/v2/signature-moments/break
 git commit -m "feat(v2): fracture the interface into physical space"
 ```
 
@@ -445,7 +443,7 @@ expect(screen.queryByText(/accuracy|latency|ms|%/i)).not.toBeInTheDocument();
 
 - [ ] **Step 2: Run and confirm failure**
 
-Run: `pnpm vitest run src/components/acts/signal-act.test.tsx`  
+Run: `pnpm vitest run src/components/acts/signal-act.test.tsx`
 Expected: FAIL because `SignalAct` does not exist.
 
 - [ ] **Step 3: Implement five genuinely different signal forms**
@@ -506,7 +504,7 @@ it("keeps outputs after decision in DOM order", () => {
 
 - [ ] **Step 2: Run and confirm failure**
 
-Run: `pnpm vitest run src/components/experience/edge-tunnel.test.tsx`  
+Run: `pnpm vitest run src/components/experience/edge-tunnel.test.tsx`
 Expected: FAIL because tunnel modules do not exist.
 
 - [ ] **Step 3: Implement GPU-friendly tunnel geometry**
@@ -558,7 +556,7 @@ expect(screen.getByRole("link", { name: /GitHub/i })).toHaveAttribute(
 
 - [ ] **Step 2: Run and confirm failure**
 
-Run: `pnpm vitest run src/components/acts/action-presence.test.tsx`  
+Run: `pnpm vitest run src/components/acts/action-presence.test.tsx`
 Expected: FAIL because both act components are missing.
 
 - [ ] **Step 3: Implement layered product approach and authentic face mask**
@@ -608,7 +606,7 @@ Tests assert six navigation items, no `.signal-thread`, no V1 Scene IDs, final c
 
 - [ ] **Step 2: Run and confirm failure**
 
-Run: `pnpm vitest run src/components/motion src/app/page.test.tsx`  
+Run: `pnpm vitest run src/components/motion src/app/page.test.tsx`
 Expected: FAIL against the remaining V1 runtime.
 
 - [ ] **Step 3: Implement desktop timeline orchestration**
@@ -633,7 +631,7 @@ Delete imports/usages of fixed Signal Thread, circular agent/orbit elements, V1 
 
 - [ ] **Step 7: Run all unit tests, lint, and build**
 
-Run: `pnpm test && pnpm lint && pnpm build`  
+Run: `pnpm test && pnpm lint && pnpm build`
 Expected: all commands PASS with six static narrative acts.
 
 - [ ] **Step 8: Commit**
@@ -666,7 +664,7 @@ The test imports `resolveBrowserExecutable()` and expects `undefined` when `CHRO
 
 - [ ] **Step 2: Run and confirm failure**
 
-Run: `node --test scripts/qa-runtime.test.mjs`  
+Run: `node --test scripts/qa-runtime.test.mjs`
 Expected: FAIL until the shared QA resolver exists.
 
 - [ ] **Step 3: Add robust journey scenarios**
