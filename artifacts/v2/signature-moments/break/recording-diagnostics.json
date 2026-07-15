@@ -1,0 +1,44 @@
+[
+  {
+    "profile": "desktop",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "range": {
+      "start": 1575,
+      "end": 2340
+    },
+    "diagnostics": {
+      "scrollY": 2340,
+      "progress": "1",
+      "horizontalOverflow": false,
+      "productOpacity": "1"
+    },
+    "consoleMessages": [],
+    "pageErrors": [],
+    "failedResponses": [],
+    "output": "artifacts/v2/signature-moments/break/desktop.webm"
+  },
+  {
+    "profile": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "range": {
+      "start": 1249.109375,
+      "end": 1797.703125
+    },
+    "diagnostics": {
+      "scrollY": 1798,
+      "progress": "1",
+      "horizontalOverflow": false,
+      "productOpacity": "1"
+    },
+    "consoleMessages": [],
+    "pageErrors": [],
+    "failedResponses": [],
+    "output": "artifacts/v2/signature-moments/break/mobile.webm"
+  }
+]
