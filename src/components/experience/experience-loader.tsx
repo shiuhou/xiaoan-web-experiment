@@ -17,17 +17,39 @@ const DynamicExperienceCanvas = dynamic(
   { ssr: false },
 );
 
-function canRenderWebGL(): boolean {
-  try {
-    const canvas = document.createElement("canvas");
-    return Boolean(
-      (window.WebGL2RenderingContext && canvas.getContext("webgl2")) ||
-        (window.WebGLRenderingContext && canvas.getContext("webgl")),
-    );
-  } catch {
-    return false;
-  }
+type WebGLProbeContext = {
+  getExtension(name: string): { loseContext(): void } | null;
+};
+
+type WebGLProbeCanvas = {
+  getContext(kind: string): WebGLProbeContext | null;
+};
+
+export function createWebGLSupportReader(
+  createCanvas: () => WebGLProbeCanvas = () =>
+    document.createElement("canvas") as unknown as WebGLProbeCanvas,
+) {
+  let cached: boolean | undefined;
+
+  return () => {
+    if (cached !== undefined) return cached;
+    try {
+      const canvas = createCanvas();
+      const context =
+        canvas.getContext("webgl2") ?? canvas.getContext("webgl");
+      cached = Boolean(context);
+      context
+        ?.getExtension("WEBGL_lose_context")
+        ?.loseContext();
+      return cached;
+    } catch {
+      cached = false;
+      return cached;
+    }
+  };
 }
+
+const canRenderWebGL = createWebGLSupportReader();
 
 function subscribeCompact(callback: () => void) {
   if (typeof window.matchMedia !== "function") {
