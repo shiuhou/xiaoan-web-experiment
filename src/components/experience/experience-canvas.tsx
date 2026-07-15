@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { usePageVisibility } from "@/hooks/use-page-visibility";
 import { ProductReveal } from "./product-reveal";
+import { SignalField } from "./signal-field";
 
 export const EXPERIENCE_BUDGET = {
   desktopDpr: 1.5,
@@ -14,10 +15,15 @@ export const EXPERIENCE_BUDGET = {
 
 export type ExperienceCanvasProps = {
   compact: boolean;
+  mode?: "wake" | "signal";
   onReady?: () => void;
 };
 
-export function ExperienceCanvas({ compact, onReady }: ExperienceCanvasProps) {
+export function ExperienceCanvas({
+  compact,
+  mode = "wake",
+  onReady,
+}: ExperienceCanvasProps) {
   const pageVisible = usePageVisibility();
   const dpr = compact
     ? EXPERIENCE_BUDGET.mobileDpr
@@ -26,7 +32,12 @@ export function ExperienceCanvas({ compact, onReady }: ExperienceCanvasProps) {
   return (
     <div className="experience-canvas" aria-hidden="true">
       <Canvas
-        camera={{ fov: 34, near: 0.1, far: 20, position: [0, 0, 4] }}
+        camera={{
+          fov: mode === "signal" ? 42 : 34,
+          near: 0.1,
+          far: 20,
+          position: [0, 0, mode === "signal" ? 5 : 4],
+        }}
         dpr={dpr}
         frameloop={pageVisible ? "always" : "never"}
         gl={{
@@ -40,7 +51,11 @@ export function ExperienceCanvas({ compact, onReady }: ExperienceCanvasProps) {
         }}
       >
         <Suspense fallback={null}>
-          <ProductReveal compact={compact} />
+          {mode === "wake" ? (
+            <ProductReveal compact={compact} />
+          ) : (
+            <SignalField compact={compact} />
+          )}
         </Suspense>
       </Canvas>
     </div>

@@ -41,7 +41,11 @@ function getCompactSnapshot() {
 const subscribeWebGL = () => () => undefined;
 const WEBGL_FORCED_OFF = process.env.NEXT_PUBLIC_DISABLE_WEBGL === "1";
 
-export function ExperienceLoader() {
+export function ExperienceLoader({
+  mode = "wake",
+}: {
+  mode?: "wake" | "signal";
+}) {
   const reducedMotion = useReducedMotion();
   const compact = useSyncExternalStore(
     subscribeCompact,
@@ -64,10 +68,11 @@ export function ExperienceLoader() {
       data-canvas-ready={canvasReady ? "true" : "false"}
       data-webgl-enabled={canvasEnabled ? "true" : "false"}
     >
-      <ExperienceFallback mode="wake" showCopy={false} />
+      <ExperienceFallback mode={mode} showCopy={false} />
       {canvasEnabled ? (
         <DynamicExperienceCanvas
           compact={compact}
+          mode={mode}
           onReady={markCanvasReady}
         />
       ) : null}
