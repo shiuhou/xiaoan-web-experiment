@@ -1,5 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { useExperience } from "@/components/experience/experience-context";
 import { MotionProvider } from "./motion-provider";
 import { SignalThread } from "./signal-thread";
 
@@ -50,6 +51,11 @@ function setReducedMotion(matches: boolean) {
   });
 }
 
+function ExperienceProbe() {
+  const { frame } = useExperience();
+  return <output data-testid="experience-probe">{frame.current.wake}</output>;
+}
+
 describe("MotionProvider", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -74,6 +80,18 @@ describe("MotionProvider", () => {
     expect(mocks.on).not.toHaveBeenCalled();
   });
 
+  it("provides one experience controller to narrative descendants", () => {
+    setReducedMotion(true);
+
+    render(
+      <MotionProvider>
+        <ExperienceProbe />
+      </MotionProvider>,
+    );
+
+    expect(screen.getByTestId("experience-probe")).toHaveTextContent("0");
+  });
+
   it("initialises and cleans up the motion lifecycle when motion is allowed", () => {
     setReducedMotion(false);
 
@@ -83,10 +101,37 @@ describe("MotionProvider", () => {
       </MotionProvider>,
     );
 
-    expect(mocks.on).toHaveBeenCalledWith("scroll", mocks.update);
+    expect(mocks.on).toHaveBeenCalledWith("scroll", expect.any(Function));
     unmount();
     expect(mocks.destroy).toHaveBeenCalledTimes(1);
     expect(mocks.kill).toHaveBeenCalledTimes(1);
+  });
+
+  it("forwards Lenis velocity into the bounded experience response", () => {
+    setReducedMotion(false);
+
+    const { unmount } = render(
+      <MotionProvider>
+        <p>Velocity scene</p>
+      </MotionProvider>,
+    );
+    const scrollCall = mocks.on.mock.calls.find(([event]) => event === "scroll");
+    const scrollCallback = scrollCall?.[1] as
+      | ((lenis: { velocity: number }) => void)
+      | undefined;
+
+    expect(scrollCallback).toBeTypeOf("function");
+    act(() => scrollCallback?.({ velocity: 20 }));
+
+    expect(mocks.update).toHaveBeenCalledTimes(1);
+    expect(
+      document.documentElement.style.getPropertyValue("--experience-velocity"),
+    ).toBe("0.75");
+
+    unmount();
+    expect(
+      document.documentElement.style.getPropertyValue("--experience-velocity"),
+    ).toBe("");
   });
 });
 

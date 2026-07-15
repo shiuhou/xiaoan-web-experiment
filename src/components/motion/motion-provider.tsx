@@ -4,11 +4,27 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { type PropsWithChildren, useEffect, useRef } from "react";
+import { ExperienceController } from "@/components/experience/experience-controller";
+import { useExperience } from "@/components/experience/experience-context";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export function MotionProvider({ children }: PropsWithChildren) {
-  const root = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
+
+  return (
+    <ExperienceController reducedMotion={reducedMotion !== false}>
+      <MotionRuntime reducedMotion={reducedMotion}>{children}</MotionRuntime>
+    </ExperienceController>
+  );
+}
+
+type MotionRuntimeProps = PropsWithChildren<{
+  reducedMotion: boolean | null;
+}>;
+
+function MotionRuntime({ children, reducedMotion }: MotionRuntimeProps) {
+  const root = useRef<HTMLDivElement>(null);
+  const { setVelocity } = useExperience();
 
   useEffect(() => {
     document.documentElement.dataset.reducedMotion =
@@ -25,7 +41,10 @@ export function MotionProvider({ children }: PropsWithChildren) {
       smoothWheel: true,
       syncTouch: false,
     });
-    lenis.on("scroll", ScrollTrigger.update);
+    const stopListening = lenis.on("scroll", (instance) => {
+      ScrollTrigger.update();
+      setVelocity(instance.velocity * 60);
+    });
 
     let frame = 0;
     const tick = (time: number) => {
@@ -46,10 +65,11 @@ export function MotionProvider({ children }: PropsWithChildren) {
       window.removeEventListener("resize", refresh);
       window.clearTimeout(refreshTimer);
       window.cancelAnimationFrame(frame);
+      stopListening?.();
       lenis.destroy();
       context.revert();
     };
-  }, [reducedMotion]);
+  }, [reducedMotion, setVelocity]);
 
   return (
     <div
