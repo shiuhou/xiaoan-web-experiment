@@ -1,38 +1,43 @@
 import { chromium } from "@playwright/test";
 import fs from "node:fs/promises";
 import path from "node:path";
+import {
+  attachIssueCollector,
+  collectRuntimeDiagnostics,
+  hasQaFailures,
+  resolveBrowserExecutable,
+  waitForV2Page,
+} from "./qa-runtime.mjs";
 
-const outputDir = path.join(process.cwd(), "artifacts", "recordings");
+const baseUrl = process.env.BASE_URL ?? "http://127.0.0.1:3000";
+const outputDir = path.join(
+  process.cwd(),
+  "artifacts",
+  "v2",
+  "recordings",
+);
 await fs.mkdir(outputDir, { recursive: true });
-
+const viewport = { width: 1440, height: 900 };
 const browser = await chromium.launch({
-  executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  executablePath: resolveBrowserExecutable(),
   headless: true,
   args: ["--use-angle=swiftshader", "--enable-webgl"],
 });
 const context = await browser.newContext({
-  viewport: { width: 1440, height: 900 },
-  recordVideo: { dir: outputDir, size: { width: 1440, height: 900 } },
+  viewport,
+  recordVideo: { dir: outputDir, size: viewport },
   colorScheme: "dark",
   reducedMotion: "no-preference",
 });
 const page = await context.newPage();
-const warnings = [];
-const errors = [];
-page.on("console", (message) => {
-  if (["warning", "error"].includes(message.type())) {
-    warnings.push({ type: message.type(), text: message.text() });
-  }
-});
-page.on("pageerror", (error) => errors.push(error.message));
-
-await page.goto("http://localhost:3000", { waitUntil: "networkidle" });
-await page.waitForTimeout(4300);
+const issues = attachIssueCollector(page);
+await page.goto(baseUrl, { waitUntil: "load", timeout: 60_000 });
+await waitForV2Page(page, 2600);
 const video = page.video();
 
 await page.evaluate(async () => {
   const destination = document.documentElement.scrollHeight - innerHeight;
-  const duration = 22000;
+  const duration = 22_000;
   const started = performance.now();
   await new Promise((resolve) => {
     const frame = (time) => {
@@ -47,28 +52,24 @@ await page.evaluate(async () => {
     requestAnimationFrame(frame);
   });
 });
-await page.waitForTimeout(2400);
-
-const diagnostics = await page.evaluate(() => ({
-  scrollY: window.scrollY,
-  maxScroll: document.documentElement.scrollHeight - innerHeight,
-  activeIndex: document.querySelector(".scene-nav__toggle strong")?.textContent?.trim(),
-  horizontalOverflow:
-    document.documentElement.scrollWidth - document.documentElement.clientWidth,
-  webglCanvasCount: document.querySelectorAll("[data-edge-webgl] canvas").length,
-}));
+await page.waitForTimeout(1800);
+const diagnostics = await collectRuntimeDiagnostics(page);
 
 await context.close();
 await browser.close();
-
-if (!video) throw new Error("Playwright did not create a video handle.");
+if (!video) throw new Error("Playwright did not create a video handle");
 const generatedPath = await video.path();
-const finalPath = path.join(outputDir, "xiaoan-scroll-desktop.webm");
-if (path.resolve(generatedPath) !== path.resolve(finalPath)) {
-  await fs.rename(generatedPath, finalPath);
-}
+const finalPath = path.join(outputDir, "xiaoan-v2-scroll-desktop.webm");
+await fs.rm(finalPath, { force: true });
+await fs.rename(generatedPath, finalPath);
+const result = {
+  diagnostics,
+  issues,
+  output: path.relative(process.cwd(), finalPath).replaceAll("\\", "/"),
+};
 await fs.writeFile(
   path.join(outputDir, "recording-diagnostics.json"),
-  JSON.stringify({ diagnostics, warnings, errors }, null, 2),
+  `${JSON.stringify(result, null, 2)}\n`,
   "utf8",
 );
+if (hasQaFailures(result)) process.exitCode = 1;

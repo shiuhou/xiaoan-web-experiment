@@ -1,105 +1,96 @@
 import { chromium } from "@playwright/test";
 import fs from "node:fs/promises";
 import path from "node:path";
+import {
+  attachIssueCollector,
+  collectRuntimeDiagnostics,
+  getActGeometry,
+  getActScrollTarget,
+  hasQaFailures,
+  resolveBrowserExecutable,
+  waitForV2Page,
+} from "./qa-runtime.mjs";
 
+const baseUrl = process.env.BASE_URL ?? "http://127.0.0.1:3000";
 const sizes = [
   { width: 1920, height: 1080 },
   { width: 1280, height: 720 },
   { width: 1024, height: 768 },
   { width: 390, height: 844 },
 ];
-
-const outputDir = path.join(process.cwd(), "artifacts", "qa", "responsive");
+const outputDir = path.join(
+  process.cwd(),
+  "artifacts",
+  "v2",
+  "qa",
+  "responsive",
+);
 await fs.mkdir(outputDir, { recursive: true });
 
 const browser = await chromium.launch({
-  executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  executablePath: resolveBrowserExecutable(),
   headless: true,
   args: ["--use-angle=swiftshader", "--enable-webgl"],
 });
-
 const results = [];
 
-for (const viewport of sizes) {
-  const mobile = viewport.width <= 767;
-  const context = await browser.newContext({
-    viewport,
-    colorScheme: "dark",
-    reducedMotion: "no-preference",
-    hasTouch: mobile,
-    isMobile: mobile,
-  });
-  const page = await context.newPage();
-  const consoleMessages = [];
-  const pageErrors = [];
-  page.on("console", (message) => {
-    if (["warning", "error"].includes(message.type())) {
-      consoleMessages.push({ type: message.type(), text: message.text() });
-    }
-  });
-  page.on("pageerror", (error) => pageErrors.push(error.message));
+try {
+  for (const viewport of sizes) {
+    const mobile = viewport.width <= 767;
+    const name = `${viewport.width}x${viewport.height}`;
+    const context = await browser.newContext({
+      viewport,
+      colorScheme: "dark",
+      reducedMotion: "no-preference",
+      hasTouch: mobile,
+      isMobile: mobile,
+    });
+    const page = await context.newPage();
+    const issues = attachIssueCollector(page);
+    await page.goto(baseUrl, { waitUntil: "load", timeout: 60_000 });
+    await waitForV2Page(page, 2100);
+    await page.screenshot({ path: path.join(outputDir, `${name}-hero.png`) });
 
-  await page.goto("http://localhost:3000", {
-    waitUntil: "domcontentloaded",
-    timeout: 60_000,
-  });
-  await page.waitForTimeout(2300);
+    const acts = await getActGeometry(page);
+    const action = acts.find((act) => act.id === "action");
+    if (!action) throw new Error("Action act is missing");
+    await page.evaluate(
+      (top) => window.scrollTo(0, top),
+      getActScrollTarget(action, viewport.height, 0.68),
+    );
+    await page.waitForTimeout(850);
+    await page.screenshot({ path: path.join(outputDir, `${name}-action.png`) });
 
-  const topState = await page.evaluate(() => {
-    const hero = document.querySelector(".hero-scene");
-    const title = document.querySelector(".hero-title");
-    const product = document.querySelector("[data-product-stage]");
-    const rect = (element) => {
-      const bounds = element?.getBoundingClientRect();
-      return bounds
-        ? { top: bounds.top, right: bounds.right, bottom: bounds.bottom, left: bounds.left }
-        : null;
-    };
-    return {
-      sceneCount: document.querySelectorAll("[data-scene]").length,
-      navigator: Boolean(document.querySelector(".scene-nav")),
-      overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      hero: rect(hero),
-      title: rect(title),
-      product: rect(product),
-    };
-  });
-
-  const edgeTarget = await page.evaluate(() => {
-    const edge = document.getElementById("edge");
-    return edge
-      ? edge.offsetTop + Math.max(0, edge.offsetHeight - innerHeight) * 0.68
-      : innerHeight * 3;
-  });
-  await page.evaluate((target) => window.scrollTo({ top: target, behavior: "instant" }), edgeTarget);
-  await page.waitForTimeout(1100);
-
-  const edgeState = await page.evaluate(() => ({
-    webglCanvasCount: document.querySelectorAll("[data-edge-webgl] canvas").length,
-    fallbackCount: document.querySelectorAll("[data-edge-fallback]").length,
-    activeScene: document.querySelector(".scene-nav__toggle strong")?.textContent?.trim() ?? null,
-  }));
-
-  results.push({ viewport, topState, edgeState, consoleMessages, pageErrors });
-  await context.close();
+    const diagnostics = await collectRuntimeDiagnostics(page);
+    const geometry = await page.evaluate(() => {
+      const rect = (selector) => {
+        const bounds = document.querySelector(selector)?.getBoundingClientRect();
+        return bounds
+          ? {
+              top: bounds.top,
+              right: bounds.right,
+              bottom: bounds.bottom,
+              left: bounds.left,
+              width: bounds.width,
+              height: bounds.height,
+            }
+          : null;
+      };
+      return {
+        actionProduct: rect("[data-action-product]"),
+        actionTitle: rect("#action-title"),
+      };
+    });
+    results.push({ viewport, geometry, diagnostics, issues });
+    await context.close();
+  }
+} finally {
+  await browser.close();
 }
 
-await browser.close();
 await fs.writeFile(
   path.join(outputDir, "results.json"),
-  JSON.stringify(results, null, 2),
+  `${JSON.stringify(results, null, 2)}\n`,
   "utf8",
 );
-
-if (
-  results.some(
-    (result) =>
-      result.topState.sceneCount !== 8 ||
-      result.topState.overflow !== 0 ||
-      !result.topState.navigator ||
-      result.consoleMessages.length > 0 ||
-      result.pageErrors.length > 0,
-  )
-) {
-  process.exitCode = 1;
-}
+if (results.some(hasQaFailures)) process.exitCode = 1;

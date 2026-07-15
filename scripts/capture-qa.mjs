@@ -1,24 +1,41 @@
 import { chromium } from "@playwright/test";
 import fs from "node:fs/promises";
 import path from "node:path";
+import {
+  V2_CAPTURE_PROGRESS,
+  attachIssueCollector,
+  collectRuntimeDiagnostics,
+  getActGeometry,
+  getActScrollTarget,
+  hasQaFailures,
+  resolveBrowserExecutable,
+  waitForV2Page,
+} from "./qa-runtime.mjs";
 
 const root = process.cwd();
-const passName = process.env.QA_PASS || "first-pass";
-const outputDir = path.join(root, "artifacts", "qa", passName);
-await fs.mkdir(outputDir, { recursive: true });
-
+const baseUrl = process.env.BASE_URL ?? "http://127.0.0.1:3000";
+const passName = process.env.QA_PASS ?? "final";
 const mobile = process.env.QA_VIEWPORT === "mobile";
 const reduced = process.env.QA_REDUCED === "1";
 const viewport = mobile
   ? { width: 390, height: 844 }
   : { width: 1440, height: 900 };
+const profile = `${mobile ? "mobile" : "desktop"}${reduced ? "-reduced" : ""}`;
+const outputDir = path.join(
+  root,
+  "artifacts",
+  "v2",
+  "qa",
+  "captures",
+  `${passName}-${profile}`,
+);
+await fs.mkdir(outputDir, { recursive: true });
 
 const browser = await chromium.launch({
-  executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  executablePath: resolveBrowserExecutable(),
   headless: true,
   args: ["--use-angle=swiftshader", "--enable-webgl"],
 });
-
 const context = await browser.newContext({
   viewport,
   deviceScaleFactor: 1,
@@ -28,68 +45,35 @@ const context = await browser.newContext({
   isMobile: mobile,
 });
 const page = await context.newPage();
-const consoleMessages = [];
-const pageErrors = [];
+const issues = attachIssueCollector(page);
 
-page.on("console", (message) => {
-  if (["warning", "error"].includes(message.type())) {
-    consoleMessages.push({ type: message.type(), text: message.text() });
-  }
-});
-page.on("pageerror", (error) => pageErrors.push(error.message));
+await page.goto(baseUrl, { waitUntil: "load", timeout: 60_000 });
+await waitForV2Page(page, reduced ? 500 : 2100);
+const acts = await getActGeometry(page);
 
-await page.goto("http://localhost:3000", { waitUntil: "networkidle" });
-await page.waitForTimeout(2200);
-
-const scenes = await page.locator("[data-scene]").evaluateAll((nodes) =>
-  nodes.map((node) => ({
-    id: node.id,
-    top: node.getBoundingClientRect().top + window.scrollY,
-    height: node.getBoundingClientRect().height,
-  })),
-);
-
-const progressByScene = {
-  awakening: 0,
-  breaking: 0.82,
-  perception: 0.78,
-  edge: 0.68,
-  understanding: 0.75,
-  presence: 0.72,
-  system: 0.86,
-  closing: 0.2,
-};
-
-for (const scene of scenes) {
-  const progress = progressByScene[scene.id] ?? 0.5;
-  const scrollable = Math.max(0, scene.height - viewport.height);
-  await page.evaluate((target) => window.scrollTo({ top: target, behavior: "instant" }), scene.top + scrollable * progress);
-  await page.waitForTimeout(900);
-  await page.screenshot({ path: path.join(outputDir, `${scene.id}.png`) });
+for (const act of acts) {
+  const progress = reduced ? 0 : (V2_CAPTURE_PROGRESS[act.id] ?? 0.5);
+  const target = getActScrollTarget(act, viewport.height, progress);
+  await page.evaluate((top) => window.scrollTo(0, top), target);
+  await page.waitForTimeout(reduced ? 180 : 750);
+  await page.screenshot({ path: path.join(outputDir, `${act.id}.png`) });
 }
 
-await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-await page.waitForTimeout(700);
-await page.screenshot({ path: path.join(outputDir, "full-page.png"), fullPage: true });
+await page.evaluate(() => window.scrollTo(0, 0));
+await page.waitForTimeout(500);
+await page.screenshot({
+  path: path.join(outputDir, "full-page.png"),
+  fullPage: true,
+});
 
-const diagnostics = await page.evaluate(() => ({
-  viewport: { width: window.innerWidth, height: window.innerHeight },
-  document: {
-    scrollWidth: document.documentElement.scrollWidth,
-    clientWidth: document.documentElement.clientWidth,
-    scrollHeight: document.documentElement.scrollHeight,
-  },
-  reducedMotion: document.documentElement.dataset.reducedMotion,
-  webglCanvasCount: document.querySelectorAll("[data-edge-webgl] canvas").length,
-  fallbackCount: document.querySelectorAll("[data-edge-fallback]").length,
-  sceneCount: document.querySelectorAll("[data-scene]").length,
-}));
-
+const diagnostics = await collectRuntimeDiagnostics(page);
+const result = { profile, viewport, reduced, acts, diagnostics, issues };
 await fs.writeFile(
   path.join(outputDir, "diagnostics.json"),
-  JSON.stringify({ scenes, diagnostics, consoleMessages, pageErrors }, null, 2),
+  `${JSON.stringify(result, null, 2)}\n`,
   "utf8",
 );
 
 await context.close();
 await browser.close();
+if (hasQaFailures(result)) process.exitCode = 1;
