@@ -1,0 +1,203 @@
+.presence-act {
+  position: relative;
+  z-index: 7;
+  min-height: 100svh;
+  overflow: clip;
+  color: #f4eee5;
+  background:
+    radial-gradient(ellipse at 72% 58%, rgba(209, 137, 78, 0.2), transparent 34%),
+    linear-gradient(118deg, #100d0b 0 43%, #20150f 72%, #0d0b0a);
+  isolation: isolate;
+}
+
+.presence-act::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(112deg, transparent 25%, rgba(251, 228, 195, 0.1) 43%, transparent 61%);
+}
+
+.presence-act__light {
+  position: absolute;
+  z-index: 2;
+  top: -28%;
+  right: 3%;
+  width: 62vw;
+  height: 150%;
+  background: linear-gradient(110deg, transparent 28%, rgba(249, 219, 178, 0.12) 49%, transparent 65%);
+  filter: blur(12px);
+  transform: skewX(-11deg);
+}
+
+.presence-act__product {
+  position: absolute;
+  z-index: 3;
+  top: -18%;
+  right: -19%;
+  width: min(82vw, 78rem);
+  height: 132%;
+  transform: scale(1.16);
+  transform-origin: 62% 55%;
+}
+
+.presence-act__product img {
+  object-fit: contain;
+  filter: drop-shadow(-3rem 4rem 4.5rem rgba(0, 0, 0, 0.58));
+}
+
+.presence-act__copy {
+  position: absolute;
+  z-index: 6;
+  top: 11%;
+  left: var(--page-pad);
+  width: min(66vw, 68rem);
+}
+
+.presence-act__copy > span {
+  color: rgba(224, 176, 129, 0.68);
+  font: 620 0.62rem/1.2 "Inter Tight Variable", var(--sans);
+  letter-spacing: 0.16em;
+}
+
+.presence-act__copy h2 {
+  margin: clamp(2.5rem, 7vh, 5.5rem) 0 0;
+  font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
+  font-size: clamp(3.8rem, 7.5vw, 7.8rem);
+  font-weight: 720;
+  line-height: 0.94;
+  letter-spacing: -0.085em;
+}
+
+.presence-act__copy h2 span,
+.presence-act__copy h2 strong {
+  display: block;
+}
+
+.presence-act__copy h2 strong {
+  margin-top: 0.12em;
+  color: transparent;
+  font-weight: inherit;
+  -webkit-text-stroke: 1px rgba(244, 226, 205, 0.82);
+}
+
+.presence-act__copy p {
+  margin: 2rem 0 0;
+  color: rgba(236, 220, 201, 0.64);
+  font: 560 0.66rem/1.4 var(--mono);
+  letter-spacing: 0.14em;
+}
+
+.presence-act__footer {
+  position: absolute;
+  z-index: 7;
+  right: var(--page-pad);
+  bottom: 2rem;
+  left: var(--page-pad);
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(238, 208, 173, 0.2);
+}
+
+.presence-act__footer > div {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.presence-act__footer strong {
+  font: 650 0.68rem/1 var(--sans);
+  letter-spacing: 0.16em;
+}
+
+.presence-act__footer span {
+  color: rgba(227, 210, 190, 0.5);
+  font: 520 0.5rem/1.4 var(--mono);
+  letter-spacing: 0.11em;
+}
+
+.presence-act__footer nav {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.presence-act__footer a {
+  min-width: 8.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(231, 181, 132, 0.44);
+  color: rgba(245, 231, 213, 0.78);
+  font: 590 0.55rem/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.presence-act__footer a:hover,
+.presence-act__footer a:focus-visible {
+  border-color: #edba86;
+  color: #fff4e5;
+}
+
+@media (max-width: 767px) {
+  .presence-act {
+    min-height: 100svh;
+  }
+
+  .presence-act__product {
+    top: 18%;
+    right: -48%;
+    width: 152vw;
+    height: 92%;
+    transform: scale(1.14);
+  }
+
+  .presence-act__copy {
+    top: 7%;
+    left: 1.1rem;
+    width: calc(100vw - 2.2rem);
+  }
+
+  .presence-act__copy h2 {
+    margin-top: 2.2rem;
+    font-size: 11.9vw;
+    line-height: 0.98;
+  }
+
+  .presence-act__copy p {
+    max-width: 7.5rem;
+    margin-top: 1.2rem;
+    font-size: 0.48rem;
+    line-height: 1.6;
+  }
+
+  .presence-act__footer {
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .presence-act__footer span {
+    font-size: 0.4rem;
+  }
+
+  .presence-act__footer nav {
+    gap: 1rem;
+  }
+
+  .presence-act__footer a {
+    min-width: 0;
+    flex: 1;
+    font-size: 0.47rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .presence-act__product,
+  .presence-act__light {
+    transform: none;
+  }
+}

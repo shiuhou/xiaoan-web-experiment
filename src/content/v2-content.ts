@@ -25,6 +25,11 @@ export const V2_ASSETS = {
   productDock: withSiteBasePath("/assets/v2/product-dock.png"),
 } as const;
 
+export const V2_LINKS = {
+  github:
+    "https://github.com/shiuhou/xiaoan-web-experiment/tree/feature/visual-overhaul-v2",
+} as const;
+
 export const V2_ACTS: readonly ActContent[] = [
   {
     id: "wake",

@@ -10,6 +10,8 @@
 @import "../styles/v2/break.css";
 @import "../styles/v2/signal.css";
 @import "../styles/v2/edge-intent.css";
+@import "../styles/v2/action.css";
+@import "../styles/v2/presence.css";
 
 *,
 *::before,
