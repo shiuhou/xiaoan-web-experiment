@@ -9,6 +9,7 @@
 @import "../styles/v2/wake.css";
 @import "../styles/v2/break.css";
 @import "../styles/v2/signal.css";
+@import "../styles/v2/edge-intent.css";
 
 *,
 *::before,

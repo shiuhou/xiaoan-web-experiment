@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import { usePageVisibility } from "@/hooks/use-page-visibility";
 import { ProductReveal } from "./product-reveal";
 import { SignalField } from "./signal-field";
+import { EdgeTunnel } from "./edge-tunnel";
 
 export const EXPERIENCE_BUDGET = {
   desktopDpr: 1.5,
@@ -15,7 +16,7 @@ export const EXPERIENCE_BUDGET = {
 
 export type ExperienceCanvasProps = {
   compact: boolean;
-  mode?: "wake" | "signal";
+  mode?: "wake" | "signal" | "edge";
   onReady?: () => void;
 };
 
@@ -33,10 +34,10 @@ export function ExperienceCanvas({
     <div className="experience-canvas" aria-hidden="true">
       <Canvas
         camera={{
-          fov: mode === "signal" ? 42 : 34,
+          fov: mode === "edge" ? 48 : mode === "signal" ? 42 : 34,
           near: 0.1,
           far: 20,
-          position: [0, 0, mode === "signal" ? 5 : 4],
+          position: [0, 0, mode === "edge" ? 5.4 : mode === "signal" ? 5 : 4],
         }}
         dpr={dpr}
         frameloop={pageVisible ? "always" : "never"}
@@ -53,8 +54,10 @@ export function ExperienceCanvas({
         <Suspense fallback={null}>
           {mode === "wake" ? (
             <ProductReveal compact={compact} />
-          ) : (
+          ) : mode === "signal" ? (
             <SignalField compact={compact} />
+          ) : (
+            <EdgeTunnel compact={compact} />
           )}
         </Suspense>
       </Canvas>

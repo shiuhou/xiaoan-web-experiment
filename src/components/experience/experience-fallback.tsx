@@ -2,7 +2,7 @@ import Image from "next/image";
 import { V2_ACTS, V2_ASSETS } from "@/content/v2-content";
 
 export type ExperienceFallbackProps = {
-  mode: "wake" | "signal";
+  mode: "wake" | "signal" | "edge";
   showCopy?: boolean;
 };
 
@@ -11,6 +11,28 @@ export function ExperienceFallback({
   showCopy = true,
 }: ExperienceFallbackProps) {
   const wake = V2_ACTS[0];
+
+  if (mode === "edge") {
+    return (
+      <div
+        className="experience-fallback experience-fallback--edge"
+        data-experience-fallback={mode}
+        data-edge-tunnel-fallback
+        aria-hidden="true"
+      >
+        <div className="experience-fallback__edge-lanes">
+          {Array.from({ length: 3 }, (_, index) => (
+            <span data-fallback-lane key={index} />
+          ))}
+        </div>
+        <div className="experience-fallback__edge-gates">
+          {Array.from({ length: 6 }, (_, index) => (
+            <i key={index} />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   if (mode === "signal") {
     return (

@@ -44,7 +44,7 @@ const WEBGL_FORCED_OFF = process.env.NEXT_PUBLIC_DISABLE_WEBGL === "1";
 export function ExperienceLoader({
   mode = "wake",
 }: {
-  mode?: "wake" | "signal";
+  mode?: "wake" | "signal" | "edge";
 }) {
   const reducedMotion = useReducedMotion();
   const compact = useSyncExternalStore(
