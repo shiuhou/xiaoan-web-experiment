@@ -1,15 +1,6 @@
-"use client";
-
 import Image from "next/image";
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { useExperience } from "@/components/experience/experience-context";
-import {
-  createBreakTimeline,
-  getBreakMotionProfile,
-} from "@/components/motion/break-timeline";
+import { getBreakMotionProfile } from "@/components/motion/break-timeline";
 import { V2_ACTS, V2_ASSETS } from "@/content/v2-content";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const INTERFACE_ITEMS = ["CHAT", "TASKS", "CALENDAR", "REMINDER"] as const;
 
@@ -51,31 +42,10 @@ function InterfaceCanvas() {
 }
 
 export function BreakAct() {
-  const root = useRef<HTMLElement>(null);
-  const reducedMotion = useReducedMotion();
-  const { setActProgress } = useExperience();
   const act = V2_ACTS[1];
-
-  useLayoutEffect(() => {
-    const section = root.current;
-    if (!section || reducedMotion !== false) {
-      setActProgress("break", 1);
-      return;
-    }
-
-    const compact = window.matchMedia("(max-width: 767px)").matches;
-    const context = gsap.context(() => {
-      createBreakTimeline(section, compact, (progress) =>
-        setActProgress("break", progress),
-      );
-    }, section);
-
-    return () => context.revert();
-  }, [reducedMotion, setActProgress]);
 
   return (
     <section
-      ref={root}
       id="break"
       className="v2-act v2-act--break break-act"
       data-act="break"

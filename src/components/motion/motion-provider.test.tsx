@@ -11,6 +11,8 @@ const mocks = vi.hoisted(() => ({
   refresh: vi.fn(),
   update: vi.fn(),
   kill: vi.fn(),
+  start: vi.fn(),
+  stop: vi.fn(),
 }));
 
 vi.mock("lenis", () => ({
@@ -18,6 +20,8 @@ vi.mock("lenis", () => ({
     destroy = mocks.destroy;
     on = mocks.on;
     raf = mocks.raf;
+    start = mocks.start;
+    stop = mocks.stop;
   },
 }));
 
@@ -132,6 +136,30 @@ describe("MotionProvider", () => {
     expect(
       document.documentElement.style.getPropertyValue("--experience-velocity"),
     ).toBe("");
+  });
+
+  it("pauses smooth scrolling while the scene index is open", () => {
+    setReducedMotion(false);
+    const { unmount } = render(
+      <MotionProvider>
+        <p>Indexed scene</p>
+      </MotionProvider>,
+    );
+
+    act(() => {
+      window.dispatchEvent(
+        new CustomEvent("xiaoan:scene-index", { detail: { open: true } }),
+      );
+    });
+    expect(mocks.stop).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      window.dispatchEvent(
+        new CustomEvent("xiaoan:scene-index", { detail: { open: false } }),
+      );
+    });
+    expect(mocks.start).toHaveBeenCalledTimes(1);
+    unmount();
   });
 });
 

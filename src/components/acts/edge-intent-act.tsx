@@ -1,18 +1,11 @@
-"use client";
-
 import Image from "next/image";
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
 import { ExperienceLoader } from "@/components/experience/experience-loader";
-import { useExperience } from "@/components/experience/experience-context";
-import { createEdgeIntentTimeline } from "@/components/motion/edge-intent-timeline";
 import {
   AGENT_INPUTS,
   AGENT_OUTPUTS,
   V2_ACTS,
   V2_ASSETS,
 } from "@/content/v2-content";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const DECISION_STAGES = [
   ["INPUT", "SIGNAL EVENT"],
@@ -30,31 +23,10 @@ const SYSTEM_LAYERS = [
 ] as const;
 
 export function EdgeIntentAct() {
-  const root = useRef<HTMLElement>(null);
-  const reducedMotion = useReducedMotion();
-  const { setActProgress } = useExperience();
   const act = V2_ACTS[3];
-
-  useLayoutEffect(() => {
-    const section = root.current;
-    if (!section || reducedMotion !== false) {
-      setActProgress("edge-intent", 1);
-      return;
-    }
-
-    const compact = window.matchMedia("(max-width: 767px)").matches;
-    const context = gsap.context(() => {
-      createEdgeIntentTimeline(section, compact, (progress) =>
-        setActProgress("edge-intent", progress),
-      );
-    }, section);
-
-    return () => context.revert();
-  }, [reducedMotion, setActProgress]);
 
   return (
     <section
-      ref={root}
       id="edge-intent"
       className="v2-act v2-act--edge-intent edge-intent-act"
       data-act="edge-intent"

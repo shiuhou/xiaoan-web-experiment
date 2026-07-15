@@ -1,0 +1,61 @@
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .v2-narrative[data-v2-motion-state="final"] .v2-act {
+    height: 100svh;
+    min-height: 100svh;
+  }
+
+  .v2-narrative[data-v2-motion-state="final"] :is(
+    .wake-act__sticky,
+    .break-act__stage,
+    .signal-act__stage,
+    .edge-intent-act__stage,
+    .action-act__stage
+  ) {
+    position: relative;
+    top: auto;
+  }
+
+  .v2-narrative[data-v2-motion-state="final"] :is(
+    [data-wake-meta],
+    [data-wake-type-layer],
+    [data-wake-semantic],
+    [data-wake-status],
+    [data-break-copy],
+    [data-break-product],
+    [data-signal-copy],
+    [data-event-token],
+    [data-event-concept],
+    [data-compression-label],
+    [data-edge-copy],
+    [data-edge-hardware],
+    [data-edge-route],
+    [data-decision-stage],
+    [data-agent-output],
+    [data-action-copy],
+    [data-action-product],
+    [data-expression-mask],
+    [data-physical-light]
+  ) {
+    visibility: visible !important;
+  }
+
+  .v2-narrative[data-v2-motion-state="final"] .experience-canvas {
+    display: none;
+  }
+
+  .scene-nav__toggle > i::before,
+  .scene-nav__toggle > i::after,
+  .scene-nav__panel a,
+  .scene-nav__panel a > i {
+    transition: none;
+  }
+}

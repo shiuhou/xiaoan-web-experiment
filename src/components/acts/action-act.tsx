@@ -1,41 +1,13 @@
-"use client";
-
 import Image from "next/image";
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { useExperience } from "@/components/experience/experience-context";
-import { createActionTimeline } from "@/components/motion/action-timeline";
 import { V2_ACTS, V2_ASSETS } from "@/content/v2-content";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const PHYSICAL_OUTPUTS = ["EXPRESSION", "VOICE", "MOTION"] as const;
 
 export function ActionAct() {
-  const root = useRef<HTMLElement>(null);
-  const reducedMotion = useReducedMotion();
-  const { setActProgress } = useExperience();
   const act = V2_ACTS[4];
-
-  useLayoutEffect(() => {
-    const section = root.current;
-    if (!section || reducedMotion !== false) {
-      setActProgress("action", 1);
-      return;
-    }
-
-    const compact = window.matchMedia("(max-width: 767px)").matches;
-    const context = gsap.context(() => {
-      createActionTimeline(section, compact, (progress) =>
-        setActProgress("action", progress),
-      );
-    }, section);
-
-    return () => context.revert();
-  }, [reducedMotion, setActProgress]);
 
   return (
     <section
-      ref={root}
       id="action"
       className="v2-act v2-act--action action-act"
       data-act="action"

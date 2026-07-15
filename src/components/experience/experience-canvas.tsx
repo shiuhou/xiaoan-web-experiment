@@ -15,12 +15,21 @@ export const EXPERIENCE_BUDGET = {
 } as const;
 
 export type ExperienceCanvasProps = {
+  active: boolean;
   compact: boolean;
   mode?: "wake" | "signal" | "edge";
   onReady?: () => void;
 };
 
+export function getExperienceFrameLoop(
+  pageVisible: boolean,
+  sceneVisible: boolean,
+): "always" | "never" {
+  return pageVisible && sceneVisible ? "always" : "never";
+}
+
 export function ExperienceCanvas({
+  active,
   compact,
   mode = "wake",
   onReady,
@@ -40,7 +49,7 @@ export function ExperienceCanvas({
           position: [0, 0, mode === "edge" ? 5.4 : mode === "signal" ? 5 : 4],
         }}
         dpr={dpr}
-        frameloop={pageVisible ? "always" : "never"}
+        frameloop={getExperienceFrameLoop(pageVisible, active)}
         gl={{
           alpha: true,
           antialias: !compact,

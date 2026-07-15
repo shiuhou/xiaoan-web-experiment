@@ -7,6 +7,10 @@ import { type PropsWithChildren, useEffect, useRef } from "react";
 import { ExperienceController } from "@/components/experience/experience-controller";
 import { useExperience } from "@/components/experience/experience-context";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import {
+  SCENE_INDEX_EVENT,
+  type SceneIndexEventDetail,
+} from "@/lib/ui-events";
 
 export function MotionProvider({ children }: PropsWithChildren) {
   const reducedMotion = useReducedMotion();
@@ -45,6 +49,16 @@ function MotionRuntime({ children, reducedMotion }: MotionRuntimeProps) {
       ScrollTrigger.update();
       setVelocity(instance.velocity * 60);
     });
+    const handleSceneIndex = (event: Event) => {
+      const { open } = (event as CustomEvent<SceneIndexEventDetail>).detail;
+      if (open) {
+        lenis.stop();
+        setVelocity(0);
+      } else {
+        lenis.start();
+      }
+    };
+    window.addEventListener(SCENE_INDEX_EVENT, handleSceneIndex);
 
     let frame = 0;
     const tick = (time: number) => {
@@ -63,6 +77,7 @@ function MotionRuntime({ children, reducedMotion }: MotionRuntimeProps) {
 
     return () => {
       window.removeEventListener("resize", refresh);
+      window.removeEventListener(SCENE_INDEX_EVENT, handleSceneIndex);
       window.clearTimeout(refreshTimer);
       window.cancelAnimationFrame(frame);
       stopListening?.();

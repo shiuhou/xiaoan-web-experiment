@@ -1,12 +1,5 @@
-"use client";
-
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
 import { ExperienceLoader } from "@/components/experience/experience-loader";
-import { useExperience } from "@/components/experience/experience-context";
-import { createSignalTimeline } from "@/components/motion/signal-timeline";
 import { V2_ACTS } from "@/content/v2-content";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const EVENTS = [
   ["STATE", "FATIGUE POSSIBLE"],
@@ -102,31 +95,10 @@ function ContextSignal() {
 }
 
 export function SignalAct() {
-  const root = useRef<HTMLElement>(null);
-  const reducedMotion = useReducedMotion();
-  const { setActProgress } = useExperience();
   const act = V2_ACTS[2];
-
-  useLayoutEffect(() => {
-    const section = root.current;
-    if (!section || reducedMotion !== false) {
-      setActProgress("signal", 1);
-      return;
-    }
-
-    const compact = window.matchMedia("(max-width: 767px)").matches;
-    const context = gsap.context(() => {
-      createSignalTimeline(section, compact, (progress) =>
-        setActProgress("signal", progress),
-      );
-    }, section);
-
-    return () => context.revert();
-  }, [reducedMotion, setActProgress]);
 
   return (
     <section
-      ref={root}
       id="signal"
       className="v2-act v2-act--signal signal-act"
       data-act="signal"

@@ -1,12 +1,5 @@
-"use client";
-
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ExperienceLoader } from "@/components/experience/experience-loader";
-import { useExperience } from "@/components/experience/experience-context";
 import { V2_ACTS } from "@/content/v2-content";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const WAKE_STATUS = [
   "SYSTEM / ONLINE",
@@ -15,87 +8,10 @@ const WAKE_STATUS = [
 ] as const;
 
 export function WakeAct() {
-  const root = useRef<HTMLElement>(null);
-  const reducedMotion = useReducedMotion();
-  const { setActProgress } = useExperience();
   const wake = V2_ACTS[0];
-
-  useLayoutEffect(() => {
-    const section = root.current;
-    if (!section || reducedMotion !== false) {
-      setActProgress("wake", 1);
-      return;
-    }
-
-    gsap.registerPlugin(ScrollTrigger);
-    const context = gsap.context(() => {
-      gsap
-        .timeline({ defaults: { ease: "power3.out" } })
-        .fromTo(
-          "[data-wake-meta]",
-          { autoAlpha: 0, y: -12 },
-          { autoAlpha: 1, y: 0, duration: 0.7 },
-        )
-        .fromTo(
-          "[data-wake-type-layer] > span",
-          { autoAlpha: 0, yPercent: 28 },
-          { autoAlpha: 1, yPercent: 0, duration: 1.05, stagger: 0.08 },
-          0.12,
-        )
-        .fromTo(
-          "[data-wake-semantic], [data-wake-status]",
-          { autoAlpha: 0, y: 16 },
-          { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.09 },
-          0.42,
-        );
-
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true,
-            invalidateOnRefresh: true,
-            onRefresh: (trigger) =>
-              setActProgress("wake", trigger.progress),
-            onUpdate: (trigger) =>
-              setActProgress("wake", trigger.progress),
-          },
-        })
-        .to(
-          "[data-wake-product]",
-          { scale: 1.085, yPercent: 3, ease: "none" },
-          0,
-        )
-        .to(
-          ".wake-act__type--back",
-          { yPercent: -17, opacity: 0.24, ease: "none" },
-          0,
-        )
-        .to(
-          ".wake-act__type--front",
-          { yPercent: 24, opacity: 0.08, ease: "none" },
-          0,
-        )
-        .to(
-          ".wake-act__fracture",
-          { xPercent: 34, opacity: 0.18, ease: "none" },
-          0,
-        )
-        .to(
-          "[data-wake-status], [data-wake-semantic]",
-          { opacity: 0, yPercent: -22, ease: "none" },
-          0.18,
-        );
-    }, section);
-
-    return () => context.revert();
-  }, [reducedMotion, setActProgress]);
 
   return (
     <section
-      ref={root}
       id="wake"
       className="v2-act v2-act--wake wake-act"
       data-act="wake"

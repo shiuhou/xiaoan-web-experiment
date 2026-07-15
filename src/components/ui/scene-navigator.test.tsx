@@ -13,6 +13,7 @@ describe("SceneNavigator", () => {
 
     await user.click(toggle);
     expect(toggle).toHaveAttribute("aria-expanded", "true");
+    expect(document.body).toHaveAttribute("data-scene-index-open", "true");
     expect(screen.getAllByRole("link")).toHaveLength(6);
     expect(screen.getByRole("link", { name: /01 wake/i })).toHaveAttribute(
       "href",
@@ -21,5 +22,6 @@ describe("SceneNavigator", () => {
 
     await user.click(screen.getByRole("link", { name: /04 edge-intent/i }));
     expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(document.body).not.toHaveAttribute("data-scene-index-open");
   });
 });
