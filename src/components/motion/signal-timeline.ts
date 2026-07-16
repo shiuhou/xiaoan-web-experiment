@@ -60,7 +60,13 @@ export function createSignalTimeline(
       { xPercent: 0, opacity: 1, stagger: 0.025, duration: 0.2 },
       0.06,
     )
-    .to("[data-signal-phase-line]", { scaleX: 1, duration: 0.94 }, 0.03);
+    .to("[data-signal-phase-line]", { scaleX: 1, duration: 0.94 }, 0.03)
+    .fromTo(
+      "[data-signal-chamber]",
+      { opacity: 0.08, scaleX: 0.28 },
+      { opacity: 1, scaleX: 1, duration: 0.34 },
+      0.34,
+    );
 
   SIGNAL_TARGETS.forEach((target, index) => {
     timeline.to(
@@ -72,7 +78,7 @@ export function createSignalTimeline(
         yPercent: -50,
         scale: target.scale,
         rotation: target.rotation,
-        opacity: 0.08,
+        opacity: 0.16,
         duration: 0.48,
       },
       0.19 + index * 0.018,
@@ -90,6 +96,18 @@ export function createSignalTimeline(
       "[data-signal-aperture]",
       { scaleX: 1, opacity: 0.84, duration: 0.18 },
       0.72,
+    )
+    .fromTo(
+      "[data-signal-flash]",
+      { opacity: 0, scaleX: 0.08 },
+      {
+        opacity: 0.82,
+        scaleX: 1,
+        duration: 0.055,
+        yoyo: true,
+        repeat: 1,
+      },
+      0.52,
     )
     .fromTo(
       "[data-event-token]",

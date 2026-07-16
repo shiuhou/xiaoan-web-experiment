@@ -121,6 +121,21 @@ export function SignalAct() {
           <ContextSignal />
         </div>
 
+        <div
+          className="signal-act__chamber"
+          data-signal-chamber
+          aria-hidden="true"
+        >
+          <i />
+          <i />
+          <b />
+        </div>
+        <i
+          className="signal-act__flash"
+          data-signal-flash
+          aria-hidden="true"
+        />
+
         <div className="signal-act__aperture" data-signal-aperture aria-hidden="true">
           <i />
           <i />

@@ -29,6 +29,8 @@ describe("SignalAct", () => {
       ),
     ).toEqual(["camera", "voice", "expression", "time", "context"]);
     expect(container.querySelectorAll("[data-event-token]")).toHaveLength(4);
+    expect(container.querySelector("[data-signal-chamber]")).toBeInTheDocument();
+    expect(container.querySelector("[data-signal-flash]")).toBeInTheDocument();
     expect(screen.queryByText(/accuracy|latency|\d+ms|%/i)).not.toBeInTheDocument();
     expect(container.querySelector(".experience-loader")).not.toBeInTheDocument();
   });
