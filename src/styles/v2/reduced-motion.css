@@ -57,6 +57,15 @@
     display: none;
   }
 
+  .v2-narrative[data-v2-motion-state="final"] [data-signal-flash] {
+    display: none !important;
+  }
+
+  .v2-narrative[data-v2-motion-state="final"] [data-signal-chamber] {
+    opacity: 0.72 !important;
+    transform: translateX(-50%) scaleX(1) !important;
+  }
+
   .v2-narrative[data-v2-motion-state="final"] .edge-intent-act__requests {
     top: 27%;
     display: grid;

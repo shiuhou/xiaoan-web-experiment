@@ -1,3 +1,16 @@
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 .v2-narrative {
   position: relative;
   width: 100%;
@@ -11,6 +24,18 @@
   overflow: clip;
   isolation: isolate;
   scroll-margin-top: 0;
+}
+
+.v2-act:not(.v2-act--presence)::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  z-index: 80;
+  height: clamp(1.6rem, 4svh, 3.2rem);
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(180deg, transparent, rgba(3, 7, 8, 0.95));
 }
 
 html[data-scene-index-open="true"],

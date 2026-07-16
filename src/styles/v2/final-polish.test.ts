@@ -13,4 +13,15 @@ describe("V2 final visual polish", () => {
     expect(edge).toContain("mix-blend-mode");
     expect(edge).toContain("data-edge-optical-frame");
   });
+
+  it("preserves normal scrolling while hiding chrome and motion-only flashes", () => {
+    const base = read("base.css");
+    const reduced = read("reduced-motion.css");
+
+    expect(base).toContain("scrollbar-width: none");
+    expect(base).toContain("::-webkit-scrollbar");
+    expect(base).toContain(".v2-act:not(.v2-act--presence)::after");
+    expect(base).not.toContain("scroll-snap-type");
+    expect(reduced).toContain("[data-signal-flash]");
+  });
 });
