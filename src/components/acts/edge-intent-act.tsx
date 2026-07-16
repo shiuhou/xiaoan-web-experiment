@@ -35,7 +35,11 @@ export function EdgeIntentAct() {
           <p>Intel DK-2500 讓感知、Agent 與機器人共享同一條路徑。</p>
         </header>
 
-        <figure className="edge-intent-act__hardware" data-edge-hardware>
+        <figure
+          className="edge-intent-act__hardware"
+          data-edge-hardware
+          data-edge-optical-frame
+        >
           <div className="edge-intent-act__hardware-image" data-edge-hardware-image>
             <Image
               src={V2_ASSETS.dk2500}

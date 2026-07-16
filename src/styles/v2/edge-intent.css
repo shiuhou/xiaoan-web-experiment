@@ -80,13 +80,31 @@
   top: 23%;
   left: 4%;
   width: min(54vw, 49rem);
-  aspect-ratio: 1.5;
+  aspect-ratio: 1.72;
   margin: 0;
   overflow: hidden;
-  background: #f0f0ec;
-  box-shadow: 0 2.8rem 6rem rgba(0, 0, 0, 0.48);
+  background: #061014;
+  box-shadow:
+    0 2.8rem 6rem rgba(0, 0, 0, 0.48),
+    inset 0 0 0 1px rgba(136, 225, 226, 0.1);
   transform-origin: 50% 55%;
   will-change: transform, opacity, clip-path;
+}
+
+.edge-intent-act__hardware[data-edge-optical-frame] {
+  isolation: isolate;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8% 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8% 88%,
+    transparent
+  );
 }
 
 .edge-intent-act__hardware::before {
@@ -94,8 +112,24 @@
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  border: 1px solid rgba(8, 20, 24, 0.12);
   content: "";
+  background:
+    linear-gradient(90deg, rgba(3, 11, 14, 0.92), transparent 20% 72%, rgba(188, 107, 56, 0.2)),
+    linear-gradient(180deg, rgba(4, 14, 17, 0.12), transparent 42%, rgba(4, 13, 16, 0.82));
+  mix-blend-mode: multiply;
+}
+
+.edge-intent-act__hardware::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  content: "";
+  opacity: 0.72;
+  background:
+    linear-gradient(90deg, transparent 0 54%, rgba(142, 232, 233, 0.22) 55%, transparent 56%),
+    linear-gradient(180deg, transparent 0 48%, rgba(151, 234, 234, 0.13) 49%, transparent 50%);
+  mix-blend-mode: screen;
 }
 
 .edge-intent-act__hardware-image {
@@ -106,7 +140,10 @@
 }
 
 .edge-intent-act__hardware-image img {
-  object-fit: contain;
+  object-fit: cover;
+  object-position: 60% 50%;
+  filter: grayscale(0.28) contrast(1.2) brightness(0.72) saturate(0.68);
+  mix-blend-mode: luminosity;
 }
 
 .edge-intent-act__hardware figcaption {
@@ -254,14 +291,14 @@
 .edge-stage > span {
   display: block;
   margin-bottom: 0.42rem;
-  font: 520 0.43rem/1 var(--mono);
+  font: 520 0.5rem/1 var(--mono);
   letter-spacing: 0.1em;
 }
 
 .edge-stage > strong {
   display: block;
   overflow: hidden;
-  font: 620 clamp(0.72rem, 1vw, 0.92rem)/1 var(--mono);
+  font: 620 clamp(0.78rem, 1.05vw, 0.98rem)/1 var(--mono);
   letter-spacing: 0.07em;
   text-overflow: ellipsis;
 }
@@ -270,7 +307,7 @@
   display: block;
   margin-top: 0.5rem;
   color: rgba(189, 216, 211, 0.4);
-  font: 500 0.43rem/1.25 var(--mono);
+  font: 500 0.47rem/1.25 var(--mono);
   letter-spacing: 0.08em;
 }
 
@@ -334,6 +371,11 @@
     top: 23%;
     left: 4%;
     width: 92%;
+    aspect-ratio: 2.15;
+  }
+
+  .edge-intent-act__hardware-image img {
+    object-position: 62% 51%;
   }
 
   .edge-intent-act__hardware figcaption {
@@ -420,9 +462,9 @@
     margin: 0;
   }
 
-  .edge-stage > span { font-size: 0.37rem; }
-  .edge-stage > strong { font-size: 0.58rem; }
-  .edge-stage > small { font-size: 0.37rem; }
+  .edge-stage > span { font-size: 0.46rem; }
+  .edge-stage > strong { font-size: 0.64rem; }
+  .edge-stage > small { font-size: 0.46rem; }
 
   .edge-stage__outputs {
     position: absolute;

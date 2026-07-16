@@ -36,10 +36,10 @@ export function createEdgeIntentTimeline(
     .to(
       "[data-edge-hardware]",
       {
-        xPercent: compact ? 0 : -25,
-        yPercent: compact ? -14 : 25,
-        scale: compact ? 0.72 : 0.64,
-        opacity: 0.72,
+        xPercent: compact ? 0 : -18,
+        yPercent: compact ? -10 : 20,
+        scale: compact ? 0.78 : 0.62,
+        opacity: 0.82,
         duration: 0.44,
       },
       0.22,
@@ -47,9 +47,9 @@ export function createEdgeIntentTimeline(
     .to(
       "[data-edge-hardware-image]",
       {
-        xPercent: compact ? -17 : -25,
-        yPercent: compact ? 9 : 17,
-        scale: compact ? 1.55 : 1.82,
+        xPercent: compact ? -12 : -18,
+        yPercent: compact ? 2 : 9,
+        scale: compact ? 1.35 : 1.62,
         duration: 0.43,
       },
       0.22,
