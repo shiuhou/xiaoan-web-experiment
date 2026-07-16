@@ -36,7 +36,12 @@ test("fails QA for overflow, runtime errors, missing assets, or incomplete acts"
       missingImages: [],
       navigationLinks: 6,
     },
-    issues: { consoleErrors: [], pageErrors: [], failedResponses: [] },
+    issues: {
+      consoleMessages: [],
+      consoleErrors: [],
+      pageErrors: [],
+      failedResponses: [],
+    },
   };
   assert.equal(hasQaFailures(clean), false);
   assert.equal(
@@ -50,6 +55,13 @@ test("fails QA for overflow, runtime errors, missing assets, or incomplete acts"
     hasQaFailures({
       ...clean,
       issues: { ...clean.issues, pageErrors: ["boom"] },
+    }),
+    true,
+  );
+  assert.equal(
+    hasQaFailures({
+      ...clean,
+      issues: { ...clean.issues, consoleMessages: ["warning"] },
     }),
     true,
   );

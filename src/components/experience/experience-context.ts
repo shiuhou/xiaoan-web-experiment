@@ -11,7 +11,6 @@ import type { ExperienceFrame } from "@/lib/experience-state";
 export type ExperienceControllerValue = {
   frame: MutableRefObject<ExperienceFrame>;
   setActProgress: (act: ActId, value: number) => void;
-  setVelocity: (pxPerSecond: number) => void;
 };
 
 export const ExperienceContext =

@@ -140,38 +140,12 @@
   letter-spacing: 0.13em;
 }
 
-.break-interface__rail {
-  position: absolute;
-  top: 3.15rem;
-  bottom: 2.65rem;
-  left: 0;
-  display: flex;
-  width: 10.4rem;
-  flex-direction: column;
-  gap: 0;
-  padding-top: 1.2rem;
-  border-right: 1px solid rgba(168, 231, 235, 0.12);
-}
-
-.break-interface__rail span {
-  padding: 0.78rem 1.1rem;
-  border-bottom: 1px solid rgba(168, 231, 235, 0.075);
-  color: rgba(213, 230, 228, 0.48);
-  font: 550 0.55rem/1 var(--mono);
-  letter-spacing: 0.11em;
-}
-
-.break-interface__rail span:first-child {
-  color: #dff3f1;
-  background: rgba(102, 221, 230, 0.055);
-}
-
 .break-interface__session {
   position: absolute;
   top: 18%;
   right: 22%;
   bottom: 17%;
-  left: 19%;
+  left: 12%;
 }
 
 .break-interface__prompt {
@@ -213,52 +187,6 @@
 
 .break-interface__messages i:nth-child(3) {
   --message-width: 81%;
-}
-
-.break-interface__agenda {
-  position: absolute;
-  top: 19%;
-  right: 2.6%;
-  display: grid;
-  width: 15%;
-  gap: 0.5rem;
-  padding-left: 1.2rem;
-  border-left: 1px solid rgba(168, 231, 235, 0.13);
-  font-family: var(--mono);
-}
-
-.break-interface__agenda span,
-.break-interface__agenda small {
-  color: rgba(209, 228, 226, 0.44);
-  font-size: 0.52rem;
-  letter-spacing: 0.11em;
-}
-
-.break-interface__agenda b {
-  font-size: clamp(1.2rem, 2vw, 2.1rem);
-  font-weight: 450;
-}
-
-.break-interface__agenda i {
-  width: 100%;
-  height: 1px;
-  background: rgba(168, 231, 235, 0.14);
-}
-
-.break-interface__ticker {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  height: 2.65rem;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1.2rem;
-  border-top: 1px solid rgba(168, 231, 235, 0.13);
-  color: rgba(196, 224, 224, 0.42);
-  font: 520 0.5rem/1 var(--mono);
-  letter-spacing: 0.1em;
 }
 
 .break-act__seam {
@@ -348,13 +276,17 @@
   }
 
   .break-act__copy {
-    top: 1.25rem;
+    top: 3.35rem;
     right: 1.1rem;
     left: 1.1rem;
   }
 
   .break-act__copy h2 {
-    font-size: 10.8vw;
+    font-size: 10.2vw;
+  }
+
+  .break-act__copy h2 span {
+    display: block;
   }
 
   .break-act__copy p {
@@ -401,37 +333,16 @@
     font-size: 0.43rem;
   }
 
-  .break-interface__rail {
-    width: 5.5rem;
-  }
-
-  .break-interface__rail span {
-    padding: 0.65rem 0.6rem;
-    font-size: 0.41rem;
-  }
-
   .break-interface__session {
     top: 18%;
     right: 7%;
-    left: 29%;
+    left: 7%;
   }
 
   .break-interface__session strong {
     margin-top: 1.2rem;
     font-size: 7.8vw;
     line-height: 1.12;
-  }
-
-  .break-interface__agenda {
-    display: none;
-  }
-
-  .break-interface__ticker {
-    font-size: 0.39rem;
-  }
-
-  .break-interface__ticker span:last-child {
-    display: none;
   }
 
   .break-act__seam {

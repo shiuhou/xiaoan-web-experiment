@@ -1,4 +1,3 @@
-import { ExperienceLoader } from "@/components/experience/experience-loader";
 import { V2_ACTS } from "@/content/v2-content";
 
 const EVENTS = [
@@ -105,10 +104,6 @@ export function SignalAct() {
       aria-labelledby="signal-title"
     >
       <div className="signal-act__stage">
-        <div className="signal-act__field" aria-hidden="true">
-          <ExperienceLoader mode="signal" />
-        </div>
-
         <header className="signal-act__copy" data-signal-copy>
           <span>03 / PERCEPTION</span>
           <h2 id="signal-title">
@@ -138,9 +133,6 @@ export function SignalAct() {
             data-event-rail
             aria-hidden="true"
           />
-          <span className="signal-act__concept-label" data-event-concept>
-            CONCEPT EVENT / NOT A METRIC
-          </span>
           {EVENTS.map(([label, value]) => (
             <div className="signal-event" data-event-token key={label}>
               <span>{label}</span>

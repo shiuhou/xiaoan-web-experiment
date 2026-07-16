@@ -1,0 +1,242 @@
+[
+  {
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "geometry": {
+      "actionProduct": {
+        "top": 45.8768310546875,
+        "right": 1890.799072265625,
+        "bottom": 1202.6324462890625,
+        "left": 965.0538330078125,
+        "width": 925.7452392578125,
+        "height": 1156.755615234375
+      },
+      "actionTitle": {
+        "top": 69.78125,
+        "right": 653.640625,
+        "bottom": 247.9375,
+        "left": 56,
+        "width": 597.640625,
+        "height": 178.15625
+      }
+    },
+    "diagnostics": {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 11826,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    }
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "geometry": {
+      "actionProduct": {
+        "top": 30.589752197265625,
+        "right": 1260.5430908203125,
+        "bottom": 801.7601623535156,
+        "left": 643.3847045898438,
+        "width": 617.1583862304688,
+        "height": 771.17041015625
+      },
+      "actionTitle": {
+        "top": 69.78125,
+        "right": 491.78125,
+        "bottom": 204.9375,
+        "left": 38.390625,
+        "width": 453.390625,
+        "height": 135.15625
+      }
+    },
+    "diagnostics": {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 7884,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    }
+  },
+  {
+    "viewport": {
+      "width": 1024,
+      "height": 768
+    },
+    "geometry": {
+      "actionProduct": {
+        "top": 31.205291748046875,
+        "right": 1008.451416015625,
+        "bottom": 803.8764343261719,
+        "left": 390.08319091796875,
+        "width": 618.3682250976562,
+        "height": 772.671142578125
+      },
+      "actionTitle": {
+        "top": 69.78125,
+        "right": 393.421875,
+        "bottom": 177.875,
+        "left": 30.71875,
+        "width": 362.703125,
+        "height": 108.09375
+      }
+    },
+    "diagnostics": {
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 8410,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "geometry": {
+      "actionProduct": {
+        "top": 184.03115844726562,
+        "right": 439.91363525390625,
+        "bottom": 701.2077941894531,
+        "left": 26.0126953125,
+        "width": 413.90093994140625,
+        "height": 517.1766357421875
+      },
+      "actionTitle": {
+        "top": 54.59375,
+        "right": 372.40625,
+        "bottom": 132.46875,
+        "left": 17.59375,
+        "width": 354.8125,
+        "height": 77.875
+      }
+    },
+    "diagnostics": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 8423,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "mobile",
+      "canvas": [
+        {
+          "ready": "true",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": true
+        }
+      ],
+      "missingImages": []
+    },
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    }
+  }
+]

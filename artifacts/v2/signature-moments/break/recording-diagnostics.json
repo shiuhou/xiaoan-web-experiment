@@ -1,44 +1,118 @@
 [
   {
+    "act": "break",
     "profile": "desktop",
     "viewport": {
       "width": 1440,
       "height": 900
     },
     "range": {
-      "start": 1575,
-      "end": 2340
+      "start": 1605.6,
+      "end": 2278.8
+    },
+    "signatureState": {
+      "progress": "0.9203",
+      "focalOpacity": "1"
+    },
+    "screenshots": {
+      "start": "artifacts/v2/signature-moments/break/desktop-start.png",
+      "peak": "artifacts/v2/signature-moments/break/desktop-peak.png",
+      "end": "artifacts/v2/signature-moments/break/desktop-end.png"
     },
     "diagnostics": {
-      "scrollY": 2340,
-      "progress": "1",
-      "horizontalOverflow": false,
-      "productOpacity": "1"
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 9855,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "true",
+          "active": "true",
+          "enabled": "true",
+          "hasCanvas": true
+        }
+      ],
+      "missingImages": []
     },
-    "consoleMessages": [],
-    "pageErrors": [],
-    "failedResponses": [],
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    },
     "output": "artifacts/v2/signature-moments/break/desktop.webm"
   },
   {
+    "act": "break",
     "profile": "mobile",
     "viewport": {
       "width": 390,
       "height": 844
     },
     "range": {
-      "start": 1249.109375,
-      "end": 1797.703125
+      "start": 1271.053125,
+      "end": 1753.815625
+    },
+    "signatureState": {
+      "progress": "0.9199",
+      "focalOpacity": "1"
+    },
+    "screenshots": {
+      "start": "artifacts/v2/signature-moments/break/mobile-start.png",
+      "peak": "artifacts/v2/signature-moments/break/mobile-peak.png",
+      "end": "artifacts/v2/signature-moments/break/mobile-end.png"
     },
     "diagnostics": {
-      "scrollY": 1798,
-      "progress": "1",
-      "horizontalOverflow": false,
-      "productOpacity": "1"
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 8423,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "mobile",
+      "canvas": [
+        {
+          "ready": "true",
+          "active": "true",
+          "enabled": "true",
+          "hasCanvas": true
+        }
+      ],
+      "missingImages": []
     },
-    "consoleMessages": [],
-    "pageErrors": [],
-    "failedResponses": [],
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    },
     "output": "artifacts/v2/signature-moments/break/mobile.webm"
   }
 ]

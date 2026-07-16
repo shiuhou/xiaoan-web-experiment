@@ -1,0 +1,65 @@
+[
+  {
+    "file": "artifacts/v2/recordings/xiaoan-v2-desktop.webm",
+    "bytes": 3592046,
+    "durationSeconds": 28.64,
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "artifacts/v2/recordings/xiaoan-v2-mobile.webm",
+    "bytes": 2637029,
+    "durationSeconds": 22.52,
+    "width": 390,
+    "height": 844
+  },
+  {
+    "file": "artifacts/v2/recordings/xiaoan-v2-social-15s.webm",
+    "bytes": 1773772,
+    "durationSeconds": 15.44,
+    "width": 1080,
+    "height": 1350
+  },
+  {
+    "file": "artifacts/v2/signature-moments/action/desktop.webm",
+    "bytes": 1548017,
+    "durationSeconds": 14.04,
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "artifacts/v2/signature-moments/action/mobile.webm",
+    "bytes": 940493,
+    "durationSeconds": 10.56,
+    "width": 390,
+    "height": 844
+  },
+  {
+    "file": "artifacts/v2/signature-moments/break/desktop.webm",
+    "bytes": 1340914,
+    "durationSeconds": 16.24,
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "artifacts/v2/signature-moments/break/mobile.webm",
+    "bytes": 719610,
+    "durationSeconds": 9.52,
+    "width": 390,
+    "height": 844
+  },
+  {
+    "file": "artifacts/v2/signature-moments/signal/desktop.webm",
+    "bytes": 1158926,
+    "durationSeconds": 11.84,
+    "width": 1440,
+    "height": 900
+  },
+  {
+    "file": "artifacts/v2/signature-moments/signal/mobile.webm",
+    "bytes": 516809,
+    "durationSeconds": 9.24,
+    "width": 390,
+    "height": 844
+  }
+]

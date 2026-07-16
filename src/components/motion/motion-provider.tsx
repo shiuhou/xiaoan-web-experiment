@@ -5,7 +5,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { type PropsWithChildren, useEffect, useRef } from "react";
 import { ExperienceController } from "@/components/experience/experience-controller";
-import { useExperience } from "@/components/experience/experience-context";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import {
   SCENE_INDEX_EVENT,
@@ -28,7 +27,6 @@ type MotionRuntimeProps = PropsWithChildren<{
 
 function MotionRuntime({ children, reducedMotion }: MotionRuntimeProps) {
   const root = useRef<HTMLDivElement>(null);
-  const { setVelocity } = useExperience();
 
   useEffect(() => {
     document.documentElement.dataset.reducedMotion =
@@ -45,15 +43,13 @@ function MotionRuntime({ children, reducedMotion }: MotionRuntimeProps) {
       smoothWheel: true,
       syncTouch: false,
     });
-    const stopListening = lenis.on("scroll", (instance) => {
+    const stopListening = lenis.on("scroll", () => {
       ScrollTrigger.update();
-      setVelocity(instance.velocity * 60);
     });
     const handleSceneIndex = (event: Event) => {
       const { open } = (event as CustomEvent<SceneIndexEventDetail>).detail;
       if (open) {
         lenis.stop();
-        setVelocity(0);
       } else {
         lenis.start();
       }
@@ -84,7 +80,7 @@ function MotionRuntime({ children, reducedMotion }: MotionRuntimeProps) {
       lenis.destroy();
       context.revert();
     };
-  }, [reducedMotion, setVelocity]);
+  }, [reducedMotion]);
 
   return (
     <div

@@ -1,27 +1,41 @@
-# Final Verification
+# Xiao-An V2 Final Verification
 
-執行日期：2026-07-14（Asia/Shanghai）
+驗證日期：2026-07-16（Asia/Shanghai）
+
+分支：`feature/visual-overhaul-v2`
+
+基準分支：`0703`（未合併、未修改）
 
 ## Automated tests
 
-```text
-pnpm test
-Test Files  8 passed (8)
-Tests       23 passed (23)
-Duration    7.57s
-Exit code   0
-```
-
-覆蓋內容包括：八幕存在與文案邊界、Hero/Breaking 結構、Edge fallback 與粒子 budget、散亂訊號到結構化軌道、Motion Provider、Narrative timeline、Scene Navigator、reduced-motion 契約。
-
-## PPT extraction tests
+### PPT 與 V2 資產腳本
 
 ```text
-python -m unittest tests/test_extract_ppt_assets.py
-Ran 3 tests in 0.130s
+python -m unittest tests/test_extract_ppt_assets.py tests/test_prepare_v2_assets.py
+Ran 4 tests
 OK
 Exit code 0
 ```
+
+### QA runtime contract
+
+```text
+node --test scripts/qa-runtime.test.mjs
+Tests 4 passed
+Failures 0
+Exit code 0
+```
+
+### React / TypeScript tests
+
+```text
+pnpm test
+Test Files 18 passed (18)
+Tests      39 passed (39)
+Exit code  0
+```
+
+Vitest 的 jsdom 環境會輸出兩行 `HTMLCanvasElement.getContext()` 未實作提示；它來自 jsdom 沒有安裝原生 Canvas，測試仍通過。Fresh Chromium runtime QA 沒有相同 warning。
 
 ## Lint
 
@@ -31,45 +45,109 @@ eslint . --max-warnings=0
 Exit code 0
 ```
 
-ESLint warnings：0。
+## GitHub Pages static export
 
-## Production build
+```text
+GITHUB_PAGES=true
+NEXT_PUBLIC_SITE_BASE_PATH=/xiaoan-web-experiment
+pnpm build
+```
+
+結果：
+
+- Next.js 16.2.10
+- Compiled successfully
+- TypeScript finished
+- Static pages generated 7/7
+- `/`、`/_not-found`、`/concepts/a`、`/concepts/b`、`/concepts/c`、`/icon.png` 正常產生
+- Exit code 0
+
+`out/index.html` 路徑檢查：
+
+```text
+Prefixed Next chunk references  57
+Prefixed local asset references 14
+Bare /_next references           0
+Bare /assets references          0
+```
+
+## Standard production build
 
 ```text
 pnpm build
-Next.js 16.2.10 (Turbopack)
-Compiled successfully in 3.2s
-TypeScript finished in 9.1s
-Static pages generated: 4/4
-Routes: /, /_not-found, /icon.png
+Compiled successfully
+TypeScript finished
+Static pages generated 7/7
 Exit code 0
 ```
 
-## Production smoke test
+Production server smoke test：HTTP 200，首頁 title 為 `Xiao-An — From Signal to Presence`。
 
-以 `pnpm start` 啟動 production build，請求 `http://localhost:3000`：
+## Fresh Chromium browser QA
+
+Final capture profiles：
+
+- 1440×900 desktop
+- 390×844 mobile
+- 1440×900 desktop Reduced Motion
+- 1920×1080、1280×720、1024×768、390×844 responsive matrix
+
+所有 profile：
+
+- 六幕存在。
+- document-level horizontal overflow 為 0。
+- missing images 為 0。
+- console warning／error 為 0。
+- page error、HTTP 失敗、request failure 為 0。
+
+### Motion QA
+
+normal、fast、slow 三種速度均：
+
+- 到達最大 scroll 與 Scene 06。
+- 回頂後 Wake 可重新播放。
+- 中段 reload 保留完整內容。
+- resize 至 1280×720 後沒有 overflow 或錯誤狀態。
+
+### Journey QA
 
 ```text
-HTTP 200
-Response bytes 72736
+Desktop normal bottom 8955 / max 8955
+Desktop fast reverse  0
+Presence data scene   presence
+Presence toggle       opacity 0
+Presence progress     opacity 0
+Mobile touch bottom   7579 / max 7579
 ```
 
-測試後已停止本地 production server。
+Reduced Motion：REMINDER、CARE、WAIT、EXPRESSION、VOICE、MOTION 六個語義輸出全部可見。
 
-## Browser QA
+WebGL-disabled：fallback 存在、可見且圖片完整載入。
 
-- 1440×900 desktop：8 scenes、overflow 0、console/page errors 0。
-- 390×844 mobile：8 scenes、overflow 0、console/page errors 0。
-- 1920×1080、1280×720、1024×768、390×844 responsive matrix：全部 8 scenes、overflow 0、navigator 可用、console/page errors 0。
-- Reduced Motion：8 scenes、WebGL canvas 0、designed fallback 1、overflow 0、warnings/errors 0。
-- Normal / fast / slow scroll：均到達 `08 / 08`，回頂部恢復 `01 / 08`；中段 reload 保留 Edge canvas；resize 1280×720 後 overflow 0。
-- 完整錄屏：到達 max scroll，active index `08 / 08`，overflow 0，WebGL canvas 1，warnings/errors 0。
+證據：
 
-詳細 JSON：
+```text
+artifacts/v2/qa/captures/final-delivery-desktop/
+artifacts/v2/qa/captures/final-delivery-mobile/
+artifacts/v2/qa/captures/final-delivery-desktop-reduced/
+artifacts/v2/qa/responsive/results.json
+artifacts/v2/qa/motion/results.json
+artifacts/v2/qa/journey/results.json
+```
 
-- `artifacts/qa/motion-review/results.json`
-- `artifacts/qa/responsive/results.json`
-- `artifacts/qa/final-desktop/diagnostics.json`
-- `artifacts/qa/final-mobile/diagnostics.json`
-- `artifacts/qa/final-reduced/diagnostics.json`
-- `artifacts/recordings/recording-diagnostics.json`
+## Video verification
+
+| 錄影 | 尺寸 | 時長 |
+|---|---:|---:|
+| Desktop full scroll | 1440×900 | 28.64 s |
+| Mobile full scroll | 390×844 | 22.52 s |
+| Social 4:5 cut | 1080×1350 | 15.44 s |
+| Action desktop / mobile | 1440×900 / 390×844 | 14.04 s / 10.56 s |
+| Break desktop / mobile | 1440×900 / 390×844 | 16.24 s / 9.52 s |
+| Signal desktop / mobile | 1440×900 / 390×844 | 11.84 s / 9.24 s |
+
+`artifacts/v2/recordings/review-frames/` 已抽取 social 2／5／8／11／14 秒與 desktop 關鍵幀作視覺檢查。4:5 影片為滿版輸出，沒有灰邊或左上角低解析內容。
+
+## Delivery integrity
+
+`artifacts/v2/DELIVERY_MANIFEST.json` 記錄最終交付檔案的大小與 SHA-256。桌面、手機、Reduced Motion、比較圖、Signature Moment 與錄影均位於 `artifacts/v2/`。

@@ -34,11 +34,11 @@
 .presence-act__product {
   position: absolute;
   z-index: 3;
-  top: -18%;
-  right: -19%;
-  width: min(82vw, 78rem);
-  height: 132%;
-  transform: scale(1.16);
+  top: -10%;
+  right: -12%;
+  width: min(70vw, 70rem);
+  height: 122%;
+  transform: scale(1.06);
   transform-origin: 62% 55%;
 }
 
@@ -64,7 +64,7 @@
 .presence-act__copy h2 {
   margin: clamp(2.5rem, 7vh, 5.5rem) 0 0;
   font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
-  font-size: clamp(3.8rem, 7.5vw, 7.8rem);
+  font-size: clamp(3.8rem, 6.9vw, 7.2rem);
   font-weight: 720;
   line-height: 0.94;
   letter-spacing: -0.085em;
@@ -147,10 +147,10 @@
 
   .presence-act__product {
     top: 18%;
-    right: -48%;
-    width: 152vw;
+    right: -38%;
+    width: 136vw;
     height: 92%;
-    transform: scale(1.14);
+    transform: scale(1.06);
   }
 
   .presence-act__copy {

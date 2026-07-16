@@ -6,7 +6,7 @@ import { PRODUCT_REVEAL_FRAGMENT_SHADER } from "@/shaders/product-reveal";
 
 describe("Wake product reveal", () => {
   it("keeps a complete Hero when WebGL is unavailable", () => {
-    render(<ExperienceFallback mode="wake" />);
+    render(<ExperienceFallback />);
 
     expect(
       screen.getByRole("img", { name: /Xiao-An robot and dock/i }),
@@ -17,8 +17,8 @@ describe("Wake product reveal", () => {
   it("keeps desktop and mobile rendering budgets bounded", () => {
     expect(EXPERIENCE_BUDGET.desktopDpr).toBeLessThanOrEqual(1.5);
     expect(EXPERIENCE_BUDGET.mobileDpr).toBeLessThanOrEqual(1);
-    expect(EXPERIENCE_BUDGET.desktopRevealSubdivisions).toEqual([128, 128]);
-    expect(EXPERIENCE_BUDGET.mobileRevealSubdivisions).toEqual([72, 72]);
+    expect(EXPERIENCE_BUDGET.desktopRevealSubdivisions).toEqual([1, 1]);
+    expect(EXPERIENCE_BUDGET.mobileRevealSubdivisions).toEqual([1, 1]);
   });
 
   it("uses deterministic reveal noise instead of perpetual shader time", () => {

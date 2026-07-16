@@ -1,24 +1,22 @@
 "use client";
 
-import { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Suspense, useEffect, useRef } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { usePageVisibility } from "@/hooks/use-page-visibility";
 import { ProductReveal } from "./product-reveal";
-import { SignalField } from "./signal-field";
-import { EdgeTunnel } from "./edge-tunnel";
 
 export const EXPERIENCE_BUDGET = {
   desktopDpr: 1.5,
   mobileDpr: 1,
-  desktopRevealSubdivisions: [128, 128],
-  mobileRevealSubdivisions: [72, 72],
+  desktopRevealSubdivisions: [1, 1],
+  mobileRevealSubdivisions: [1, 1],
 } as const;
 
 export type ExperienceCanvasProps = {
   active: boolean;
   compact: boolean;
-  mode?: "wake" | "signal" | "edge";
   onReady?: () => void;
+  onUnavailable?: () => void;
 };
 
 export function getExperienceFrameLoop(
@@ -28,11 +26,47 @@ export function getExperienceFrameLoop(
   return pageVisible && sceneVisible ? "always" : "never";
 }
 
+function CanvasLifecycle({
+  onReady,
+  onUnavailable,
+}: Pick<ExperienceCanvasProps, "onReady" | "onUnavailable">) {
+  const { gl, invalidate } = useThree();
+  const ready = useRef(false);
+
+  useFrame(() => {
+    if (!ready.current) {
+      ready.current = true;
+      onReady?.();
+    }
+  });
+
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const handleLost = (event: Event) => {
+      event.preventDefault();
+      ready.current = false;
+      onUnavailable?.();
+    };
+    const handleRestored = () => {
+      ready.current = false;
+      invalidate();
+    };
+    canvas.addEventListener("webglcontextlost", handleLost);
+    canvas.addEventListener("webglcontextrestored", handleRestored);
+    return () => {
+      canvas.removeEventListener("webglcontextlost", handleLost);
+      canvas.removeEventListener("webglcontextrestored", handleRestored);
+    };
+  }, [gl, invalidate, onUnavailable]);
+
+  return null;
+}
+
 export function ExperienceCanvas({
   active,
   compact,
-  mode = "wake",
   onReady,
+  onUnavailable,
 }: ExperienceCanvasProps) {
   const pageVisible = usePageVisibility();
   const dpr = compact
@@ -42,12 +76,7 @@ export function ExperienceCanvas({
   return (
     <div className="experience-canvas" aria-hidden="true">
       <Canvas
-        camera={{
-          fov: mode === "edge" ? 48 : mode === "signal" ? 42 : 34,
-          near: 0.1,
-          far: 20,
-          position: [0, 0, mode === "edge" ? 5.4 : mode === "signal" ? 5 : 4],
-        }}
+        camera={{ fov: 34, near: 0.1, far: 20, position: [0, 0, 4] }}
         dpr={dpr}
         frameloop={getExperienceFrameLoop(pageVisible, active)}
         gl={{
@@ -55,19 +84,14 @@ export function ExperienceCanvas({
           antialias: !compact,
           powerPreference: "high-performance",
         }}
-        onCreated={({ gl }) => {
-          gl.setClearColor(0x000000, 0);
-          onReady?.();
-        }}
+        onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
       >
         <Suspense fallback={null}>
-          {mode === "wake" ? (
-            <ProductReveal compact={compact} />
-          ) : mode === "signal" ? (
-            <SignalField compact={compact} />
-          ) : (
-            <EdgeTunnel compact={compact} />
-          )}
+          <ProductReveal compact={compact} />
+          <CanvasLifecycle
+            onReady={onReady}
+            onUnavailable={onUnavailable}
+          />
         </Suspense>
       </Canvas>
     </div>

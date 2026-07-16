@@ -72,17 +72,6 @@ export function createEdgeIntentTimeline(
       0.24,
     )
     .fromTo(
-      "[data-edge-layer]",
-      { opacity: 0, letterSpacing: "0.32em", y: 12 },
-      { opacity: 0.82, letterSpacing: "0.08em", y: 0, stagger: 0.045, duration: 0.2 },
-      0.18,
-    )
-    .to(
-      "[data-edge-layer]",
-      { opacity: 0, scaleX: 0.3, stagger: 0.03, duration: 0.16 },
-      0.44,
-    )
-    .fromTo(
       "[data-edge-plane]",
       { opacity: 0.04, scaleY: 0.24 },
       { opacity: 0.46, scaleY: 1, stagger: 0.035, duration: 0.25 },

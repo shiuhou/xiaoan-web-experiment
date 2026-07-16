@@ -10,7 +10,7 @@ export const V2_ACT_IDS = Object.freeze([
 export const V2_CAPTURE_PROGRESS = Object.freeze({
   wake: 0,
   break: 0.44,
-  signal: 0.78,
+  signal: 0.92,
   "edge-intent": 0.84,
   action: 0.68,
   presence: 0,
@@ -128,6 +128,7 @@ export function hasQaFailures(result) {
       diagnostics.navigationLinks !== V2_ACT_IDS.length ||
       diagnostics.horizontalOverflow > 0 ||
       (diagnostics.missingImages?.length ?? 0) > 0 ||
+      (issues.consoleMessages?.length ?? 0) > 0 ||
       (issues.consoleErrors?.length ?? 0) > 0 ||
       (issues.pageErrors?.length ?? 0) > 0 ||
       (issues.failedResponses?.length ?? 0) > 0 ||

@@ -2,22 +2,12 @@ import Image from "next/image";
 import { getBreakMotionProfile } from "@/components/motion/break-timeline";
 import { V2_ACTS, V2_ASSETS } from "@/content/v2-content";
 
-const INTERFACE_ITEMS = ["CHAT", "TASKS", "CALENDAR", "REMINDER"] as const;
-
 function InterfaceCanvas() {
   return (
     <div className="break-interface" data-interface-canvas>
       <header className="break-interface__bar">
-        <span>XIAO-AN.OS / AGENT WINDOW</span>
-        <span>SCREEN-BOUND</span>
+        <span>DIGITAL AGENT / SCREEN BOUND</span>
       </header>
-      <nav className="break-interface__rail" aria-hidden="true">
-        {INTERFACE_ITEMS.map((item, index) => (
-          <span key={item}>
-            {String(index + 1).padStart(2, "0")} / {item}
-          </span>
-        ))}
-      </nav>
       <div className="break-interface__session">
         <span className="break-interface__prompt">USER / DESKTOP SESSION</span>
         <strong>Agent 不應該永遠被困在屏幕裡。</strong>
@@ -27,22 +17,13 @@ function InterfaceCanvas() {
           <i />
         </div>
       </div>
-      <aside className="break-interface__agenda">
-        <span>NOW</span>
-        <b>15:40</b>
-        <i />
-        <small>ONE MORE WINDOW</small>
-      </aside>
-      <footer className="break-interface__ticker">
-        <span>CHAT → TASK → REMINDER → REPLY</span>
-        <span>NO BODY / NO DISTANCE / NO PRESENCE</span>
-      </footer>
     </div>
   );
 }
 
 export function BreakAct() {
   const act = V2_ACTS[1];
+  const [lead, tail] = act.zh.split("，");
 
   return (
     <section
@@ -54,7 +35,10 @@ export function BreakAct() {
       <div className="break-act__stage">
         <div className="break-act__copy" data-break-copy>
           <span>02 / BREAKING THE SCREEN</span>
-          <h2 id="break-title">{act.zh}</h2>
+          <h2 id="break-title">
+            <span>{lead}，</span>
+            <span>{tail}</span>
+          </h2>
           <p>Agent 不應該永遠被困在屏幕裡。</p>
         </div>
 

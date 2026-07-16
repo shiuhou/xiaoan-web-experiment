@@ -64,7 +64,12 @@ export function createBreakTimeline(
     )
     .to(
       "[data-break-product]",
-      { opacity: 1, scale: 1.04, z: 86, yPercent: compact ? 2 : -2 },
+      {
+        opacity: 1,
+        scale: compact ? 1.06 : 1.1,
+        z: 86,
+        yPercent: compact ? 2 : -2,
+      },
       0.12,
     )
     .to(
@@ -78,5 +83,5 @@ export function createBreakTimeline(
       0.375,
     )
     .to("[data-depth-route]", { scaleX: 1, opacity: 1 }, 0.42)
-    .to("[data-break-product]", { scale: 1, yPercent: 0, z: 54 }, 0.76);
+    .to("[data-break-product]", { scale: 1.02, yPercent: 0, z: 54 }, 0.76);
 }

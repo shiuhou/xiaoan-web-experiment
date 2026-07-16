@@ -1,0 +1,92 @@
+[
+  {
+    "profile": "desktop",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "duration": 22000,
+    "diagnostics": {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 9855,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    },
+    "output": "artifacts/v2/recordings/xiaoan-v2-desktop.webm"
+  },
+  {
+    "profile": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "duration": 18000,
+    "diagnostics": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 8423,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "mobile",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    },
+    "output": "artifacts/v2/recordings/xiaoan-v2-mobile.webm"
+  }
+]

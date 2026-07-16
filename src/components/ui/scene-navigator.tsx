@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { V2_ACTS, type ActId } from "@/content/v2-content";
 import { SCENE_INDEX_EVENT } from "@/lib/ui-events";
 
@@ -16,6 +16,7 @@ const ACT_LABELS: Record<ActId, string> = {
 export function SceneNavigator() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<ActId>("wake");
+  const panelRef = useRef<HTMLDivElement>(null);
   const activeIndex = V2_ACTS.findIndex((act) => act.id === active);
 
   useEffect(() => {
@@ -57,12 +58,17 @@ export function SceneNavigator() {
       if (
         ["PageDown", "PageUp", "ArrowDown", "ArrowUp", " ", "Home", "End"].includes(
           event.key,
-        )
+        ) &&
+        !panelRef.current?.contains(event.target as Node)
       ) {
         event.preventDefault();
       }
     };
-    const preventBackgroundScroll = (event: Event) => event.preventDefault();
+    const preventBackgroundScroll = (event: Event) => {
+      if (!panelRef.current?.contains(event.target as Node)) {
+        event.preventDefault();
+      }
+    };
     window.addEventListener("keydown", handleIndexKeyboard);
     window.addEventListener("wheel", preventBackgroundScroll, { passive: false });
     window.addEventListener("touchmove", preventBackgroundScroll, {
@@ -83,6 +89,7 @@ export function SceneNavigator() {
     <nav
       className="scene-nav"
       data-open={open}
+      data-scene={active}
       data-v2-navigation=""
       aria-label="Scene index"
     >
@@ -120,6 +127,7 @@ export function SceneNavigator() {
       />
 
       <div
+        ref={panelRef}
         className="scene-nav__panel"
         id="scene-index-panel"
         data-lenis-prevent

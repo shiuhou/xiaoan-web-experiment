@@ -10,6 +10,10 @@ describe("SceneNavigator", () => {
 
     const toggle = screen.getByRole("button", { name: /open scene index/i });
     expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(screen.getByRole("navigation", { name: /scene index/i })).toHaveAttribute(
+      "data-scene",
+      "wake",
+    );
 
     await user.click(toggle);
     expect(toggle).toHaveAttribute("aria-expanded", "true");
@@ -23,5 +27,24 @@ describe("SceneNavigator", () => {
     await user.click(screen.getByRole("link", { name: /04 edge-intent/i }));
     expect(toggle).toHaveAttribute("aria-expanded", "false");
     expect(document.body).not.toHaveAttribute("data-scene-index-open");
+  });
+
+  it("locks the background but allows the open panel to scroll", async () => {
+    const user = userEvent.setup();
+    render(<SceneNavigator />);
+    await user.click(screen.getByRole("button", { name: /open scene index/i }));
+
+    const panel = document.getElementById("scene-index-panel");
+    expect(panel).not.toBeNull();
+    const panelWheel = new WheelEvent("wheel", { bubbles: true, cancelable: true });
+    panel?.dispatchEvent(panelWheel);
+    expect(panelWheel.defaultPrevented).toBe(false);
+
+    const backgroundWheel = new WheelEvent("wheel", {
+      bubbles: true,
+      cancelable: true,
+    });
+    document.body.dispatchEvent(backgroundWheel);
+    expect(backgroundWheel.defaultPrevented).toBe(true);
   });
 });

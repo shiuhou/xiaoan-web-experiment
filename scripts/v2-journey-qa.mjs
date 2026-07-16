@@ -75,6 +75,18 @@ try {
   await wheel(desktop, 680, Math.ceil(maxScroll / 680) + 1, 75);
   await desktop.waitForTimeout(650);
   const normalBottom = Math.round(await desktop.evaluate(() => scrollY));
+  const presenceNavigator = await desktop.evaluate(() => {
+    const navigation = document.querySelector("[data-v2-navigation]");
+    const toggle = navigation?.querySelector(".scene-nav__toggle");
+    const progress = navigation?.querySelector(".scene-nav__progress");
+    return {
+      scene: navigation?.getAttribute("data-scene") ?? null,
+      toggleOpacity: toggle ? Number.parseFloat(getComputedStyle(toggle).opacity) : 1,
+      progressOpacity: progress
+        ? Number.parseFloat(getComputedStyle(progress).opacity)
+        : 1,
+    };
+  });
   await wheel(desktop, -2300, Math.ceil(maxScroll / 2300) + 1, 95);
   await desktop.waitForTimeout(650);
   const fastReverse = Math.round(await desktop.evaluate(() => scrollY));
@@ -89,8 +101,13 @@ try {
     const act = desktopActs.find((entry) => entry.id === id);
     if (!act) throw new Error(`Missing reload act: ${id}`);
     const target = getActScrollTarget(act, 900, id === "wake" ? 0 : 0.58);
-    await desktop.evaluate((top) => window.scrollTo(0, top), target);
-    await desktop.waitForTimeout(420);
+    if (id === "wake") {
+      await wheel(desktop, -maxScroll, 2, 90);
+      await desktop.waitForTimeout(650);
+    } else {
+      await desktop.evaluate((top) => window.scrollTo(0, top), target);
+      await desktop.waitForTimeout(420);
+    }
     await desktop.reload({ waitUntil: "load" });
     await waitForV2Page(desktop, 750);
     reloads.push(
@@ -119,6 +136,7 @@ try {
     name: "desktop-wheel-reverse-reload-resize",
     normalBottom,
     maxScroll,
+    presenceNavigator,
     fastReverse,
     rapidState,
     reloads,
@@ -146,12 +164,16 @@ try {
     await mobile.waitForTimeout(70);
   }
   await mobile.waitForTimeout(700);
-  const mobileScrollY = Math.round(await mobile.evaluate(() => scrollY));
+  const mobilePosition = await mobile.evaluate(() => ({
+    y: Math.round(scrollY),
+    max: Math.round(document.documentElement.scrollHeight - innerHeight),
+  }));
   const mobileDiagnostics = await collectRuntimeDiagnostics(mobile);
   await mobile.screenshot({ path: path.join(outputDir, "mobile-touch-end.png") });
   scenarios.push({
     name: "mobile-touch",
-    mobileScrollY,
+    mobileScrollY: mobilePosition.y,
+    mobileMaxScroll: mobilePosition.max,
     diagnostics: mobileDiagnostics,
     issues: mobileIssues,
   });
@@ -167,6 +189,23 @@ try {
   await reduced.goto(baseUrl, { waitUntil: "load", timeout: 60_000 });
   await waitForV2Page(reduced, 550);
   const reducedDiagnostics = await collectRuntimeDiagnostics(reduced);
+  const reducedSemanticOutputs = await reduced.evaluate(() =>
+    [...document.querySelectorAll("[data-agent-output], [data-action-output]")].map(
+      (element) => {
+        const style = getComputedStyle(element);
+        const rect = element.getBoundingClientRect();
+        return {
+          text: element.textContent?.trim() ?? "",
+          visible:
+            style.display !== "none" &&
+            style.visibility !== "hidden" &&
+            Number.parseFloat(style.opacity) > 0 &&
+            rect.width > 0 &&
+            rect.height > 0,
+        };
+      },
+    ),
+  );
   await reduced.screenshot({
     path: path.join(outputDir, "reduced-motion-full.png"),
     fullPage: true,
@@ -174,6 +213,7 @@ try {
   scenarios.push({
     name: "reduced-motion",
     diagnostics: reducedDiagnostics,
+    semanticOutputs: reducedSemanticOutputs,
     issues: reducedIssues,
   });
   await reducedContext.close();
@@ -197,8 +237,23 @@ try {
   await page.goto(baseUrl, { waitUntil: "load", timeout: 60_000 });
   await waitForV2Page(page, 900);
   const diagnostics = await collectRuntimeDiagnostics(page);
+  const fallback = await page.evaluate(() => {
+    const element = document.querySelector('[data-experience-fallback="wake"]');
+    const image = element?.querySelector("img");
+    const style = element ? getComputedStyle(element) : null;
+    const rect = element?.getBoundingClientRect();
+    return {
+      present: Boolean(element),
+      visible:
+        Boolean(rect && rect.width > 0 && rect.height > 0) &&
+        style?.display !== "none" &&
+        style?.visibility !== "hidden" &&
+        Number.parseFloat(style?.opacity ?? "0") > 0,
+      imageComplete: image instanceof HTMLImageElement && image.complete,
+    };
+  });
   await page.screenshot({ path: path.join(outputDir, "webgl-disabled.png") });
-  scenarios.push({ name: "webgl-disabled", diagnostics, issues });
+  scenarios.push({ name: "webgl-disabled", diagnostics, fallback, issues });
   await context.close();
 } finally {
   await noWebglBrowser.close();
@@ -213,14 +268,30 @@ await fs.writeFile(
 const desktopResult = scenarios.find((scenario) => scenario.name.startsWith("desktop"));
 const reducedResult = scenarios.find((scenario) => scenario.name === "reduced-motion");
 const noWebglResult = scenarios.find((scenario) => scenario.name === "webgl-disabled");
+const mobileResult = scenarios.find((scenario) => scenario.name === "mobile-touch");
 const failed =
   scenarios.some(hasQaFailures) ||
   Math.abs(desktopResult.normalBottom - desktopResult.maxScroll) > 14 ||
+  desktopResult.presenceNavigator.scene !== "presence" ||
+  desktopResult.presenceNavigator.toggleOpacity > 0.01 ||
+  desktopResult.presenceNavigator.progressOpacity > 0.01 ||
   desktopResult.fastReverse > 14 ||
   desktopResult.reloads.some(
-    (reload) => reload.bodyTextLength < 500 || reload.motionState !== "animated",
+    (reload) =>
+      reload.bodyTextLength < 500 ||
+      reload.motionState !== "animated" ||
+      reload.sectionTop === null ||
+      Math.abs(reload.sectionTop) > 900,
   ) ||
+  desktopResult.resize.layout !== "mobile" ||
+  desktopResult.resize.horizontalOverflow !== 0 ||
+  Math.abs(mobileResult.mobileScrollY - mobileResult.mobileMaxScroll) > 24 ||
   reducedResult.diagnostics.motionState !== "final" ||
   reducedResult.diagnostics.canvas.some((canvas) => canvas.enabled === "true") ||
-  noWebglResult.diagnostics.canvas.some((canvas) => canvas.enabled === "true");
+  reducedResult.semanticOutputs.length < 6 ||
+  reducedResult.semanticOutputs.some((output) => !output.visible) ||
+  noWebglResult.diagnostics.canvas.some((canvas) => canvas.enabled === "true") ||
+  !noWebglResult.fallback.present ||
+  !noWebglResult.fallback.visible ||
+  !noWebglResult.fallback.imageComplete;
 if (failed) process.exitCode = 1;

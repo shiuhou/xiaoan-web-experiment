@@ -1,13 +1,18 @@
-# Xiao-An Web Experiment
+# Xiao-An Web Experiment V2
 
-以「**FROM SIGNAL TO UNDERSTANDING TO PRESENCE**」為主線的小安概念產品網站。這不是答辯簡報網頁化，也不是可控制機器人的 Dashboard；它是一個使用真實產品素材、ScrollTrigger、2.5D 與單一 WebGL 場景完成的 Creative Web Experiment。
+小安的實驗性概念產品網站，以六幕連續滾動敘事把真實產品、Intel DK-2500 與 OpenClaw 的關係轉化為一段從訊號到具身存在的視覺旅程。
 
-- 公開網站：https://shiuhou.github.io/xiaoan-web-experiment/
-- GitHub（`0703`）：https://github.com/shiuhou/xiaoan-web-experiment/tree/0703
+> FROM SIGNAL TO UNDERSTANDING TO PRESENCE
+>
+> 從虛擬中走出來，在現實中走近你。
+
+這不是答辯 PPT 網頁化，也不是可控制機器人的 Dashboard。所有狀態、事件與決策介面都屬於 Concept UI，不代表真實性能數據。
+
+目前版本位於 [`feature/visual-overhaul-v2`](https://github.com/shiuhou/xiaoan-web-experiment/tree/feature/visual-overhaul-v2)，只供審閱；`0703` 與其 GitHub Pages 網站不會因本分支而改變。
 
 ## 快速開始
 
-需求：Node.js 20+，建議使用 pnpm。
+需求：Node.js 20+、pnpm。
 
 ```powershell
 pnpm install
@@ -16,155 +21,168 @@ pnpm dev
 
 開啟 `http://localhost:3000`。
 
-完整驗證：
+Production 模式：
 
 ```powershell
+pnpm build
+pnpm start
+```
+
+完整程式驗證：
+
+```powershell
+python -m unittest tests/test_extract_ppt_assets.py tests/test_prepare_v2_assets.py
+node --test scripts/qa-runtime.test.mjs
 pnpm test
 pnpm lint
 pnpm build
 ```
 
-PPT 素材提取測試：
+## 六幕敘事
 
-```powershell
-python -m unittest tests/test_extract_ppt_assets.py
-```
+1. `WAKE`：以海報式產品構圖喚醒小安。
+2. `BREAK`：平面介面斷裂，智能從屏幕進入空間。
+3. `SIGNAL`：Camera、Voice、Expression、Time、Context 形成可讀訊號。
+4. `EDGE / INTENT`：Intel DK-2500 把輸入整理為 Context、Memory、Skills 與 Decision。
+5. `ACTION`：冷色決策場轉為暖色具身回應，是主要 Signature Moment。
+6. `PRESENCE`：移除技術介面，只留下小安與核心標語。
 
 ## 專案結構
 
 ```text
 src/
-├── app/                    # App Router 入口與全域樣式
+├── app/                         # Next.js App Router
 ├── components/
-│   ├── canvas/             # Edge WebGL aperture 與 fallback
-│   ├── motion/             # Lenis、GSAP、Signal Thread
-│   ├── scenes/             # 八個連續敘事場景
-│   └── ui/                 # 導航與系統狀態
-├── content/                # 文案、場景資料與資產路徑
-├── hooks/                  # reduced-motion、page visibility
-└── styles/                 # 按視覺系統拆分的 CSS
+│   ├── acts/                    # 六幕場景
+│   ├── concepts/                # 三個藝術方向的可視提案
+│   ├── experience/              # Hero WebGL、fallback、生命週期
+│   ├── motion/                  # Lenis、GSAP、各幕 timeline
+│   └── ui/                      # Scene Navigator
+├── content/                     # V2 文案、資產與連結
+├── hooks/                       # Reduced Motion、頁面可見性
+├── lib/                         # 路徑與狀態工具
+├── shaders/                     # Hero 產品揭示 shader
+└── styles/v2/                   # 各幕、手機、降級樣式
 
-scripts/                    # 素材提取、視覺 QA、截圖、錄屏
-public/assets/product/      # 網站實際使用或保留的本地產品素材
-work/ppt-assets/            # 完整 PPT extraction、inventory、contact sheet
-artifacts/                  # QA、交付截圖、審查報告與錄屏
-references/                 # 原始輸入文件；不在網站中直接載入
+scripts/                         # 資產、QA、截圖、錄影、交付封裝
+public/assets/product/           # PPT/DOCX 中選出的真實產品素材
+public/assets/v2/                # V2 衍生素材與 manifest
+work/ppt-assets/                 # 原始提取、inventory、contact sheet
+artifacts/v2/                    # 最終截圖、錄影、QA 與審查結果
+references/                      # 原始輸入文件，不由網站 runtime 讀取
 ```
 
-> 公開 repository 同時保留 `references/`、完整 extraction、QA 截圖與交付素材，讓其他 Agent 可以核對原始資料、實作和最終視覺。
+## 調整內容
 
-## 調整文案
-
-八幕主標題、中文說明、技術標記與 Concept Event 集中在：
+主要文案、場景索引、GitHub 連結與資產路徑集中在：
 
 ```text
-src/content/site-content.ts
+src/content/v2-content.ts
 ```
 
-主標題可用 `\n` 控制分行。不要在 component 中加入長段答辯文字；每幕應維持一個核心句子。
+場景結構在 `src/components/acts/`，各幕動畫在 `src/components/motion/`，視覺樣式在 `src/styles/v2/`。
 
 ## 替換產品圖
 
-目前產品路徑集中在 `ASSETS`：
+目前核心資產：
 
 ```text
-src/content/site-content.ts
-public/assets/product/
+public/assets/product/xiaoan-dock.png
+public/assets/product/dk2500-exploded.png
+public/assets/v2/product-foreground.png
+public/assets/v2/product-dock.png
+public/assets/v2/expression-care.png
 ```
 
-最直接的替換方式是保留檔名與近似長寬比：
+替換時維持檔名可避免修改程式；若比例不同，需同步檢查 `wake.css`、`action.css`、`presence.css` 的 `object-fit`、裁切位置與產品圖層尺寸。不要直接把低解析圖片放大成滿屏背景。
 
-- `xiaoan-dock.png`：Hero、Breaking、Presence、Closing；建議透明背景。
-- `dk2500-exploded.png`：Edge 硬件錨點。
-- `xiaoan-expressions.png`：保留作下一版表情素材，目前不直接疊在主畫面。
+## WebGL 與降級
 
-低解析或有簡報背景的圖片不要放大填滿畫面；優先以局部裁切、輪廓光、遮罩或設計場景融合。
+WebGL 只用於 Hero 的產品揭示，其他幕以 DOM、SVG、CSS 與 GSAP 完成。它會在離開 Hero、頁面不可見或 context lost 時停止或降級；手機 DPR 固定為 1，桌面上限為 1.5。
 
-## WebGL 開關與降級
-
-Edge WebGL 只在接近 viewport 時動態載入，離屏、頁面不可見或 Reduced Motion 時停止或改用靜態 aperture。若需在低階設備或錄製流程中強制停用：
+停用 WebGL：
 
 ```powershell
 $env:NEXT_PUBLIC_DISABLE_WEBGL='1'
 pnpm dev
 ```
 
-部署時可在環境變數加入：
+或在部署環境加入：
 
 ```text
 NEXT_PUBLIC_DISABLE_WEBGL=1
 ```
 
-靜態 fallback 保留完整的四階段標記，不會出現空白場景。
+fallback 仍會顯示完整產品圖，不會留下空白 Hero。
 
-## 素材提取
+## Reduced Motion
+
+`prefers-reduced-motion: reduce` 會停用 Lenis、scrub、長 sticky 敘事與 WebGL，六幕改為自然文檔流並直接顯示最終語義狀態。REMINDER、CARE、WAIT、EXPRESSION、VOICE、MOTION 均保留可讀。
+
+## PPT 素材提取
 
 ```powershell
 pnpm extract:assets
 ```
 
-腳本 `scripts/extract-ppt-assets.py` 會：解壓 `ppt/media`、讀取尺寸/格式/大小/SHA-256、追蹤 slide 使用位置、產生 CSV/JSON inventory 與 contact sheet、分類候選資產，並把選定原圖複製到 `public/assets/ppt/`。原始 PPT 不會被修改。
+`scripts/extract-ppt-assets.py` 會解壓 `ppt/media`、記錄尺寸／格式／大小／SHA-256、建立 contact sheet、輸出 CSV/JSON inventory，並把選取資產複製到 `public/assets/ppt/`，不覆蓋原始檔。
 
-完整素材說明見 [ASSET_INVENTORY.md](./ASSET_INVENTORY.md)。
+詳見 [ASSET_INVENTORY.md](./ASSET_INVENTORY.md)。
 
-## 視覺 QA 與錄製
+## 視覺 QA 與錄影
 
-桌面逐幕截圖：
+先啟動 production server，再設定實際網址：
 
 ```powershell
-$env:QA_PASS='manual-desktop'
-node scripts/capture-qa.mjs
+$env:BASE_URL='http://127.0.0.1:3000'
+$env:CHROME_PATH='C:\Program Files\Google\Chrome\Application\chrome.exe'
 ```
 
-手機逐幕截圖：
+常用命令：
 
 ```powershell
-$env:QA_PASS='manual-mobile'
-$env:QA_VIEWPORT='mobile'
-node scripts/capture-qa.mjs
-```
-
-Reduced Motion：
-
-```powershell
-$env:QA_PASS='manual-reduced'
-$env:QA_REDUCED='1'
-node scripts/capture-qa.mjs
-```
-
-完整桌面滾動錄屏：
-
-```powershell
+node scripts/responsive-qa.mjs
+node scripts/motion-qa.mjs
+node scripts/v2-journey-qa.mjs
 node scripts/record-scroll.mjs
+node scripts/record-v2-signatures.mjs
+node scripts/record-v2-social.mjs
+node scripts/video-metadata.mjs
+node scripts/extract-video-review-frames.mjs
+python scripts/compose_v2_delivery.py --pass-name final-delivery
 ```
 
-輸出在 `artifacts/recordings/xiaoan-scroll-desktop.webm`。若剪成社交媒體版本，建議只保留 Hero、Breaking、Edge、Presence、Closing，控制在 12–16 秒；完整錄屏仍作為工程交付與全頁動態證據。
+主要交付：
 
-## 部署
+- `artifacts/v2/desktop/`、`mobile/`、`reduced-motion/`
+- `artifacts/v2/signature-moments/`
+- `artifacts/v2/recordings/xiaoan-v2-desktop.webm`
+- `artifacts/v2/recordings/xiaoan-v2-mobile.webm`
+- `artifacts/v2/recordings/xiaoan-v2-social-15s.webm`
+- `artifacts/v2/DELIVERY_MANIFEST.json`
 
-`0703` 分支已設定 GitHub Pages workflow。每次 push 到該分支時，GitHub Actions 會以 `/xiaoan-web-experiment` 作為站點子路徑，輸出靜態網站並更新公開頁面。
+## GitHub Pages 靜態輸出
 
-如需改用 Vercel，本專案不依賴遠端圖片、網路字體、API 或外部資料服務，可直接部署：
+```powershell
+$env:GITHUB_PAGES='true'
+$env:NEXT_PUBLIC_SITE_BASE_PATH='/xiaoan-web-experiment'
+pnpm build
+```
 
-1. 將此獨立專案放入自己的 Git repository。
-2. 在 Vercel 匯入 repository。
-3. Framework 選擇 Next.js；Install/Build 使用預設 `pnpm install`、`pnpm build`。
-4. 如需停用 WebGL，加入 `NEXT_PUBLIC_DISABLE_WEBGL=1`。
-5. 部署前再次執行 `pnpm test && pnpm lint && pnpm build`。
+輸出位於 `out/`，資產會使用 `/xiaoan-web-experiment` base path。
 
-GitHub Pages 公開站點與 repository 是兩個不同網址；前者展示可操作網站，後者用於查看代碼與交付素材。
+## Vercel 部署
 
-## 已知限制
+1. 在 Vercel 匯入 GitHub repository。
+2. Framework 選 Next.js，Install Command 使用 `pnpm install`，Build Command 使用 `pnpm build`。
+3. 不要設定 `GITHUB_PAGES=true`。
+4. 若目標裝置不需要 WebGL，可加入 `NEXT_PUBLIC_DISABLE_WEBGL=1`。
+5. 部署前先完成 test、lint、build 與瀏覽器 QA。
 
-- `港科广初赛答辩PPT.pptx` 未出現在提供的來源目錄；現版以 `结题(3).pptx`、設計報告、demo script 與 live repository 架構核對內容。
-- 產品主圖為 1122×1402，已透過構圖與 2.5D 使用，仍不等同新的 4K 商業攝影。
-- WebGL/Three 只創造 Edge 的空間資料處理場；它仍是此站最大的 client bundle 成本。
-- 所有事件、狀態與資料線均為 Concept UI，沒有連接真實機器人、DK-2500 API、OpenClaw、WebSocket 或 Dashboard。
-- 系統字體會依 Windows/macOS 環境產生小幅排版差異。
-
-## 設計與審查紀錄
+## 相關文檔
 
 - [DESIGN_NOTES.md](./DESIGN_NOTES.md)
+- [MOTION_SYSTEM_V2.md](./MOTION_SYSTEM_V2.md)
+- [PERFORMANCE_REPORT_V2.md](./PERFORMANCE_REPORT_V2.md)
 - [ASSET_INVENTORY.md](./ASSET_INVENTORY.md)
-- `artifacts/reviews/read-only-review.md`
-- `artifacts/qa/QA_REPORT.md`
+- [artifacts/verification/VERIFICATION.md](./artifacts/verification/VERIFICATION.md)

@@ -74,7 +74,7 @@ export function createActionTimeline(
     .to(
       "[data-action-product]",
       {
-        scale: compact ? 1.06 : 1.08,
+        scale: compact ? 1.13 : 1.16,
         xPercent: compact ? 3 : 2,
         yPercent: compact ? 3 : 1,
         duration: 0.42,
@@ -120,7 +120,7 @@ export function createActionTimeline(
     )
     .to(
       "[data-action-product]",
-      { scale: compact ? 1.02 : 1.04, duration: 0.16 },
+      { scale: compact ? 1.03 : 1.05, duration: 0.16 },
       0.84,
     );
 }

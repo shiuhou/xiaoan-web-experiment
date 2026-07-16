@@ -1,60 +1,82 @@
 # Xiao-An Asset Inventory
 
-## 輸入文件
+## 輸入資料
 
-| 文件 | 狀態 | 用途 |
-|---|---|---|
-| `references/结题(3).pptx` | 已完整盤點，15 slides | 產品圖、DK-2500、架構、硬件與世界觀主來源 |
-| `references/香港科技大学（广州）_小安_作品设计报告.docx` | 已盤點文字與 media | 世界觀、功能敘述、真實六表情圖 |
-| `references/demo(1).txt` | 已讀取 | Demo 行為與敘事語氣參考 |
-| `references/18ca95687677e79eefe76121e355a3ec_a9ca9e3e76da0fdacf55d557b2152e7e_8.doc` | 已檢查 | 空白/制式功能表，未作主要內容來源 |
-| `references/全國賽大會通知.pdf` | 保留，未作視覺來源 | 行政文件，不屬網站內容範圍 |
-| `references/圖片_20260714162759.jpg` | 保留，未作產品主圖 | 補充圖片，未優於簡報透明產品圖 |
-| `references/港科广初赛答辩PPT.pptx` | **未找到** | 已在 supplied references 與來源專案做 targeted search；不虛構其內容 |
+`references/` 目前包含：
 
-原始輸入文件只讀，沒有被覆寫。
+| 文件 | 用途 |
+|---|---|
+| `结题(3).pptx` | 主要世界觀、產品圖、DK-2500、架構與技術語彙 |
+| `香港科技大学（广州）_小安_作品设计报告.docx` | 產品定位、補充圖片與設計資料 |
+| `demo(1).txt` | Demo 與交互脈絡參考 |
+| `18ca95687677e79eefe76121e355a3ec_a9ca9e3e76da0fdacf55d557b2152e7e_8.doc` | 舊格式補充文件 |
+| `全國賽大會通知.pdf` | 比賽背景資料，不作網站主文案 |
+| `圖片_20260714162759.jpg` | 補充圖片，未作產品本體替代 |
 
-## PPT extraction 輸出
+原始參考文件只作素材與內容依據，不由網站 runtime 讀取。
 
-- 腳本：`scripts/extract-ppt-assets.py`
-- 測試：`tests/test_extract_ppt_assets.py`
-- 完整 media 數量：29
-- 自動/人工選定候選：21
-- 原始提取：`work/ppt-assets/final-deck/media/`
-- Contact sheet：`work/ppt-assets/final-deck/contact-sheet.png`
-- 完整清單：`work/ppt-assets/final-deck/asset-inventory.csv`
-- JSON 清單：`work/ppt-assets/final-deck/asset-inventory.json`
-- 選定 manifest：`work/ppt-assets/final-deck/selected-assets.json`
-- Public 原圖副本：`public/assets/ppt/`
+## PPT 提取流程
 
-CSV 記錄 `filename`、來源路徑、尺寸、格式、色彩模式、bytes、SHA-256、使用 slide、分類、selected 與 context。所有選取均複製原圖，不直接覆蓋。
+```powershell
+pnpm extract:assets
+```
 
-## 網站產品資產
+`scripts/extract-ppt-assets.py` 會：
 
-| 網站檔名 | 原始來源 | 尺寸 | SHA-256 | 使用方式 |
+1. 把 PPTX 當 ZIP 解壓並保留 `ppt/media` 原始檔。
+2. 記錄格式、寬高、檔案大小與 SHA-256。
+3. 建立 contact sheet。
+4. 輸出 CSV／JSON inventory 與選取 manifest。
+5. 把選取檔案複製至 `public/assets/ppt/`，不覆蓋原始來源。
+
+產物：
+
+```text
+work/ppt-assets/final-deck/media/
+work/ppt-assets/final-deck/contact-sheet.png
+work/ppt-assets/final-deck/asset-inventory.csv
+work/ppt-assets/final-deck/asset-inventory.json
+work/ppt-assets/final-deck/selected-assets.json
+public/assets/ppt/
+```
+
+## 網站核心產品資產
+
+| 網站檔案 | 原始來源 | 尺寸 | SHA-256 | 用途 |
 |---|---|---:|---|---|
-| `xiaoan-dock.png` | PPT `image3.png`, slides 1/14 | 1122×1402 | `3b1f73f9…f541217b` | Hero、Breaking、Presence、Closing 的真實產品錨點 |
-| `dk2500-exploded.png` | PPT `image11.png`, slide 6 | 1267×845 | `7df0df3f…592e4fd3` | Edge 的 DK-2500 實體來源圖 |
-| `system-architecture.png` | PPT `image17.png`, slide 8 | 1672×941 | `48982972…379db900` | 架構內容核對；Reviewer 後不再作幽靈底圖 |
-| `edge-hardware.png` | PPT `image19.png`, slide 9 | 1770×888 | `62a0fd11…a270fb4f` | 保留但不渲染；原圖含未重新驗證的性能資訊 |
-| `robot-internals-front.png` | PPT `image13.png`, slide 6 | 1195×896 | `99dba4c9…11533f2f` | 下一版硬件細節候選 |
-| `robot-internals-top.jpeg` | PPT `image14.jpeg`, slide 6 | 4032×3024 | `bc8d1a02…148a5812` | 下一版硬件特寫候選 |
-| `xiaoan-expressions.png` | DOCX `word/media/image75.*` | 745×571 | `e601c368…ff8a679d` | 真實六表情 grid；保留但不在 Presence 疊加 |
+| `public/assets/product/xiaoan-dock.png` | PPT `image3.png` | 1122×1402 | `3b1f73f9c9189b81d5f65a5abec0c3afd4002da7bee62f0e1a80e9e8f541217b` | Hero、Break、Action、Presence 的真實產品錨點 |
+| `public/assets/product/dk2500-exploded.png` | PPT `image11.png` | 1267×845 | `7df0df3f40e5761aad5a1bf342b5da024e47c48f4b9576cd1d234d50592e4fd3` | Edge / Intent 硬件核心 |
+| `public/assets/product/system-architecture.png` | PPT `image17.png` | 1672×941 | `489829724e696c2c76cc6dd6c06f13fe4b1c9d5e796b7674f4385292379db900` | 架構與內容核對，不直接作滿屏圖 |
+| `public/assets/product/edge-hardware.png` | PPT `image19.png` | 1770×888 | `62a0fd1147c8c870f86c98fabd6d9db3311f5798a77c4715225f6aa8a270fb4f` | DK-2500 補充硬件參考 |
+| `public/assets/product/robot-internals-front.png` | PPT `image13.png` | 1195×896 | `99dba4c95d6d6820432dc1f54d41a5e156313c51186149a9267b38c711533f2f` | 下一版產品內部細節 |
+| `public/assets/product/robot-internals-top.jpeg` | PPT `image14.jpeg` | 4032×3024 | `bc8d1a02589531a2f1cce16185098d4470a95f3e6dd6b137b9949c5d148a5812` | 下一版硬件特寫 |
+| `public/assets/product/xiaoan-expressions.png` | DOCX 圖片 | 745×571 | 見來源 inventory | 表情參考，不作假產品外觀 |
 
-完整 SHA-256 可在 `asset-inventory.csv` 與檔案本身查驗。
+## V2 衍生資產
 
-## 視覺使用原則
+`scripts/prepare_v2_assets.py` 從核心產品圖建立可重複使用的本地衍生檔：
 
-- 不生成與真實小安外觀不同的假機器人。
-- 產品主圖保留原始透明圖，以輪廓、光場、遮罩、視差與場景融合強化，不做粗糙去背。
-- `edge-hardware.png` 因含來源簡報內的性能資訊而不直接顯示，避免被誤認為本網站驗證過的數據。
-- WebGL 只生成抽象訊號與處理空間，不冒充真實硬件外觀。
-- 架構 route 以 live repository 的 `/video`、`/audio`、`/control` 契約為準；不建立假的 `/agent` endpoint。
+| 檔案 | 用途 |
+|---|---|
+| `public/assets/v2/product-dock.png` | 保留完整機器人與基站構圖 |
+| `public/assets/v2/product-foreground.png` | Hero／Action 前景圖層 |
+| `public/assets/v2/expression-care.png` | Action 的 CARE 表情遮罩 |
+| `public/assets/v2/asset-manifest.json` | 衍生來源、尺寸與校驗資訊 |
 
-## 下一版建議素材
+衍生檔不會改寫 `public/assets/product/` 或 `public/assets/ppt/` 的來源圖。
 
-1. 4K 透明或中性背景的正面、45°、側面產品照。
-2. DK-2500 基站單獨實拍與無文字 exploded view。
-3. 表情螢幕的原始 PNG/動畫序列。
-4. 馬達、鏡頭、麥克風與底盤細節 macro shots。
-5. 可公開、無敏感內容的真實桌面環境照片。
+## 素材使用原則
+
+- 真實小安產品圖是唯一產品本體，不生成外觀不同的假機器人。
+- 低解析來源以局部裁切、遮罩、輪廓光、視差與場景融合使用，不直接拉伸成 4K 背景。
+- DK-2500 與架構圖保留原始技術資訊，不虛構硬件規格或性能數字。
+- 網站不依賴遠端圖片、素材 CDN 或 build-time 網絡字體。
+- Concept UI 與來源照片分層，避免讓概念事件看起來像真實 Dashboard 數據。
+
+## 下一版優先素材
+
+1. 4K 正面、45 度與側面產品照，固定光位並保留透明背景版本。
+2. 基站屏幕、揚聲器、無線充電區、輪組與攝像頭微距。
+3. DK-2500 單獨硬件照與可用於 2.5D 的分層爆炸圖。
+4. 產品開心／關懷／等待三種屏幕表情的乾淨素材。
+5. 同機位深度圖或遮罩，提升 Hero 的 2.5D 精度。

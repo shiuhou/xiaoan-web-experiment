@@ -42,61 +42,10 @@
   box-shadow: 0 0 2.5rem rgba(93, 222, 231, 0.18);
 }
 
-.signal-act__field,
 .signal-act__forms {
   position: absolute;
   inset: 0;
 }
-
-.signal-act__field {
-  z-index: 2;
-  opacity: 0.72;
-}
-
-.signal-act__field .experience-canvas {
-  filter: none;
-}
-
-.experience-fallback--signal {
-  overflow: hidden;
-  opacity: 0.7;
-}
-
-.experience-fallback__signal-lines span {
-  position: absolute;
-  top: -12%;
-  bottom: -12%;
-  left: calc(50% + (var(--fallback-lane) - 2) * 3.7rem);
-  width: 1px;
-  background: linear-gradient(transparent, rgba(127, 226, 233, 0.32), transparent);
-  transform: rotate(calc((var(--fallback-lane) - 2) * 1.8deg));
-}
-
-.experience-fallback__signal-lines span:nth-child(1) { --fallback-lane: 0; }
-.experience-fallback__signal-lines span:nth-child(2) { --fallback-lane: 1; }
-.experience-fallback__signal-lines span:nth-child(3) { --fallback-lane: 2; }
-.experience-fallback__signal-lines span:nth-child(4) { --fallback-lane: 3; }
-.experience-fallback__signal-lines span:nth-child(5) { --fallback-lane: 4; }
-
-.experience-fallback__signal-points i {
-  position: absolute;
-  top: calc(12% + (var(--point-row) * 4.35%));
-  left: calc(50% + (var(--point-lane) - 2) * 3.7rem);
-  width: 2px;
-  height: 2px;
-  background: #a3eef0;
-  box-shadow: 0 0 0.45rem rgba(114, 229, 236, 0.5);
-}
-
-.experience-fallback__signal-points i:nth-child(5n + 1) { --point-lane: 0; }
-.experience-fallback__signal-points i:nth-child(5n + 2) { --point-lane: 1; }
-.experience-fallback__signal-points i:nth-child(5n + 3) { --point-lane: 2; }
-.experience-fallback__signal-points i:nth-child(5n + 4) { --point-lane: 3; }
-.experience-fallback__signal-points i:nth-child(5n) { --point-lane: 4; }
-.experience-fallback__signal-points i:nth-child(n) { --point-row: 1; }
-.experience-fallback__signal-points i:nth-child(n + 6) { --point-row: 5; }
-.experience-fallback__signal-points i:nth-child(n + 11) { --point-row: 9; }
-.experience-fallback__signal-points i:nth-child(n + 16) { --point-row: 13; }
 
 .signal-act__copy {
   position: absolute;
@@ -375,15 +324,6 @@
   transform-origin: top;
 }
 
-.signal-act__concept-label {
-  display: block;
-  margin-bottom: 1rem;
-  opacity: 0;
-  color: rgba(182, 225, 225, 0.34);
-  font: 520 0.47rem/1 var(--mono);
-  letter-spacing: 0.12em;
-}
-
 .signal-event {
   display: grid;
   min-height: 3.25rem;
@@ -547,10 +487,6 @@
     padding-left: 1.1rem;
   }
 
-  .signal-act__concept-label {
-    font-size: 0.39rem;
-  }
-
   .signal-event {
     min-height: 2.65rem;
     grid-template-columns: 3.9rem 1fr minmax(5.3rem, auto);
@@ -573,10 +509,6 @@
     font-size: 0.42rem;
   }
 
-  .experience-fallback__signal-lines span,
-  .experience-fallback__signal-points i {
-    left: calc(50% + (var(--fallback-lane, var(--point-lane)) - 2) * 1rem);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -602,7 +534,6 @@
   }
 
   .signal-event,
-  .signal-act__concept-label,
   .signal-act__events p {
     opacity: 1;
     clip-path: none;

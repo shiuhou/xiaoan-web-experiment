@@ -1,102 +1,135 @@
-# Xiao-An Web Experiment — Design Notes
+# Xiao-An V2 Design Notes
 
-## 最終藝術方向
+## 藝術方向選擇
 
-選定方向：**Signal Chapel / 訊號聖殿**。
+前期以三個方向評估現有素材：
 
-網站把小安理解為「正在取得身體的訊號」。畫面從不穩定、平面的數位資訊開始，逐步形成有秩序的空間深度，最後回到安靜的物理存在。視覺以近黑靛藍、瓷白、冰青與少量銅色構成；它是 Futuristic，但不是 Cyberpunk；有技術感，但不是 Dashboard。
+1. `Porcelain Circuit`：瓷白產品、冷色結構線、精密硬件語彙。
+2. `Soft Machine`：暖白、柔光、情緒陪伴與低頻呼吸。
+3. `Signal Chapel`：黑色空間、巨大字體、單一光束與儀式化滾動。
 
-另外兩個未採用方向：
-
-- **Porcelain Circuit / 瓷白電路**：偏明亮的工業編輯系統，適合 DK-2500，但不夠支撐本次強滾動敘事。
-- **Soft Machine / 柔性機器**：以呼吸與表情為中心，更溫暖，但容易讓小安偏向兒童桌寵。
+最終選擇 `Signal Chapel / 訊號禮堂`，並吸收 Porcelain Circuit 的硬件精度與 Soft Machine 的暖色終章。這最適合現有真實產品圖：產品不用被偽造成另一台 3D 機器人，而是在黑色空間裡成為唯一實體錨點。
 
 ## 核心視覺隱喻
 
-一條共用的 **Signal Thread** 穿越八幕：
+網站不是「展示很多 AI 功能」，而是一條狀態轉換：
 
-`SIGNAL → PERCEPTION → EDGE → INTENT → ACTION → PRESENCE`
+```text
+SIGNAL → FORM → INTENT → ACTION → PRESENCE
+```
 
-它不是性能資料，也不代表即時連線；它是敘事上的連續裝置。訊號由小安的臉部附近出發，在 Scene 02 打開平面界面，在 Perception 分化為不同訊號形態，在 Edge 被整理，在 Agent 收斂為意圖，最後回到表情、聲音與運動。
+冷色線條代表尚未被理解的訊號；排列、分流與選擇代表處理；暖色光進入畫面代表決策回到物理世界。產品圖在每一幕都不是裝飾，而是「智能取得身體」的證據。
 
-## 顏色與字體系統
+## 視覺系統
 
-- Void：`#020507`
-- Deep indigo：`#07121b`
-- Structural blue：`#102b3a`
-- Signal cyan：`#5ee7ff`
-- Cold white：`#edf8f7`
-- Porcelain：`#dce5e2`
-- Copper accent：`#d79a56`
-- Muted technical text：`#7f9aa5`
+### 色彩
 
-不下載網路字體。Display 使用 `Bahnschrift Condensed`、`Arial Narrow` 等系統字體；中文使用 `Microsoft JhengHei`、`PingFang TC` fallback；技術標記使用 `Cascadia Code`、`SFMono-Regular` fallback。
+- Void `#020507`
+- Deep blue-black `#061018`
+- Structural cyan `#5ee7ff`
+- Cold white `#edf8f7`
+- Porcelain `#dce5e2`
+- Copper / presence `#d79a56`
+- Muted technical text `#7f9aa5`
 
-## 共用 Motion Language
+青色只用於訊號、定位與可交互提示；銅色只在 Action 與 Presence 釋放。網站避免通用紫藍 SaaS 漸變、密集粒子、霓虹邊框與卡片牆。
 
-- **SIGNAL**：細線、光點、波形、窄資料帶。
-- **PROCESS**：訊號對齊、壓縮、分流與穿越處理平面。
-- **DECISION**：多條輸入路徑收斂到同一核心，再分岔成不同輸出。
-- **ACTION**：能量由內向外釋放，產品向觀看者靠近。
-- **QUIET**：技術圖層逐步消失，只保留產品與標語。
+### 字體
 
-所有主要滾動 timeline 都使用 GSAP context 並在 unmount 時 cleanup。桌面使用 scrub 與 pinned stage；手機只在 Breaking、Edge、Presence 保留短距離 sticky composition，不複製桌面的長 pin。
+- 主標題：本地系統窄體與粗黑中文 fallback，形成海報尺度。
+- 英文介面：Inter Tight Variable（已本地打包）。
+- 技術標記：等寬字體 fallback，使用大幅尺寸反差而非大量圖標。
 
-## 八幕動畫邏輯
+不在 build 時下載網絡字體。
 
-### 01 — Awakening
+## 共用動態元素
 
-使用 PPT 中的真實透明產品圖作為唯一產品本體。畫面由主產品、低透明輪廓層與 CSS 面部呼吸光建立克制的 2.5D 深度。Pointer 只影響前景位移與光暈，載入 reveal 約兩秒，最終可獨立作為 1440×900 海報。
+整個作品共用一條「訊號線」的語法，而不是每幕發明新特效：
 
-### 02 — Breaking the Screen
+- `SIGNAL`：細線、掃描、波形、時間刻度。
+- `PROCESS`：收縮、排序、對齊、路徑分流。
+- `DECISION`：焦點收斂、狀態選擇、冷色停頓。
+- `ACTION`：由內向外釋放、產品靠近、暖光進場。
+- `QUIET`：終章移除介面，保留產品與一句話。
 
-聊天、待辦、日曆與提醒先處於同一平面。桌面滾動約進入本幕 35% 後，四層 UI 沿 X/Y/Z 分離並讓小安穿過原本的螢幕邊界；約 82% 停在可截圖的完整構圖。這是全站的 Signature Moment。
+Lenis 只負責平滑輸入，GSAP ScrollTrigger 把每幕進度映射到可重播 timeline；沒有 scroll snap 或滾輪劫持。
 
-### 03 — Perception
+## 六幕動畫邏輯
 
-Camera、Voice、Expression、Time、Context 以掃描、波形、軌跡、時間刻度與資料帶圍繞同一核心，不做成五張卡片。訊號最後整理為明確標示的 Concept Event。
+### 01 — WAKE
 
-### 04 — The Edge
+產品由暗處進入單一垂直光束，前後兩層巨大中文字形成視差。Hero WebGL 只做克制的產品揭示與深度扭曲；DOM 產品圖同時作為可用 fallback。狀態列從 `SYSTEM / ONLINE` 到 `AGENT / AWAKE`，不顯示任何虛構數值。
 
-Intel DK-2500 被轉化為「Data Aperture」。WebGL 粒子不是背景宇宙：它會依該幕滾動進度，從散亂的三維媒體訊號收斂成三條結構化資料軌道，穿越三個處理平面後離開。DOM 只保留四個必要階段：`LOCAL PERCEPTION`、`EVENT PROCESSING`、`AGENT GATEWAY`、`ROBOT COMMUNICATION`。
+### 02 — BREAK
 
-### 05 — Understanding
+抽象桌面介面在固定舞台中裂成前後空間，產品穿過切口而不是普通 fade-in。短暫負空間是轉折節拍，完整長版錄影保留這個 Signature Transition；社群短版則使用精選路徑避免黑場停格。
 
-使用者請求、陪伴請求與被動訊號從左側依次進入 Agent decision field。`CONTEXT / MEMORY / SKILLS / DECISION` 是一個有秩序的理解空間，不使用 AI 大腦圖。
+### 03 — SIGNAL
 
-### 06 — Presence
+Camera、Voice、Expression、Time、Context 被設計為五種不同形態，不使用五張 Feature Card。訊號先分散，再沿垂直軸整理為結構化事件；事件內容是概念敘事，不代表模型準確率或真實延遲。
 
-訊號回到真實產品圖。螢幕亮起、運動線釋放，`AGENT DECISION → CARE` 與 `ROBOT ACTION → MOVE CLOSER` 形成具身閉環。Reviewer 後已移除底部低價值 expression film，讓產品重新成為唯一主角。
+### 04 — EDGE / INTENT
 
-### 07 — System Reveal
+真實 Intel DK-2500 爆炸圖是主視覺，垂直處理軌道把 Input 依次整理為 Context、Memory、Skills、Decision、Output。OpenClaw 被表現成決策秩序，而不是 AI 大腦。此幕由 DOM、CSS 與 SVG 完成，確保文字與硬件圖片保持清晰。
 
-畫面整理成 Robot、Edge、Agent 三層空間海報。桌面使用水平深度，手機改為垂直堆疊；保留目前工程契約 `/video`、`/audio`、`/control`，Agent 只標示為 layer，不虛構不存在的 `/agent` route。原始 PPT 架構圖僅作內容核對，不再作為不可讀的幽靈底圖。
+### 05 — ACTION
 
-### 08 — Closing
+這是最終主要 Signature Moment。左側冷色決策場與右側暖色物理場先分離，`CARE / MOVE CLOSER` 決策沿控制路徑回到產品；Expression、Voice、Motion 依次被點亮，產品由遠處靠近，悲傷表情形成情緒回應。
 
-所有技術介面退出，只保留小安、柔和光線與最後標語。`EXPLORE AGAIN` 是有效的頁內連結；未加入假的 Demo、社交媒體、聯絡表單或 GitHub URL。
+### 06 — PRESENCE
+
+介面與技術標記逐步退出，只留下暖黑空間、真實小安與「從虛擬中走出來，在現實中走近你」。它既是結尾，也是可獨立截圖的產品海報。
 
 ## Signature Moment
 
-Scene 02 的平面 UI 在滾動中打開空間深度，小安同時由後方穿越界面。這個瞬間直接對應「Agent 不應永遠被困在螢幕裡」，而不是單純 fade-in；快速滾動、回到頂部與中段 reload 均已納入 QA。
+主要 Signature Moment 是 Action 的冷暖世界轉換：意圖沿控制線回到身體，冷色界面打開成暖色物理空間，產品靠近並改變表情。它有清晰語義——決策成為具身回應——而不是純裝飾光效。
 
-## 為什麼只在 Edge 使用 WebGL
+Breaking the Screen 是次要 Signature Transition，負責建立「平面介面被實體穿破」的世界觀。
 
-Edge 的敘事需要真實深度、粒子視差與由散亂到有序的空間重排；其他場景以 DOM、CSS、SVG、GSAP 表現可取得更清晰的字體、更精確的響應式控制與較低渲染成本。WebGL 動態載入、限制 DPR/粒子量、接近 viewport 才載入，離屏或頁面不可見時停止 frameloop；不可用時顯示完整設計的靜態 aperture。
+## WebGL 使用原因
 
-## 手機與 Reduced Motion
+WebGL 只保留在 Hero，因為產品揭示需要比 CSS mask 更有深度的表面變形；Signal 與 Edge 的 WebGL 已在審查後移除，避免三個 Canvas 競爭 context、增加 bundle 與產生無語義動畫。
 
-- 手機標題與產品圖重新構圖，不是桌面等比例縮小。
-- Breaking、Edge、Presence 只使用短距離 sticky composition；其他場景回到 document flow。
-- Robot–Edge–Agent 架構改為垂直閱讀。
-- Pointer effects 停用，WebGL 降低粒子數與 DPR。
-- `prefers-reduced-motion` 停用 Lenis、scrub、長 pin、粒子動畫與 cursor effects，所有內容直接顯示可讀 final state。
-- 可用 `NEXT_PUBLIC_DISABLE_WEBGL=1` 強制使用靜態 fallback。
+最終策略：
+
+- WebGL2 探測成功才載入 Three.js。
+- Canvas 動態載入，第一個成功 frame 後才標記 ready。
+- 桌面 DPR 上限 1.5，手機 DPR 1。
+- Hero 離開視窗後停止 frame loop，延遲卸載。
+- 頁面不可見時停止渲染。
+- context lost 時立即切換為產品圖 fallback；恢復後重新 invalidate。
+- `NEXT_PUBLIC_DISABLE_WEBGL=1` 可全域停用。
+
+## 手機版策略
+
+手機不是桌面縮小版：
+
+- 版式改為垂直海報與單一焦點。
+- 標題重新斷行，產品裁切與靠近幅度獨立設定。
+- Signal 與 Edge 改為更清楚的垂直閱讀順序。
+- Action 保留冷暖分界、控制線與三種輸出。
+- 架構與決策軌道不使用橫向 overflow。
+- Navigator 加大文字寬度，面板內部可滾動，背景保持鎖定。
+- Presence 隱藏 Navigator，避免破壞終章海報。
+
+## Reduced Motion
+
+當使用者偏好 Reduced Motion：
+
+- 不建立 Lenis、scrub timeline 或長 sticky 舞台。
+- 六幕回到自然文檔流，每幕為可讀的最終狀態。
+- WebGL 停用，Hero 使用本地產品圖。
+- REMINDER、CARE、WAIT、EXPRESSION、VOICE、MOTION 全部直接可見。
+- 不因停用動畫而留下空白舞台。
 
 ## Concept UI 邊界
 
-所有 status、event trace、signal band、decision state 都是視覺概念，用來說明架構與可能事件流，不是即時 Dashboard。網站沒有呈現任何虛構的準確率、延遲、吞吐量、使用者數或部署成果。
+下列內容只用於視覺敘事：感知事件、Context／Memory／Skills／Decision 軌道、CARE 決策、MOVE CLOSER 指令與系統狀態。網站不宣稱準確率、延遲、用戶數、部署規模、銷售數據或真實 API 狀態。
 
 ## 下一版素材替換
 
-產品路徑集中在 `src/content/site-content.ts` 與 `public/assets/product/`。可在維持相近長寬比的前提下替換 `xiaoan-dock.png`、`dk2500-exploded.png` 與 `xiaoan-expressions.png`；若取得更高解析透明產品照，Hero、Breaking、Presence、Closing 不需改寫 scene component。下一版最值得補充的是：乾淨的正面/側面產品照、DK-2500 實拍、表情螢幕原始輸出，以及不帶簡報文字的硬件細節圖。
+1. 以相同角度拍攝 4K 去背景產品圖，替換 Hero、Action、Presence 三個錨點。
+2. 新增基站、屏幕、攝像頭與輪組微距素材，插入現有遮罩與控制線，不改敘事結構。
+3. 若有深度圖，可把 Hero 的單平面揭示升級為真實 2.5D 分層。
+4. 若有 Demo 影片，應放在獨立案例頁；首頁仍保持概念敘事，不改成影片播放頁。
+5. 新素材需先更新 `public/assets/v2/asset-manifest.json` 與視覺 QA 截圖。

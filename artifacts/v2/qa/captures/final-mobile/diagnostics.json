@@ -1,0 +1,105 @@
+{
+  "profile": "mobile",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "reduced": false,
+  "acts": [
+    {
+      "id": "wake",
+      "top": 0,
+      "height": 1249.109375
+    },
+    {
+      "id": "break",
+      "top": 1249.109375,
+      "height": 1392.59375
+    },
+    {
+      "id": "signal",
+      "top": 2641.703125,
+      "height": 1519.1875
+    },
+    {
+      "id": "edge-intent",
+      "top": 4160.890625,
+      "height": 1772.390625
+    },
+    {
+      "id": "action",
+      "top": 5933.28125,
+      "height": 1645.796875
+    },
+    {
+      "id": "presence",
+      "top": 7579.078125,
+      "height": 844
+    }
+  ],
+  "diagnostics": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "actIds": [
+      "wake",
+      "break",
+      "signal",
+      "edge-intent",
+      "action",
+      "presence"
+    ],
+    "navigationLinks": 6,
+    "horizontalOverflow": 0,
+    "scrollHeight": 8423,
+    "reducedMotion": "false",
+    "motionState": "animated",
+    "layout": "mobile",
+    "canvas": [
+      {
+        "ready": "true",
+        "active": "false",
+        "enabled": "true",
+        "hasCanvas": true
+      },
+      {
+        "ready": "true",
+        "active": "true",
+        "enabled": "true",
+        "hasCanvas": true
+      },
+      {
+        "ready": "true",
+        "active": "true",
+        "enabled": "true",
+        "hasCanvas": true
+      }
+    ],
+    "missingImages": []
+  },
+  "issues": {
+    "consoleMessages": [
+      {
+        "type": "warning",
+        "text": "WARNING: Too many active WebGL contexts. Oldest context will be lost."
+      },
+      {
+        "type": "warning",
+        "text": "WARNING: Too many active WebGL contexts. Oldest context will be lost."
+      },
+      {
+        "type": "warning",
+        "text": "WARNING: Too many active WebGL contexts. Oldest context will be lost."
+      },
+      {
+        "type": "warning",
+        "text": "WARNING: Too many active WebGL contexts. Oldest context will be lost."
+      }
+    ],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedResponses": [],
+    "requestFailures": []
+  }
+}

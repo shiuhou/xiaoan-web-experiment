@@ -1,0 +1,76 @@
+{
+  "profile": "desktop-reduced",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "reduced": true,
+  "acts": [
+    {
+      "id": "wake",
+      "top": 0,
+      "height": 900
+    },
+    {
+      "id": "break",
+      "top": 900,
+      "height": 900
+    },
+    {
+      "id": "signal",
+      "top": 1800,
+      "height": 900
+    },
+    {
+      "id": "edge-intent",
+      "top": 2700,
+      "height": 900
+    },
+    {
+      "id": "action",
+      "top": 3600,
+      "height": 900
+    },
+    {
+      "id": "presence",
+      "top": 4500,
+      "height": 900
+    }
+  ],
+  "diagnostics": {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "actIds": [
+      "wake",
+      "break",
+      "signal",
+      "edge-intent",
+      "action",
+      "presence"
+    ],
+    "navigationLinks": 6,
+    "horizontalOverflow": 0,
+    "scrollHeight": 5400,
+    "reducedMotion": "true",
+    "motionState": "final",
+    "layout": null,
+    "canvas": [
+      {
+        "ready": "false",
+        "active": "false",
+        "enabled": "false",
+        "hasCanvas": false
+      }
+    ],
+    "missingImages": []
+  },
+  "issues": {
+    "consoleMessages": [],
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedResponses": [],
+    "requestFailures": []
+  }
+}

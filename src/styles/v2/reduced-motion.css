@@ -9,8 +9,9 @@
   }
 
   .v2-narrative[data-v2-motion-state="final"] .v2-act {
-    height: 100svh;
-    min-height: 100svh;
+    height: auto;
+    min-height: max(100svh, 48rem);
+    overflow: visible;
   }
 
   .v2-narrative[data-v2-motion-state="final"] :is(
@@ -22,6 +23,9 @@
   ) {
     position: relative;
     top: auto;
+    height: auto;
+    min-height: max(100svh, 48rem);
+    overflow: visible;
   }
 
   .v2-narrative[data-v2-motion-state="final"] :is(
@@ -33,7 +37,6 @@
     [data-break-product],
     [data-signal-copy],
     [data-event-token],
-    [data-event-concept],
     [data-compression-label],
     [data-edge-copy],
     [data-edge-hardware],
@@ -41,6 +44,8 @@
     [data-decision-stage],
     [data-agent-output],
     [data-action-copy],
+    [data-action-decision],
+    [data-action-output],
     [data-action-product],
     [data-expression-mask],
     [data-physical-light]
@@ -78,7 +83,24 @@
 }
 
 @media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .v2-narrative[data-v2-motion-state="final"] .v2-act,
+  .v2-narrative[data-v2-motion-state="final"] :is(
+    .wake-act__sticky,
+    .break-act__stage,
+    .signal-act__stage,
+    .edge-intent-act__stage,
+    .action-act__stage
+  ) {
+    min-height: max(100svh, 44rem);
+  }
+
   .v2-narrative[data-v2-motion-state="final"] .edge-intent-act__requests {
-    display: none;
+    top: auto;
+    right: 1rem;
+    bottom: 4.6rem;
+    left: 1rem;
+    display: grid;
+    width: auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }

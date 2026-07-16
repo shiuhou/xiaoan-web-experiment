@@ -20,25 +20,43 @@ const outputDir = path.join(
   "recordings",
 );
 await fs.mkdir(outputDir, { recursive: true });
-const viewport = { width: 1080, height: 1350 };
+const viewport = { width: 720, height: 900 };
+const outputSize = { width: 1080, height: 1350 };
 const browser = await chromium.launch({
   executablePath: resolveBrowserExecutable(),
   headless: true,
   args: ["--use-angle=swiftshader", "--enable-webgl"],
 });
 const context = await browser.newContext({
-  viewport,
+  viewport: outputSize,
   colorScheme: "dark",
   reducedMotion: "no-preference",
-  recordVideo: { dir: outputDir, size: viewport },
+  recordVideo: { dir: outputDir, size: outputSize },
 });
 const page = await context.newPage();
 const issues = attachIssueCollector(page);
-await page.goto(baseUrl, { waitUntil: "load", timeout: 60_000 });
-await waitForV2Page(page, 2200);
-const acts = await getActGeometry(page);
+await page.setContent(`
+  <style>
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #02070d; }
+    iframe {
+      display: block;
+      width: ${viewport.width}px;
+      height: ${viewport.height}px;
+      border: 0;
+      transform: scale(1.5);
+      transform-origin: 0 0;
+    }
+  </style>
+  <iframe src="${baseUrl}" title="Xiao-An social capture"></iframe>
+`);
+const iframe = await page.locator("iframe").elementHandle();
+const appFrame = await iframe?.contentFrame();
+if (!appFrame) throw new Error("The social capture iframe did not attach");
+await waitForV2Page(appFrame, 300);
+const acts = await getActGeometry(appFrame);
 const video = page.video();
-const keyframes = acts.map((act) => ({
+const socialActIds = new Set(["wake", "signal", "action", "presence"]);
+const keyframes = acts.filter((act) => socialActIds.has(act.id)).map((act) => ({
   id: act.id,
   top: getActScrollTarget(
     act,
@@ -47,43 +65,34 @@ const keyframes = acts.map((act) => ({
   ),
 }));
 
-await page.evaluate(async (frames) => {
-  const durations = [900, 2500, 2200, 2800, 2500, 2400];
-  const pause = (milliseconds) =>
-    new Promise((resolve) => setTimeout(resolve, milliseconds));
-  const move = (from, to, duration) =>
-    new Promise((resolve) => {
-      const started = performance.now();
-      const frame = (time) => {
-        const linear = Math.min(1, (time - started) / duration);
-        const eased = 1 - Math.pow(1 - linear, 3);
-        window.scrollTo(0, from + (to - from) * eased);
-        if (linear < 1) requestAnimationFrame(frame);
-        else resolve();
-      };
-      requestAnimationFrame(frame);
-    });
-
-  let current = 0;
-  await pause(700);
-  for (let index = 1; index < frames.length; index += 1) {
-    await move(current, frames[index].top, durations[index]);
-    current = frames[index].top;
-    await pause(index === frames.length - 1 ? 1200 : 420);
-  }
-}, keyframes);
-await page.waitForTimeout(700);
-const diagnostics = await collectRuntimeDiagnostics(page);
+const durations = [0, 900, 3500, 2000];
+let current = 0;
+await page.waitForTimeout(200);
+await page.mouse.move(outputSize.width / 2, outputSize.height / 2);
+for (let index = 1; index < keyframes.length; index += 1) {
+  const destination = keyframes[index].top;
+  const duration = durations[index];
+  await page.mouse.wheel(0, destination - current);
+  await page.waitForTimeout(duration);
+  current = destination;
+  await page.waitForTimeout(
+    index === keyframes.length - 1 ? 2300 : index === 2 ? 1500 : 100,
+  );
+}
+await page.waitForTimeout(300);
+const diagnostics = await collectRuntimeDiagnostics(appFrame);
 
 await context.close();
-await browser.close();
 if (!video) throw new Error("Playwright did not create the social video");
 const generatedPath = await video.path();
-const finalPath = path.join(outputDir, "xiaoan-v2-social-4x5.webm");
+const finalPath = path.join(outputDir, "xiaoan-v2-social-15s.webm");
 await fs.rm(finalPath, { force: true });
 await fs.rename(generatedPath, finalPath);
+await browser.close();
 const result = {
   viewport,
+  outputSize,
+  captureMode: "scaled-interactive-frame",
   keyframes,
   diagnostics,
   issues,

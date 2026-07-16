@@ -18,7 +18,7 @@ export function PresenceAct() {
           alt="Close view of Xiao-An in physical space"
           fill
           loading="lazy"
-          sizes="(max-width: 767px) 150vw, 82vw"
+          sizes="(max-width: 767px) 136vw, 70vw"
         />
       </div>
 

@@ -14,7 +14,7 @@ describe("experience state", () => {
     expect(clampProgress(Number.POSITIVE_INFINITY)).toBe(0);
   });
 
-  it("starts every act and velocity at zero", () => {
+  it("starts every act at zero", () => {
     expect(createExperienceFrame()).toEqual({
       wake: 0,
       break: 0,
@@ -22,7 +22,6 @@ describe("experience state", () => {
       edgeIntent: 0,
       action: 0,
       presence: 0,
-      velocity: 0,
     });
   });
 

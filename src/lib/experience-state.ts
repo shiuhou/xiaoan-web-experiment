@@ -7,10 +7,9 @@ export type ExperienceFrame = {
   edgeIntent: number;
   action: number;
   presence: number;
-  velocity: number;
 };
 
-export type ExperienceActFrameKey = Exclude<keyof ExperienceFrame, "velocity">;
+export type ExperienceActFrameKey = keyof ExperienceFrame;
 
 const ACT_FRAME_KEYS: Record<ActId, ExperienceActFrameKey> = {
   wake: "wake",
@@ -41,6 +40,5 @@ export function createExperienceFrame(): ExperienceFrame {
     edgeIntent: 0,
     action: 0,
     presence: 0,
-    velocity: 0,
   };
 }

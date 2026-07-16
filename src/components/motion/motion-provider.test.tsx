@@ -2,7 +2,6 @@ import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useExperience } from "@/components/experience/experience-context";
 import { MotionProvider } from "./motion-provider";
-import { SignalThread } from "./signal-thread";
 
 const mocks = vi.hoisted(() => ({
   destroy: vi.fn(),
@@ -111,7 +110,7 @@ describe("MotionProvider", () => {
     expect(mocks.kill).toHaveBeenCalledTimes(1);
   });
 
-  it("forwards Lenis velocity into the bounded experience response", () => {
+  it("updates ScrollTrigger without writing unused velocity styles", () => {
     setReducedMotion(false);
 
     const { unmount } = render(
@@ -130,12 +129,9 @@ describe("MotionProvider", () => {
     expect(mocks.update).toHaveBeenCalledTimes(1);
     expect(
       document.documentElement.style.getPropertyValue("--experience-velocity"),
-    ).toBe("0.75");
+    ).toBe("");
 
     unmount();
-    expect(
-      document.documentElement.style.getPropertyValue("--experience-velocity"),
-    ).toBe("");
   });
 
   it("pauses smooth scrolling while the scene index is open", () => {
@@ -160,15 +156,5 @@ describe("MotionProvider", () => {
     });
     expect(mocks.start).toHaveBeenCalledTimes(1);
     unmount();
-  });
-});
-
-describe("SignalThread", () => {
-  it("is decorative and unavailable to assistive focus", () => {
-    const { container } = render(<SignalThread />);
-
-    const thread = container.firstElementChild;
-    expect(thread).toHaveAttribute("aria-hidden", "true");
-    expect(container.querySelectorAll("a,button,[tabindex='0']")).toHaveLength(0);
   });
 });

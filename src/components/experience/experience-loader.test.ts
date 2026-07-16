@@ -18,4 +18,16 @@ describe("WebGL support reader", () => {
     expect(getExtension).toHaveBeenCalledWith("WEBGL_lose_context");
     expect(loseContext).toHaveBeenCalledTimes(1);
   });
+
+  it("rejects WebGL1-only devices because the renderer requires WebGL2", () => {
+    const webgl1 = { getExtension: vi.fn() };
+    const getContext = vi.fn((kind: string) =>
+      kind === "webgl" ? webgl1 : null,
+    );
+    const readSupport = createWebGLSupportReader(() => ({ getContext }));
+
+    expect(readSupport()).toBe(false);
+    expect(getContext).toHaveBeenCalledTimes(1);
+    expect(getContext).toHaveBeenCalledWith("webgl2");
+  });
 });

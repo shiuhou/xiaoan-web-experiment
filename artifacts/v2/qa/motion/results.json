@@ -1,0 +1,263 @@
+[
+  {
+    "mode": "normal",
+    "profile": {
+      "delta": 660,
+      "delay": 90
+    },
+    "bottom": {
+      "y": 8955,
+      "max": 8955,
+      "active": "06"
+    },
+    "replay": {
+      "y": 0,
+      "wakeTransform": "matrix(1, 0, 0, 1, 0, 0)",
+      "breakOpacity": "0.08"
+    },
+    "reload": {
+      "y": 5895,
+      "edgeTop": -810,
+      "bodyTextLength": 1561
+    },
+    "resize": {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 7884,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "diagnostics": {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 7884,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    }
+  },
+  {
+    "mode": "fast",
+    "profile": {
+      "delta": 2100,
+      "delay": 100
+    },
+    "bottom": {
+      "y": 8955,
+      "max": 8955,
+      "active": "06"
+    },
+    "replay": {
+      "y": 0,
+      "wakeTransform": "matrix(1, 0, 0, 1, 0, 0)",
+      "breakOpacity": "0.08"
+    },
+    "reload": {
+      "y": 5895,
+      "edgeTop": -810,
+      "bodyTextLength": 1561
+    },
+    "resize": {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 7884,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "diagnostics": {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 7884,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    }
+  },
+  {
+    "mode": "slow",
+    "profile": {
+      "delta": 210,
+      "delay": 55
+    },
+    "bottom": {
+      "y": 8955,
+      "max": 8955,
+      "active": "06"
+    },
+    "replay": {
+      "y": 0,
+      "wakeTransform": "matrix(1, 0, 0, 1, 0, 0)",
+      "breakOpacity": "0.08"
+    },
+    "reload": {
+      "y": 5895,
+      "edgeTop": -810,
+      "bodyTextLength": 1561
+    },
+    "resize": {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 7884,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "diagnostics": {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 7884,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    }
+  }
+]

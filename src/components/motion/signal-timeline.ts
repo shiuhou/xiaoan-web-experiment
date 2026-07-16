@@ -104,12 +104,6 @@ export function createSignalTimeline(
       0.58,
     )
     .fromTo(
-      "[data-event-concept]",
-      { opacity: 0, y: 6 },
-      { opacity: 1, y: 0, duration: 0.16 },
-      0.56,
-    )
-    .fromTo(
       "[data-event-rail]",
       { scaleY: 0 },
       { scaleY: 1, duration: 0.26 },

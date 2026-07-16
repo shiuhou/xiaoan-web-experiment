@@ -1,4 +1,4 @@
-import { withSiteBasePath } from "./site-content";
+import { withSiteBasePath } from "@/lib/site-path";
 
 export type ActId =
   | "wake"

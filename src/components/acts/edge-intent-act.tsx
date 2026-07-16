@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ExperienceLoader } from "@/components/experience/experience-loader";
 import {
   AGENT_INPUTS,
   AGENT_OUTPUTS,
@@ -16,12 +15,6 @@ const DECISION_STAGES = [
   ["OUTPUT", "RETURN TO BODY"],
 ] as const;
 
-const SYSTEM_LAYERS = [
-  ["ROBOT", "PERCEPTION / ACTION"],
-  ["EDGE", "INTEL DK-2500"],
-  ["AGENT", "OPENCLAW"],
-] as const;
-
 export function EdgeIntentAct() {
   const act = V2_ACTS[3];
 
@@ -33,10 +26,6 @@ export function EdgeIntentAct() {
       aria-labelledby="edge-intent-title"
     >
       <div className="edge-intent-act__stage">
-        <div className="edge-intent-act__tunnel" aria-hidden="true">
-          <ExperienceLoader mode="edge" />
-        </div>
-
         <header className="edge-intent-act__copy" data-edge-copy>
           <span>04 / EDGE TO INTENT</span>
           <h2 id="edge-intent-title">
@@ -81,15 +70,6 @@ export function EdgeIntentAct() {
           ))}
         </div>
 
-        <div className="edge-intent-act__layers" aria-hidden="true">
-          {SYSTEM_LAYERS.map(([layer, detail]) => (
-            <div data-edge-layer key={layer}>
-              <strong>{layer}</strong>
-              <span>{detail}</span>
-            </div>
-          ))}
-        </div>
-
         <div className="edge-intent-act__route" data-edge-route>
           <i className="edge-intent-act__route-line" data-edge-route-line />
           <ol>
@@ -118,8 +98,7 @@ export function EdgeIntentAct() {
         </div>
 
         <p className="edge-intent-act__note">
-          {act.en} / OPENCLAW → CONTEXT → MEMORY → SKILLS → DECISION
-          <span>CONCEPT FLOW · NO PERFORMANCE METRICS</span>
+          {act.en} / DK-2500 → OPENCLAW
         </p>
       </div>
     </section>

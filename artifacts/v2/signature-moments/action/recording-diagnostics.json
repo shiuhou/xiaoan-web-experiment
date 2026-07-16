@@ -1,0 +1,118 @@
+[
+  {
+    "act": "action",
+    "profile": "desktop",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "range": {
+      "start": 7138.35,
+      "end": 7960.5
+    },
+    "signatureState": {
+      "progress": "0.9005",
+      "focalOpacity": "1"
+    },
+    "screenshots": {
+      "start": "artifacts/v2/signature-moments/action/desktop-start.png",
+      "peak": "artifacts/v2/signature-moments/action/desktop-peak.png",
+      "end": "artifacts/v2/signature-moments/action/desktop-end.png"
+    },
+    "diagnostics": {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 9855,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "desktop",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    },
+    "output": "artifacts/v2/signature-moments/action/desktop.webm"
+  },
+  {
+    "act": "action",
+    "profile": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "range": {
+      "start": 5957.33515625,
+      "end": 6654.8984375
+    },
+    "signatureState": {
+      "progress": "0.9002",
+      "focalOpacity": "1"
+    },
+    "screenshots": {
+      "start": "artifacts/v2/signature-moments/action/mobile-start.png",
+      "peak": "artifacts/v2/signature-moments/action/mobile-peak.png",
+      "end": "artifacts/v2/signature-moments/action/mobile-end.png"
+    },
+    "diagnostics": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actIds": [
+        "wake",
+        "break",
+        "signal",
+        "edge-intent",
+        "action",
+        "presence"
+      ],
+      "navigationLinks": 6,
+      "horizontalOverflow": 0,
+      "scrollHeight": 8423,
+      "reducedMotion": "false",
+      "motionState": "animated",
+      "layout": "mobile",
+      "canvas": [
+        {
+          "ready": "false",
+          "active": "false",
+          "enabled": "true",
+          "hasCanvas": false
+        }
+      ],
+      "missingImages": []
+    },
+    "issues": {
+      "consoleMessages": [],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "failedResponses": [],
+      "requestFailures": []
+    },
+    "output": "artifacts/v2/signature-moments/action/mobile.webm"
+  }
+]

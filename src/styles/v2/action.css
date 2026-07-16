@@ -225,7 +225,7 @@
   z-index: 8;
   top: 1.5%;
   right: 1.5%;
-  width: min(58vw, calc(96vh * 0.8003), 58rem);
+  width: min(62vw, calc(110vh * 0.8003), 62rem);
   aspect-ratio: 1122 / 1402;
   transform-origin: 64% 57%;
   transform-style: preserve-3d;
@@ -415,10 +415,15 @@
 
   .action-act__cold-world,
   .action-act__control-route,
-  .action-act__pulse,
-  .action-act__decision,
-  .action-act__outputs {
+  .action-act__pulse {
     display: none;
+  }
+
+  .action-act__decision,
+  .action-act__outputs,
+  .action-act__outputs li {
+    opacity: 1;
+    transform: none;
   }
 
   .action-act__physical-light,

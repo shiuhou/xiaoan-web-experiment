@@ -2,7 +2,13 @@ import { chromium } from "@playwright/test";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import { resolveBrowserExecutable } from "./qa-runtime.mjs";
+import {
+  attachIssueCollector,
+  collectRuntimeDiagnostics,
+  hasQaFailures,
+  resolveBrowserExecutable,
+  waitForV2Page,
+} from "./qa-runtime.mjs";
 
 export function getSignatureScrollRange({
   offsetTop,
@@ -15,149 +21,152 @@ export function getSignatureScrollRange({
   };
 }
 
-async function recordBreakSignature(browser, baseUrl, outputDir, profile) {
+const signatures = [
+  { id: "break", start: 0.04, peak: 0.52, end: 0.92, duration: 4200, focal: "[data-break-product]" },
+  { id: "signal", start: 0.04, peak: 0.7, end: 0.94, duration: 3800, focal: "[data-signal-aperture]" },
+  { id: "action", start: 0.03, peak: 0.68, end: 0.9, duration: 4200, focal: "[data-action-product]" },
+];
+
+const profiles = [
+  { name: "desktop", viewport: { width: 1440, height: 900 }, mobile: false },
+  { name: "mobile", viewport: { width: 390, height: 844 }, mobile: true },
+];
+
+async function recordSignature(browser, baseUrl, outputRoot, signature, profile) {
+  const outputDir = path.join(outputRoot, signature.id);
+  await fs.mkdir(outputDir, { recursive: true });
   const context = await browser.newContext({
     viewport: profile.viewport,
     colorScheme: "dark",
     reducedMotion: "no-preference",
+    hasTouch: profile.mobile,
+    isMobile: profile.mobile,
     recordVideo: { dir: outputDir, size: profile.viewport },
   });
   const page = await context.newPage();
-  const consoleMessages = [];
-  const pageErrors = [];
-  const failedResponses = [];
-
-  page.on("console", (message) => {
-    if (["warning", "error"].includes(message.type())) {
-      consoleMessages.push({ type: message.type(), text: message.text() });
-    }
-  });
-  page.on("pageerror", (error) => pageErrors.push(error.message));
-  page.on("response", (response) => {
-    if (response.status() >= 400) {
-      failedResponses.push({ status: response.status(), url: response.url() });
-    }
-  });
-
-  await page.goto(baseUrl, { waitUntil: "load" });
-  await page.waitForTimeout(1900);
-  const geometry = await page.evaluate(() => {
-    const section = document.getElementById("break");
-    if (!section) {
-      throw new Error("Break section is missing");
-    }
+  const issues = attachIssueCollector(page);
+  await page.goto(baseUrl, { waitUntil: "load", timeout: 60_000 });
+  await waitForV2Page(page, 1900);
+  const geometry = await page.evaluate((actId) => {
+    const section = document.getElementById(actId);
+    if (!section) throw new Error(`${actId} section is missing`);
     const bounds = section.getBoundingClientRect();
     return {
       offsetTop: bounds.top + window.scrollY,
       offsetHeight: bounds.height,
       viewportHeight: window.innerHeight,
     };
-  });
-  const range = getSignatureScrollRange(geometry);
+  }, signature.id);
+  const fullRange = getSignatureScrollRange(geometry);
+  const span = fullRange.end - fullRange.start;
+  const range = {
+    start: fullRange.start + span * signature.start,
+    end: fullRange.start + span * signature.end,
+  };
   await page.evaluate((start) => window.scrollTo(0, start), range.start);
-  await page.waitForTimeout(550);
+  await page.waitForTimeout(420);
   const video = page.video();
+  const screenshot = async (phase) => {
+    const screenshotPath = path.join(outputDir, `${profile.name}-${phase}.png`);
+    await page.screenshot({ path: screenshotPath });
+    return path.relative(process.cwd(), screenshotPath).replaceAll("\\", "/");
+  };
+  const screenshots = { start: await screenshot("start") };
 
-  await page.evaluate(async ({ start, end, duration }) => {
-    const started = performance.now();
-    await new Promise((resolve) => {
-      const frame = (time) => {
-        const linear = Math.min(1, (time - started) / duration);
-        const eased = linear < 0.5
-          ? 4 * linear * linear * linear
-          : 1 - Math.pow(-2 * linear + 2, 3) / 2;
-        window.scrollTo(0, start + (end - start) * eased);
-        if (linear < 1) {
-          requestAnimationFrame(frame);
-        } else {
-          resolve();
-        }
-      };
-      requestAnimationFrame(frame);
-    });
-  }, { ...range, duration: 4200 });
-  await page.waitForTimeout(650);
+  const animate = (start, end, duration) =>
+    page.evaluate(async ({ start, end, duration }) => {
+      const started = performance.now();
+      await new Promise((resolve) => {
+        const frame = (time) => {
+          const linear = Math.min(1, (time - started) / duration);
+          const eased = linear < 0.5
+            ? 4 * linear * linear * linear
+            : 1 - Math.pow(-2 * linear + 2, 3) / 2;
+          window.scrollTo(0, start + (end - start) * eased);
+          if (linear < 1) requestAnimationFrame(frame);
+          else resolve();
+        };
+        requestAnimationFrame(frame);
+      });
+    }, { start, end, duration });
 
-  const diagnostics = await page.evaluate(() => ({
-    scrollY: window.scrollY,
-    progress: getComputedStyle(document.documentElement)
-      .getPropertyValue("--experience-break-progress")
-      .trim(),
-    horizontalOverflow:
-      document.documentElement.scrollWidth > document.documentElement.clientWidth,
-    productOpacity: getComputedStyle(
-      document.querySelector("[data-break-product]"),
-    ).opacity,
-  }));
+  const peak = fullRange.start + span * signature.peak;
+  const duration = profile.mobile ? signature.duration - 500 : signature.duration;
+  await animate(range.start, peak, duration * 0.64);
+  await page.waitForTimeout(120);
+  screenshots.peak = await screenshot("peak");
+  await animate(peak, range.end, duration * 0.36);
+  await page.waitForTimeout(120);
+  screenshots.end = await screenshot("end");
+  await page.waitForTimeout(520);
+
+  const diagnostics = await collectRuntimeDiagnostics(page);
+  const signatureState = await page.evaluate(({ actId, focal }) => {
+    const focalElement = document.querySelector(focal);
+    return {
+      progress: getComputedStyle(document.documentElement)
+        .getPropertyValue(`--experience-${actId}-progress`)
+        .trim(),
+      focalOpacity: focalElement ? getComputedStyle(focalElement).opacity : null,
+    };
+  }, { actId: signature.id, focal: signature.focal });
 
   await context.close();
-  if (!video) {
-    throw new Error(`Playwright did not create ${profile.name} video`);
-  }
+  if (!video) throw new Error(`Playwright did not create ${signature.id}/${profile.name} video`);
   const generatedPath = await video.path();
   const finalPath = path.join(outputDir, `${profile.name}.webm`);
   await fs.rm(finalPath, { force: true });
   await fs.rename(generatedPath, finalPath);
 
   return {
+    act: signature.id,
     profile: profile.name,
     viewport: profile.viewport,
     range,
+    signatureState,
+    screenshots,
     diagnostics,
-    consoleMessages,
-    pageErrors,
-    failedResponses,
+    issues,
     output: path.relative(process.cwd(), finalPath).replaceAll("\\", "/"),
   };
 }
 
 async function main() {
   const baseUrl = process.env.BASE_URL ?? "http://127.0.0.1:3000";
-  const outputDir = path.join(
-    process.cwd(),
-    "artifacts",
-    "v2",
-    "signature-moments",
-    "break",
-  );
-  await fs.mkdir(outputDir, { recursive: true });
+  const outputRoot = path.join(process.cwd(), "artifacts", "v2", "signature-moments");
+  await fs.mkdir(outputRoot, { recursive: true });
   const browser = await chromium.launch({
     executablePath: resolveBrowserExecutable(),
     headless: true,
     args: ["--use-angle=swiftshader", "--enable-webgl"],
   });
-
-  const profiles = [
-    { name: "desktop", viewport: { width: 1440, height: 900 } },
-    { name: "mobile", viewport: { width: 390, height: 844 } },
-  ];
   const results = [];
   try {
-    for (const profile of profiles) {
-      results.push(
-        await recordBreakSignature(browser, baseUrl, outputDir, profile),
-      );
+    for (const signature of signatures) {
+      for (const profile of profiles) {
+        results.push(
+          await recordSignature(browser, baseUrl, outputRoot, signature, profile),
+        );
+      }
     }
   } finally {
     await browser.close();
   }
 
+  for (const signature of signatures) {
+    const actResults = results.filter((result) => result.act === signature.id);
+    await fs.writeFile(
+      path.join(outputRoot, signature.id, "recording-diagnostics.json"),
+      `${JSON.stringify(actResults, null, 2)}\n`,
+      "utf8",
+    );
+  }
   await fs.writeFile(
-    path.join(outputDir, "recording-diagnostics.json"),
+    path.join(outputRoot, "recording-diagnostics.json"),
     `${JSON.stringify(results, null, 2)}\n`,
     "utf8",
   );
-
-  const failed = results.some(
-    (result) =>
-      result.diagnostics.horizontalOverflow ||
-      result.consoleMessages.length > 0 ||
-      result.pageErrors.length > 0 ||
-      result.failedResponses.length > 0,
-  );
-  if (failed) {
-    process.exitCode = 1;
-  }
+  if (results.some((result) => hasQaFailures(result))) process.exitCode = 1;
 }
 
 if (

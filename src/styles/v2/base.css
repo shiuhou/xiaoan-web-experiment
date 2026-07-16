@@ -37,6 +37,7 @@ body[data-scene-index-open="true"] {
   gap: 0.28rem;
   width: min(16vw, 13rem);
   transform: translateX(-50%);
+  transition: opacity 0.45s var(--ease-signal);
 }
 
 .scene-nav__progress i {
@@ -70,6 +71,7 @@ body[data-scene-index-open="true"] {
   pointer-events: auto;
   cursor: pointer;
   z-index: 3;
+  transition: opacity 0.45s var(--ease-signal);
 }
 
 .scene-nav__toggle:focus-visible {
@@ -164,7 +166,15 @@ body[data-scene-index-open="true"] {
   box-shadow: -2rem 0 7rem rgba(0, 0, 0, 0.52);
   pointer-events: auto;
   overflow: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
   animation: v2-index-enter 0.55s var(--ease-signal) both;
+}
+
+.scene-nav[data-scene="presence"]:not([data-open="true"])
+  :is(.scene-nav__progress, .scene-nav__toggle) {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .scene-nav__panel[hidden] {
