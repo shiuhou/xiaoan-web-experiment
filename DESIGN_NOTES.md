@@ -66,11 +66,11 @@ Lenis 只負責平滑輸入，GSAP ScrollTrigger 把每幕進度映射到可重�
 
 ### 03 — SIGNAL
 
-Camera、Voice、Expression、Time、Context 被設計為五種不同形態，不使用五張 Feature Card。訊號先分散，再沿垂直軸整理為結構化事件；事件內容是概念敘事，不代表模型準確率或真實延遲。
+Camera、Voice、Expression、Time、Context 被設計為五種不同形態，不使用五張 Feature Card。訊號先分散，再進入大型「壓縮室」沿垂直軸整理為結構化事件；短促收斂光只標記資料成形的瞬間，不代表模型準確率或真實延遲。
 
 ### 04 — EDGE / INTENT
 
-真實 Intel DK-2500 爆炸圖是主視覺，垂直處理軌道把 Input 依次整理為 Context、Memory、Skills、Decision、Output。OpenClaw 被表現成決策秩序，而不是 AI 大腦。此幕由 DOM、CSS 與 SVG 完成，確保文字與硬件圖片保持清晰。
+真實 Intel DK-2500 爆炸圖被嵌入暗色光學框，而不是以白底投影片直接貼入畫面；處理軌道把 Input 依次整理為 Context、Memory、Skills、Decision、Output。OpenClaw 被表現成決策秩序，而不是 AI 大腦。此幕由 DOM、CSS 與 SVG 完成，確保文字與硬件圖片保持清晰。
 
 ### 05 — ACTION
 
@@ -79,6 +79,10 @@ Camera、Voice、Expression、Time、Context 被設計為五種不同形態，�
 ### 06 — PRESENCE
 
 介面與技術標記逐步退出，只留下暖黑空間、真實小安與「從虛擬中走出來，在現實中走近你」。它既是結尾，也是可獨立截圖的產品海報。
+
+## Final Visual Polish
+
+最後一輪沒有增加新的粒子或發光系統，而是處理中段敘事的構圖弱點：Signal 以更大的壓縮室建立單一焦點；Edge 將真實硬件圖吸收進同一套暗色光學語言；全站隱藏原生 scrollbar，並以極薄的幕間漸層封住 sticky 舞台邊界。Scene Navigator 改以 viewport focus line 同步，避免大幅跳捲越過 IntersectionObserver band 後顯示上一幕。這些修改保持 Hero-only WebGL 預算不變。
 
 ## Signature Moment
 

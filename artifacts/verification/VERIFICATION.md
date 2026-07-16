@@ -30,8 +30,8 @@ Exit code 0
 
 ```text
 pnpm test
-Test Files 18 passed (18)
-Tests      39 passed (39)
+Test Files 19 passed (19)
+Tests      42 passed (42)
 Exit code  0
 ```
 
@@ -92,6 +92,8 @@ Final capture profiles：
 - 1440×900 desktop Reduced Motion
 - 1920×1080、1280×720、1024×768、390×844 responsive matrix
 
+Final polish 重點：Signal 壓縮室、Edge 光學硬件框、隱藏原生 scrollbar、幕間邊界封口，以及大幅跳捲時的 Scene Navigator 狀態同步。
+
 所有 profile：
 
 - 六幕存在。
@@ -130,6 +132,9 @@ WebGL-disabled：fallback 存在、可見且圖片完整載入。
 artifacts/v2/qa/captures/final-delivery-desktop/
 artifacts/v2/qa/captures/final-delivery-mobile/
 artifacts/v2/qa/captures/final-delivery-desktop-reduced/
+artifacts/v2/qa/captures/final-polish-desktop/
+artifacts/v2/qa/captures/final-polish-mobile/
+artifacts/v2/qa/captures/final-polish-desktop-reduced/
 artifacts/v2/qa/responsive/results.json
 artifacts/v2/qa/motion/results.json
 artifacts/v2/qa/journey/results.json
@@ -139,12 +144,12 @@ artifacts/v2/qa/journey/results.json
 
 | 錄影 | 尺寸 | 時長 |
 |---|---:|---:|
-| Desktop full scroll | 1440×900 | 28.64 s |
-| Mobile full scroll | 390×844 | 22.52 s |
-| Social 4:5 cut | 1080×1350 | 15.44 s |
-| Action desktop / mobile | 1440×900 / 390×844 | 14.04 s / 10.56 s |
-| Break desktop / mobile | 1440×900 / 390×844 | 16.24 s / 9.52 s |
-| Signal desktop / mobile | 1440×900 / 390×844 | 11.84 s / 9.24 s |
+| Desktop full scroll | 1440×900 | 26.12 s |
+| Mobile full scroll | 390×844 | 21.88 s |
+| Social 4:5 cut | 1080×1350 | 13.12 s |
+| Action desktop / mobile | 1440×900 / 390×844 | 12.68 s / 9.20 s |
+| Break desktop / mobile | 1440×900 / 390×844 | 11.04 s / 8.36 s |
+| Signal desktop / mobile | 1440×900 / 390×844 | 10.76 s / 8.32 s |
 
 `artifacts/v2/recordings/review-frames/` 已抽取 social 2／5／8／11／14 秒與 desktop 關鍵幀作視覺檢查。4:5 影片為滿版輸出，沒有灰邊或左上角低解析內容。
 

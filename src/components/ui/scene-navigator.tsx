@@ -20,25 +20,37 @@ export function SceneNavigator() {
   const activeIndex = V2_ACTS.findIndex((act) => act.id === active);
 
   useEffect(() => {
-    if (typeof IntersectionObserver !== "function") {
-      return;
-    }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target.id) {
-          setActive(visible.target.id as ActId);
-        }
-      },
-      { rootMargin: "-38% 0px -48%", threshold: [0, 0.12, 0.4] },
-    );
-    for (const act of V2_ACTS) {
+    const acts = V2_ACTS.flatMap((act) => {
       const element = document.getElementById(act.id);
-      if (element) observer.observe(element);
-    }
-    return () => observer.disconnect();
+      return element ? [{ id: act.id, element }] : [];
+    });
+    let frame = 0;
+
+    const syncActiveScene = () => {
+      frame = 0;
+      const focusLine = window.innerHeight * 0.45;
+      let next: ActId = acts[0]?.id ?? "wake";
+
+      for (const act of acts) {
+        const bounds = act.element.getBoundingClientRect();
+        if (bounds.top <= focusLine) next = act.id;
+        if (bounds.top <= focusLine && bounds.bottom > focusLine) break;
+      }
+
+      setActive((current) => (current === next ? current : next));
+    };
+    const scheduleSync = () => {
+      if (!frame) frame = window.requestAnimationFrame(syncActiveScene);
+    };
+
+    syncActiveScene();
+    window.addEventListener("scroll", scheduleSync, { passive: true });
+    window.addEventListener("resize", scheduleSync);
+    return () => {
+      window.removeEventListener("scroll", scheduleSync);
+      window.removeEventListener("resize", scheduleSync);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {

@@ -223,10 +223,10 @@
       "layout": "mobile",
       "canvas": [
         {
-          "ready": "true",
+          "ready": "false",
           "active": "false",
           "enabled": "true",
-          "hasCanvas": true
+          "hasCanvas": false
         }
       ],
       "missingImages": []

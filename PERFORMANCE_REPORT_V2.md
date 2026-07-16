@@ -80,9 +80,9 @@ artifacts/v2/recordings/video-metadata.json
 
 | 檔案 | 尺寸 | 時長 |
 |---|---:|---:|
-| `xiaoan-v2-desktop.webm` | 1440×900 | 28.64 s |
-| `xiaoan-v2-mobile.webm` | 390×844 | 22.52 s |
-| `xiaoan-v2-social-15s.webm` | 1080×1350 | 15.44 s |
+| `xiaoan-v2-desktop.webm` | 1440×900 | 26.12 s |
+| `xiaoan-v2-mobile.webm` | 390×844 | 21.88 s |
+| `xiaoan-v2-social-15s.webm` | 1080×1350 | 13.12 s |
 
 社群影片使用 1080×1350 真實錄影畫布包覆 720×900 互動頁，避免 Playwright 把低解析內容貼在左上角造成灰邊；影片未經會凍結動畫的 Canvas 二次重編碼。
 

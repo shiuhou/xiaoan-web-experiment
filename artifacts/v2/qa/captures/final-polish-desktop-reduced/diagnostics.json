@@ -1,39 +1,39 @@
 {
-  "profile": "desktop",
+  "profile": "desktop-reduced",
   "viewport": {
     "width": 1440,
     "height": 900
   },
-  "reduced": false,
+  "reduced": true,
   "acts": [
     {
       "id": "wake",
       "top": 0,
-      "height": 1575
+      "height": 900
     },
     {
       "id": "break",
-      "top": 1575,
-      "height": 1665
+      "top": 900,
+      "height": 900
     },
     {
       "id": "signal",
-      "top": 3240,
-      "height": 1845
+      "top": 1800,
+      "height": 900
     },
     {
       "id": "edge-intent",
-      "top": 5085,
-      "height": 2025
+      "top": 2700,
+      "height": 900
     },
     {
       "id": "action",
-      "top": 7110,
-      "height": 1845
+      "top": 3600,
+      "height": 900
     },
     {
       "id": "presence",
-      "top": 8955,
+      "top": 4500,
       "height": 900
     }
   ],
@@ -52,16 +52,16 @@
     ],
     "navigationLinks": 6,
     "horizontalOverflow": 0,
-    "scrollHeight": 9855,
-    "reducedMotion": "false",
-    "motionState": "animated",
-    "layout": "desktop",
+    "scrollHeight": 5400,
+    "reducedMotion": "true",
+    "motionState": "final",
+    "layout": null,
     "canvas": [
       {
-        "ready": "true",
-        "active": "true",
-        "enabled": "true",
-        "hasCanvas": true
+        "ready": "false",
+        "active": "false",
+        "enabled": "false",
+        "hasCanvas": false
       }
     ],
     "missingImages": []
